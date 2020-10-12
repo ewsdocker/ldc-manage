@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2017, 2018. EarthWalk Software. -->
+<lms>
+	<ErrorMsgs>
+
+		<ErrorCode name="None">
+			<message>No error occured</message>
+		</ErrorCode>
+
+		<ErrorCode name="Debug">
+			<message>Debug Output</message>
+		</ErrorCode>
+
+		<ErrorCode name="Display">
+			<message>Display Message</message>
+		</ErrorCode>
+
+		<ErrorCode name="Exit">
+			<message>Software EXIT requested</message>
+		</ErrorCode>
+
+		<ErrorCode name="EndOfTest">
+			<message>The test has ended successfully</message>
+		</ErrorCode>
+
+		<ErrorCode name="EndInError">
+			<message>The test has ended unsuccessfully</message>
+		</ErrorCode>
+
+		<ErrorCode name="ScriptError">
+			<message>The script has ended in error</message>
+		</ErrorCode>
+
+		<ErrorCode name="XPathInfo">
+			<message>XPath Information</message>
+		</ErrorCode>
+
+		<ErrorCode name="DynArrayError">
+			<message>Dynamic Array Error</message>
+		</ErrorCode>
+
+		<ErrorCode name="DynArrayInfo">
+			<message>DynArray Information</message>
+		</ErrorCode>
+
+		<ErrorCode name="DynaNodeError">
+			<message>Dynamic Array Node Error</message>
+		</ErrorCode>
+
+		<ErrorCode name="DynaNodeInfo">
+			<message>Dynamic Array Node Information</message>
+		</ErrorCode>
+
+		<ErrorCode name="ErrorSystem">
+			<message>A failure in the Error Reporting System has occurred</message>
+		</ErrorCode>
+
+		<ErrorCode name="HelpError">
+			<message>Help system error</message>
+		</ErrorCode>
+
+		<ErrorCode name="CliError">
+			<message>cliParameterFunction process error</message>
+		</ErrorCode>
+
+		<ErrorCode name="winCoordsError">
+			<message>Window Coordinates error</message>
+		</ErrorCode>
+
+		<ErrorCode name="winNodeError">
+			<message>WinNode error</message>
+		</ErrorCode>
+
+		<ErrorCode name="DOMError">
+			<message>DOM Document error</message>
+		</ErrorCode>
+
+		<ErrorCode name="RDOMError">
+			<message>Read DOM Document error</message>
+		</ErrorCode>
+
+		<ErrorCode name="RDOMXPathError">
+			<message>RDOM XPath error</message>
+		</ErrorCode>
+
+		<ErrorCode name="RDOMNodeError">
+			<message>RDOM Node error</message>
+		</ErrorCode>
+
+		<ErrorCode name="ConfigXmlError">
+			<message>XML configuration error</message>
+		</ErrorCode>
+
+		<ErrorCode name="Unknown">
+			<message>Unknown error</message>
+		</ErrorCode>
+
+		<ErrorCode name="StartupError">
+			<message>Startup Error occurred</message>
+		</ErrorCode>
+
+		<ErrorCode name="InvalidCode">
+			<message>Invalid or unknown error code</message>
+		</ErrorCode>
+
+		<ErrorCode name="MissAssign">
+			<message>Parameter name missing value assignment</message>
+		</ErrorCode>
+
+		<ErrorCode name="DeclareError">
+			<message>Declaration error</message>
+		</ErrorCode>
+
+		<ErrorCode name="EmptyParams">
+			<message>No parameters were provided</message>
+		</ErrorCode>
+
+		<ErrorCode name="NotNumeric">
+			<message>Parameter is not all numeric</message>
+		</ErrorCode>
+
+		<ErrorCode name="NotRoot">
+			<message>Must be run as root</message>
+		</ErrorCode>
+
+		<ErrorCode name="NotUser">
+			<message>Must be run by a sudo user</message>
+		</ErrorCode>
+
+		<ErrorCode name="NSLength">
+			<message>Namespace name LENGTH error</message>
+		</ErrorCode>
+
+		<ErrorCode name="NSGet">
+			<message>Namespace GET error</message>
+		</ErrorCode>
+
+		<ErrorCode name="NSGenUid">
+			<message>Namespace generate uid error</message>
+		</ErrorCode>
+
+		<ErrorCode name="NsxStackError">
+			<message>NamespaceExt unable to create a stack</message>
+		</ErrorCode>
+
+		<ErrorCode name="NsxParse">
+			<message>NamespaceExt parse error</message>
+		</ErrorCode>
+
+		<ErrorCode name="NsxGet">
+			<message>NamespaceExt get error</message>
+		</ErrorCode>
+
+		<ErrorCode name="NsxSet">
+			<message>NamespaceExt set error</message>
+		</ErrorCode>
+
+		<ErrorCode name="ParamErrors">
+			<message>Parameter errors were detected</message>
+		</ErrorCode>
+
+		<ErrorCode name="ParamInfos">
+			<message>Parameter parsing information</message>
+		</ErrorCode>
+
+		<ErrorCode name="QueueCount">
+			<message>Invalid queue name</message>
+		</ErrorCode>
+
+		<ErrorCode name="QueueInit">
+			<message>Unable to initialize error queue</message>
+		</ErrorCode>
+
+		<ErrorCode name="QueuePeek">
+			<message>Error Queue peek error</message>
+		</ErrorCode>
+
+		<ErrorCode name="QueuePop">
+			<message>Error Queue pop error</message>
+		</ErrorCode>
+
+		<ErrorCode name="QueueReset">
+			<message>Unable to reset queues</message>
+		</ErrorCode>
+
+		<ErrorCode name="StackUnknown">
+			<message>Unknown stack name</message>
+		</ErrorCode>
+
+		<ErrorCode name="StackSize">
+			<message>Invalid stack size</message>
+		</ErrorCode>
+
+		<ErrorCode name="StackCreate">
+			<message>Create or Open stack error</message>
+		</ErrorCode>
+
+		<ErrorCode name="StackSet">
+			<message>Set stack error</message>
+		</ErrorCode>
+
+		<ErrorCode name="StackDestroy">
+			<message>Destroy stack error</message>
+		</ErrorCode>
+
+		<ErrorCode name="StackEmpty">
+			<message>Empty stack</message>
+		</ErrorCode>
+
+		<ErrorCode name="StackIndex">
+			<message>Invalid index</message>
+		</ErrorCode>
+
+		<ErrorCode name="StackWriteHead">
+			<message>Write stack head error</message>
+		</ErrorCode>
+
+		<ErrorCode name="SvnRepository">
+			<message>SVN Repository error</message>
+		</ErrorCode>
+
+		<ErrorCode name="UidGenerate">
+			<message>UID Generate error</message>
+		</ErrorCode>
+
+		<ErrorCode name="UidEmpty">
+			<message>UID Register error</message>
+		</ErrorCode>
+
+		<ErrorCode name="UidExists">
+			<message>UID Register existing id</message>
+		</ErrorCode>
+
+		<ErrorCode name="UidNotFound">
+			<message>UID Not Found</message>
+		</ErrorCode>
+
+		<ErrorCode name="MaxLoopXcd">
+			<message>UID Generate Max loops exceeded</message>
+		</ErrorCode>
+
+		<ErrorCode name="ErrorFunc">
+			<message>ErrorFunction error</message>
+		</ErrorCode>
+
+		<ErrorCode name="UtilityError">
+			<message>Utility Error</message>
+		</ErrorCode>
+
+		<ErrorCode name="LogOpenError">
+			<message>Error opening log file</message>
+		</ErrorCode>
+
+		<ErrorCode name="XmlError">
+			<message>XML Error</message>
+		</ErrorCode>
+
+		<ErrorCode name="XmlInfo">
+			<message>XML Information</message>
+		</ErrorCode>
+
+		<ErrorCode name="XPathError">
+			<message>XPath Error</message>
+		</ErrorCode>
+
+		<ErrorCode name="CDError">
+			<message>CD Error</message>
+		</ErrorCode>
+
+	</ErrorMsgs>
+</lms>
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- =========================================== -->
+<!--                                             -->
+<!-- cliOptions.xml                      -->
+<!-- copyright © 2014, 2016. EarthWalk Software. -->
+<!--                                             -->
+<!-- =========================================== -->
+
+<lms>
+	<declarations name="lmscli_" >
+
+		<declare name="optBatch"       type="integer">0</declare>
+		<declare name="optDebug"       type="integer">0</declare>
+		<declare name="optDisplay"     type="integer">0</declare>
+		<declare name="optHelp"	       type="integer">0</declare>
+		<declare name="optHost"        type="string" >localhost</declare>
+		<declare name="optLog"         type="integer">1</declare>
+		<declare name="optLogDir"      type="string" >/var/local/log/lms-test/</declare>
+		<declare name="optLogName"     type="string" >testLmsLog.log</declare>
+		<declare name="optNoReset"     type="integer">0</declare>
+		<declare name="optOverride"    type="integer">0</declare>
+		<declare name="optProduction"  type="integer">0</declare>
+		<declare name="optQueueErrors" type="integer">0</declare>
+		<declare name="optSilent"      type="integer">0</declare>
+
+		<declare name="shellParam" type="associative" />
+
+		<declare parent="shellParam" type="element" name="batch"    >optBatch</declare>
+		<declare parent="shellParam" type="element" name="debug"    >optDebug</declare>
+		<declare parent="shellParam" type="element" name="display"  >optDisplay</declare>
+		<declare parent="shellParam" type="element" name="help"     >optHelp</declare>
+		<declare parent="shellParam" type="element" name="host"     >optHost</declare>
+		<declare parent="shellParam" type="element" name="log"      >optLog</declare>
+		<declare parent="shellParam" type="element" name="logdir"   >optLogDir</declare>
+		<declare parent="shellParam" type="element" name="logname"  >optLogName</declare>
+		<declare parent="shellParam" type="element" name="noreset"  >optNoReset</declare>
+		<declare parent="shellParam" type="element" name="override" >optOverride</declare>
+		<declare parent="shellParam" type="element" name="prod"     >optProduction</declare>
+		<declare parent="shellParam" type="element" name="queue"    >optQueueErrors</declare>
+		<declare parent="shellParam" type="element" name="quiet"    >optSilent</declare>
+	</declarations>
+</lms>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- =========================================== -->
+<!--                                             -->
+<!-- svnMakeRepoOptions.xml                      -->
+<!-- copyright © 2014, 2016. EarthWalk Software. -->
+<!--                                             -->
+<!-- =========================================== -->
+
+<lms>
+	<declarations name="lmstest_" >
+
+		<!-- svnMakeRepo (cli) option defaults -->
+
+		<declare name="optBranch"     type="string" >trunk</declare>
+		<declare name="optLogDisplay" type="integer">1</declare>
+		<declare name="optLog"        type="string">/var/local/log/lms-test/testLmsLog.log</declare>
+		<declare name="optRepo"       type="string" >defaultRepo</declare>
+		<declare name="optSelinux"    type="integer">0</declare>
+		<declare name="optService"    type="string" >apache2ctl restart</declare>
+		<declare name="optSource"     type="string" >/home/jay/workspace</declare>
+		<declare name="optSvn"        type="string" >/media/Mint18Dev/</declare>
+		<declare name="optSvnGroup"   type="string" >www-data</declare>
+		<declare name="optSvnUser"    type="string" >www-data</declare>
+		<declare name="optSvnName"    type="string" >svn-test</declare>
+
+		<!-- standard (cli) option defaults -->
+
+		<declare name="optBatch"       type="integer">0</declare>
+		<declare name="optDebug"       type="integer">1</declare>
+		<declare name="optDisplay"     type="integer">1</declare>
+		<declare name="optHelp"	       type="integer">0</declare>
+		<declare name="optHost"        type="string" >localhost</declare>
+		<declare name="optNoReset"     type="integer">0</declare>
+		<declare name="optOverride"    type="integer">0</declare>
+		<declare name="optProduction"  type="integer">0</declare>
+		<declare name="optQueueErrors" type="integer">0</declare>
+		<declare name="optSilent"      type="integer">0</declare>
+
+		<declare name="shellParam" type="associative" />
+
+		<!-- svnMakeRepo option map -->
+
+		<declare parent="shellParam" type="element" name="branch"  >optBranch</declare>
+		<declare parent="shellParam" type="element" name="log"     >optLogDisplay</declare>
+		<declare parent="shellParam" type="element" name="repo"    >optRepo</declare>
+		<declare parent="shellParam" type="element" name="selinux" >optSelinux</declare>
+		<declare parent="shellParam" type="element" name="service" >optService</declare>
+		<declare parent="shellParam" type="element" name="source"  >optSource</declare>
+		<declare parent="shellParam" type="element" name="svn"     >optSvn</declare>
+		<declare parent="shellParam" type="element" name="svngroup">optSvnGroup</declare>
+		<declare parent="shellParam" type="element" name="svnname" >optSvnName</declare>
+		<declare parent="shellParam" type="element" name="svnuser" >optSvnUser</declare>
+
+		<!-- standard (cli) option map -->
+
+		<declare parent="shellParam" type="element" name="batch"    >optBatch</declare>
+		<declare parent="shellParam" type="element" name="debug"    >optDebug</declare>
+		<declare parent="shellParam" type="element" name="display"  >optDisplay</declare>
+		<declare parent="shellParam" type="element" name="help"     >optHelp</declare>
+		<declare parent="shellParam" type="element" name="host"     >optHost</declare>
+		<declare parent="shellParam" type="element" name="noreset"  >optNoReset</declare>
+		<declare parent="shellParam" type="element" name="override" >optOverride</declare>
+		<declare parent="shellParam" type="element" name="prod"     >optProduction</declare>
+		<declare parent="shellParam" type="element" name="queue"    >optQueueErrors</declare>
+		<declare parent="shellParam" type="element" name="quiet"    >optSilent</declare>
+	</declarations>
+</lms>

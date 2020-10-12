@@ -1,0 +1,22 @@
+0x01600004 -1 3040   0    745  1552 33   MBroadcast-LM18.home xfce4-panel
+0x01600028 -1 3040   511  0    468  3    MBroadcast-LM18.home xfce4-panel
+0x0160002b -1 3040   -9999 -9999 468  49   MBroadcast-LM18.home xfce4-panel
+0x04800001  0 0      4    36   438  125                   N/A MPD    jmeters-0.4.1
+0x04600001  0 0      1330 326  219  125                   N/A I-AUX    jmeters-0.4.1
+0x03e00003  3 3428   1272 140  280  560  MBroadcast-LM18.home sco Trace
+0x04a00001  0 0      888  36   438  125                   N/A DJConsole    jmeters-0.4.1
+0x04400001  0 0      1330 181  219  125                   N/A Mixer    jmeters-0.4.1
+0x04200001  0 0      1330 471  219  125                   N/A B-AUX    jmeters-0.4.1
+0x04c00001  0 0      446  36   438  125                   N/A Capture    jmeters-0.4.1
+0x04e0000c  2 3420   1114 436  405  216  MBroadcast-LM18.home AlsaPlayer
+0x05800003  2 3412   4    36   1106 416  MBroadcast-LM18.home Christmas - Piano Jazz Christmas Music Playlist Mix By JaBig  Smooth Instrumental Holiday Songs Medley (LP + Albums) (3:07:20) - Audacious
+0x01a00003 -1 3044   0    0    1552 778  MBroadcast-LM18.home Desktop
+0x05a00010  1 3576   16   147  750  606  MBroadcast-LM18.home Cadence
+0x05e0000c  1 3589   4    36   1548 725  MBroadcast-LM18.home BroadcastStudio - LADI Session Handler
+0x06000002  0 0      4    181  1322 516                   N/A Non Mixer
+0x05400002  0 0      4    596  430  165                   N/A butt 0.1.13
+0x05600002  2 0      1114 36   430  380                   N/A butt 0.1.13
+0x05000002  2 0      4    381  430  380                   N/A butt 0.1.13
+0x05200002  0 0      896  596  430  165                   N/A butt 0.1.13
+0x06200004  2 3735   438  376  655  385  MBroadcast-LM18.home Terminal - LP + Albums - Christmas - Piano Jazz Christmas Music Playlist Mix By JaBig Smooth Instrumental Holiday Songs Medley
+0x062000cd  3 3735   143  176  655  385  MBroadcast-LM18.home Terminal - jay@MBroadcast-LM18 ~

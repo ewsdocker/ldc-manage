@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2016. EarthWalk Software. -->
+<lms >
+	<declarations  name="group1" >
+		<declare name="dcl1" type="integer">0</declare>
+		<declare name="dcl2" type="array" />
+	</declarations>
+	<config name="development" >
+		<declare name="opt1" type="integer">0</declare>
+	</config>
+</lms>

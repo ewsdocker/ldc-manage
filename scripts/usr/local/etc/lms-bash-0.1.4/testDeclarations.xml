@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2016. EarthWalk Software. -->
+<lms>
+
+	<declarations name="lmstest_" >
+
+		<declare name="optDebug"    type="integer">10</declare>
+		<declare name="optSilent"   type="integer">20</declare>
+		<declare name="optBatch"    type="integer">30</declare>
+		<declare name="optOverride" type="integer">40</declare>
+		<declare name="optNoReset"  type="integer">50</declare>
+		<declare name="optTest"     type="integer" default="60" />
+		<declare name="optEof"      type="integer" />
+
+		<declare name="shellParam" type="associative" />
+
+			<declare parent="shellParam" type="element"  name="batch"     >0</declare>
+			<declare parent="shellParam" type="element"  name="bin"       >bin</declare>
+			<declare parent="shellParam" type="element"  name="debug"     >0</declare>
+			<declare parent="shellParam" type="element"  name="etc"       >etc</declare>
+			<declare parent="shellParam" type="element"  name="fetch"     >0</declare>
+			<declare parent="shellParam" type="element"  name="help"      >0</declare>
+			<declare parent="shellParam" type="element"  name="host"      >localhost</declare>
+			<declare parent="shellParam" type="element"  name="lang"      >bash</declare>
+			<declare parent="shellParam" type="element"  name="lib"       >0.0.1</declare>
+			<declare parent="shellParam" type="element"  name="man"       >share</declare>
+			<declare parent="shellParam" type="element"  name="path"      >svn</declare>
+			<declare parent="shellParam" type="element"  name="quiet"     >0</declare>
+			<declare parent="shellParam" type="element"  name="repoName"  >test</declare>
+			<declare parent="shellParam" type="element"  name="rootdir"   >local</declare>
+			<declare parent="shellParam" type="element"  name="script"    >lmsInstallScript</declare>
+			<declare parent="shellParam" type="element"  name="src"       >src</declare>
+			<declare parent="shellParam" type="element"  name="type"      >local</declare>
+
+		<declare name="shellMap" type="associative" />
+
+			<declare parent="shellMap" type="element"  name="batch"    >batch</declare>
+			<declare parent="shellMap" type="element"  name="bin"      >binDir</declare>
+			<declare parent="shellMap" type="element"  name="debug"    >debug</declare>
+			<declare parent="shellMap" type="element"  name="etc"      >etc</declare>
+			<declare parent="shellMap" type="element"  name="fetch"    >fetch</declare>
+			<declare parent="shellMap" type="element"  name="help"     >help</declare>
+			<declare parent="shellMap" type="element"  name="host"     >host</declare>
+			<declare parent="shellMap" type="element"  name="lang"     >lang</declare>
+			<declare parent="shellMap" type="element"  name="lib"      >lib</declare>
+			<declare parent="shellMap" type="element"  name="man"      >man</declare>
+			<declare parent="shellMap" type="element"  name="path"     >path</declare>
+			<declare parent="shellMap" type="element"  name="quiet"    >silent</declare>
+			<declare parent="shellMap" type="element"  name="repoName" >repo</declare>
+			<declare parent="shellMap" type="element"  name="rootDir"  >root</declare>
+			<declare parent="shellMap" type="element"  name="script"   >script</declare>
+			<declare parent="shellMap" type="element"  name="src"      >src</declare>
+			<declare parent="shellMap" type="element"  name="type"     >type</declare>
+
+		<declare  type="associative" name="errorCodes" />
+
+			<declare type="element" parent="errorCodes" name="NoError">No errors detected.</declare>
+			<declare type="element" parent="errorCodes" name="EndOfTest">End of test.</declare>
+			<declare type="element" parent="errorCodes" name="MissingParam">Missing required parameter.</declare>
+			<declare type="element" parent="errorCodes" name="BadValue">A bad value was entered.</declare>
+
+		<declare  type="array" name="errorNumbers" />
+
+			<declare parent="errorNumbers" type="element" name="0" >NoError</declare>
+			<declare parent="errorNumbers" type="element" name="1" >EndOfTest</declare>
+			<declare parent="errorNumbers" type="element" name="2" >MissingParam</declare>
+			<declare parent="errorNumbers" type="element" name="3" >BadValue</declare>
+
+		<declare name="lmsPassword" type="password">7mcMF596gcYa</declare>
+
+	</declarations>
+
+</lms>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- =========================================== -->
+<!--                                             -->
+<!-- svnMakeRepoHelp.xml                         -->
+<!-- copyright © 2014, 2016. EarthWalk Software. -->
+<!--                                             -->
+<!-- =========================================== -->
+
+<lms>
+	<help>
+		<labels>
+			<label name="command">[options] ... repo=Repository-name</label>
+			<label name="options">Options  (brief detail)</label>
+			<label name="footer">    Refer to the svnMakeRepo man-page for details.</label>
+		</labels>
+
+		<options>
+			<var name="branch">
+				<use>branch   = trunk|branches|tags  == Branch to store optional source in</use>
+			</var>
+
+			<var name="debug">
+				<use>debug    = 0|1                  == debug flag setting</use>
+			</var>
+
+			<var name="help">
+				<use>help     = 0|1                  == help (display this message)</use>
+			</var>
+
+			<var name="host">
+				<use>host     = address|host-name    == Subversion server</use>
+			</var>
+
+			<var name="prod">
+				<use>prod     = 0|1                  == 0 = development/test, 1 = production</use>
+			</var>
+
+			<var name="repo">
+				<use>repo     = repository-name      == Name of the repository to make</use>
+			</var>
+
+			<var name="quiet">
+				<use>quiet    = 0|1                  == enable/disable output to the console</use>
+			</var>
+
+			<var name="selinux">
+				<use>selinux  = 0|1                  == secure linux system (SeLinux), if 1</use>
+			</var>
+
+			<var name="service">
+				<use>service  = Apache-service       == Command to restart the Apache server</use>
+			</var>
+
+			<var name="source">
+				<use>source   = repository-source    == Location of the source to load</use>
+			</var>
+
+			<var name="svn">
+				<use>svn      = path                 == Path to parent of the svn folder</use>
+			</var>
+
+			<var name="svngroup">
+				<use>svngroup = group-name           == Svn repository group</use>
+			</var>
+
+			<var name="svnname">
+				<use>svnname  = svn-directory-name   == Svn repository name (no path)</use>
+			</var>
+
+			<var name="svnuser">
+				<use>svnuser  = group-user           == Svn repository user name</use>
+			</var>
+
+		</options>
+
+	</help>
+</lms>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2016. EarthWalk Software. -->
+<lms>
+	<help>
+		<options>
+
+			<var name="batch">
+				<use>batch=batch-script-name   - the batch script to run</use>
+			</var>
+
+			<var name="bin">
+				<use>bin=bin-directory         - where to store scripts</use>
+			</var>
+
+			<var name="debug">
+				<use>debug=debug-level         - 0=none, 1=minimal, 2=verbose</use>
+			</var>
+
+			<var name="etc">
+				<use>etc=etc-directory         - configuration file folder name</use>
+			</var>
+
+			<var name="fetch">
+				<use>fetch=fetch-type          - 'fetch', 'download', 'lib'</use>
+			</var>
+
+			<var name="host">
+				<use>host-svn-host-name        - svn server name or address</use>
+			</var>
+
+			<var name="lang">
+				<use>lang=library-language     - bash, php, cpp</use>
+			</var>
+
+			<var name="lib">
+				<use>lib=library-version       - library version to install</use>
+			</var>
+
+			<var name="man">
+				<use>man=manpage-directory     - the manpage folder</use>
+			</var>
+
+			<var name="path">
+				<use>path=svn-repository-root  - path to svn repository on server</use>
+			</var>
+
+			<var name="quiet">
+				<use>quiet=quiet-flag          - 1=suppress all console output</use>
+			</var>
+
+			<var name="repo">
+				<use>repo=svn-repository-name  - the repository to install from</use>
+			</var>
+
+			<var name="root">
+				<use>root=root-folder-name     - root directory path</use>
+			</var>
+
+			<var name="script">
+				<use>script=script-name        - the script to install</use>
+			</var>
+
+			<var name="src">
+				<use>src=src-directory         - the install source folder</use>
+			</var>
+
+			<var name="type">
+				<use>type=heirarchy            - the install source folder</use>
+			</var>
+
+		</options>
+		<labels>
+			<label name="command">[options] script=name</label>
+			<label name="options">Options  (brief detail)</label>
+			<label name="footer">Refer to the manpage for additional information</label>
+		</labels>
+	</help>
+</lms>

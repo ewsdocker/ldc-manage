@@ -1,0 +1,71 @@
+.\" Title: lmsInstallScript
+.\" Author: Jay Wheeler <jaywheeler@users.sourceforge.net>
+.\" Generator: manedit
+.\" Date: 05/18/2016
+.\" Manual: Subversion
+.\" Source: lmsInstallScript 0.0.1
+.\" Language: English
+.\" 
+.\" disable hyphenation
+.\" disable justification (adjust text to left margin only)
+.\" -----------------------------------------------------------
+.TH "lmsInstallScript" "1" "May 2016" "version 1.0.0" ""
+.SH "NAME"
+\fBlmsInstallScript\fR \- Make Subversion Repository
+.SH "SYNOPSIS"
+\fB lmsInstallScript\fR <option=value><option=value>...\fBname\fR=[repository\-name]
+.SH "DESCRIPTION"
+\fBlmsInstallScript\fR is a bash script which automates the creation of new Subversion repositories.
+.PP 
+The script automatically creates the requested repository in the current Subversion repository folder.
+.SH "OPTIONS"
+.TP 
+\fBbranch\fR=<repository\-branch\-name>
+Set the name of the folder to open in the repository.  If not provided, it will default to \fBtrunk\fR, or the current setting of \fBsvnBranch\fR.
+.TP 
+\fBdebug\fR=<0|1>
+Display additional information related to making the requested repository.
+.TP 
+\fBhost\fR=<IP\-Address|Sever\-Name>
+Set the Subversion host IP\-address or name.  If not provided, the name will default to \fBlocalhost\fR, or the current setting of \fBsvnHost\fR.
+.TP 
+\fBquiet\fR=<0|1>
+If \fBnon\-zero\fR, the console display will be inhibited. Set to \fBzero\fR for normal console display.
+.TP 
+\fBsource\fR=<path\-to\-source>
+When provided, specifies the absolute path to the source to be loaded into the repository.
+.TP 
+\fBsvn\fR=<path\-to\-subversion\-repository>
+Absolute path to svn repository folder.
+.SH "Examples"
+.XP 3
+Create an empty repository named \fBBar\fR at the default location:
+ 
+.RS 5
+lmsInstallScriptsitory name=\fBBar\fR
+.RE
+.PP 
+.XP 3
+Create a repository named \fBBar\fR with initial content from \fB/media/source/\fBFoo\fR:
+
+.RS 5
+lmsInstallScriptsitory source=\fB/media/source/Foo\fR name=\fBBar\fR
+.RE
+.PP 
+.XP 3
+Create a repository named \fBBar\fR with initial content from \fB/media/source/Foo\fR loaded to the \fBtags\fR branch:
+
+.RS 5
+lmsInstallScriptsitory source=\fB/media/source/Foo\fR branch=\fBtags\fR name=\fBBar\fR
+.RE
+.PP 
+.SH "REPORTING BUGS"
+Report bugs at \fBhttp://subversion.net\fR
+.PP 
+Website: \fBhttp:///\fR
+.SH "COPYRIGHT"
+\fBlmsInstallScript\fR is copyright © 2016. EarthWalk Software.
+.PP 
+Licensed under the \fBAcademic Free License version 3.0\fR (or later). Refer to the file named License.txt provided with the source, or from http://opensource.org/licenses/academic.php
+.SH "AUTHOR"
+\fBJay Wheeler\fR (jaywheeler@users.sourceforge.net) for \fBEarthWalk Software\fR.

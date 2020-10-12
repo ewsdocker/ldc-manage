@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2017. EarthWalk Software. -->
+<lms>
+
+	<declarations name="lmscli_" >
+
+		<declare name="shellParam" type="associative" />
+
+		<declare name="optDebug"  type="integer">0</declare>
+		<declare name="optHelp"	  type="integer">0</declare>
+		<declare name="optQuiet"  type="integer">0</declare>
+
+		<declare parent="shellParam" type="element"  name="debug" >optDebug</declare>
+		<declare parent="shellParam" type="element"  name="help"  >optHelp</declare>
+		<declare parent="shellParam" type="element"  name="quiet" >optSilent</declare>
+
+	</declarations>
+
+	<declarations name="lmsins_" >
+
+		<declare name="reduceQuote" type="integer">1</declare>
+
+	</declarations>
+
+</lms>
+

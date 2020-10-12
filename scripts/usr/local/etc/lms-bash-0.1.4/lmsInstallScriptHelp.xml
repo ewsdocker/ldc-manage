@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2016. EarthWalk Software. -->
+<global type="namespace" name="help">
+
+	<!-- 
+	=====================================================================
+	=====================================================================
+
+		help display labels / titles
+
+	=====================================================================
+	===================================================================== 
+	-->
+	<optionsLabel type="associative" name="optionsLabel">
+		<optionLabel type="element" parent="optionsLabel" name="command">[options] script-file-name</optionLabel>
+		<optionLabel type="element" parent="optionsLabel" name="options">Options  (brief detail)</optionLabel>
+		<optionLabel type="element" parent="optionsLabel" name="footer">Refer to the manpage for additional information</optionLabel>
+	</optionsLabel>
+
+	<!-- 
+	=====================================================================
+	=====================================================================
+
+		option names and default values
+
+	=====================================================================
+	===================================================================== 
+	-->
+	<options type="associative" name="options">
+		<optionsVar type="element" parent="options" name="batch">0</optionsVar>
+		<optionsVar type="element" parent="options" name="bin">bin</optionsVar>
+		<optionsVar type="element" parent="options" name="debug">0</optionsVar>
+		<optionsVar type="element" parent="options" name="etc">etc</optionsVar>
+		<optionsVar type="element" parent="options" name="fetch">0</optionsVar>
+		<optionsVar type="element" parent="options" name="host">localhost</optionsVar>
+		<optionsVar type="element" parent="options" name="lang">bash</optionsVar>
+		<optionsVar type="element" parent="options" name="lib">0.0.1</optionsVar>
+		<optionsVar type="element" parent="options" name="man">share</optionsVar>
+		<optionsVar type="element" parent="options" name="src">src</optionsVar>
+		<optionsVar type="element" parent="options" name="type">local</optionsVar>
+		<optionsVar type="element" parent="options" name="path">svn</optionsVar>
+		<optionsVar type="element" parent="options" name="quiet">0</optionsVar>
+		<optionsVar type="element" parent="options" name="repo">test</optionsVar>
+		<optionsVar type="element" parent="options" name="root">local</optionsVar>
+		<optionsVar type="element" parent="options" name="script">lmsInstallScript</optionsVar>
+	</options>
+
+	<!-- 
+	=====================================================================
+	=====================================================================
+
+		options use display data
+
+	=====================================================================
+	===================================================================== 
+	-->
+	<optionsUse type="associative" name="optionsUse">
+		<optionUse type="element" parent="optionsUse" name="batch">batch=batch-script-name   - the batch script to run</optionUse>
+		<optionUse type="element" parent="optionsUse" name="bin">bin=bin-directory         - where to store scripts</optionUse>
+		<optionUse type="element" parent="optionsUse" name="debug">debug=debug-level         - 0=none, 1=minimal, 2=verbose</optionUse>
+		<optionUse type="element" parent="optionsUse" name="etc">etc=etc-directory         - configuration file folder name</optionUse>
+		<optionUse type="element" parent="optionsUse" name="fetch">fetch=fetch-type          - 'fetch', 'download', 'lib'</optionUse>
+		<optionUse type="element" parent="optionsUse" name="host">host=svn-host-name        - svn server name or address</optionUse>
+		<optionUse type="element" parent="optionsUse" name="lang">lang=library-language     - 'bash', 'php', 'cpp'</optionUse>
+		<optionUse type="element" parent="optionsUse" name="lib">lib=library-version       - library version to install</optionUse>
+		<optionUse type="element" parent="optionsUse" name="man">man=manpage-directory     - the manpage folder</optionUse>
+		<optionUse type="element" parent="optionsUse" name="src">src=src-directory         - the install source folder</optionUse>
+		<optionUse type="element" parent="optionsUse" name="type">type=heirarchy            - 'system', 'local', 'user' or 'none'</optionUse>
+		<optionUse type="element" parent="optionsUse" name="path">path=svn-repository-root  - path to svn repository on server</optionUse>
+		<optionUse type="element" parent="optionsUse" name="quiet">quiet=quiet-flag          - 1=suppress all console output</optionUse>
+		<optionUse type="element" parent="optionsUse" name="repo">repo=svn-repository-name  - the repository to install from</optionUse>
+		<optionUse type="element" parent="optionsUse" name="root">root=root-folder-name     - root directory path</optionUse>
+		<optionUse type="element" parent="optionsUse" name="script">script=script-name        - the script to install</optionUse>
+	</optionsUse>
+
+</global>

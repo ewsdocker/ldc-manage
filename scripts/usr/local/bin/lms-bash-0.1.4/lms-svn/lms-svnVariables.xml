@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- =========================================== -->
+<!--                                             -->
+<!-- lms-svnVariables.xml                      -->
+<!-- copyright © 2014, 2016. EarthWalk Software. -->
+<!--                                             -->
+<!-- =========================================== -->
+
+<lms>
+	<declarations name="lmssvn_" >
+
+		<!-- lms-svn variable declarations and defaults -->
+
+		<declare name="url"             type="string" ></declare>
+		<declare name="helpMessage"     type="string" ></declare>
+		<declare name="repoPath"        type="string" ></declare>
+		<declare name="repoUrl"         type="string" ></declare>
+		<declare name="repoRights"      type="string" >774</declare>
+
+		<declare name="logPath"         type="string" >/var/local/log/lms-svn/</declare>
+		<declare name="logFile"         type="string" >logTestFile</declare>
+		<declare name="logName"         type="string" >774</declare>
+
+		<declare name="readOpen"        type="integer">0</declare>
+		<declare name="readBuffer"      type="string" ></declare>
+		<declare name="readFileName"    type="string" ></declare>
+
+		<declare name="readArrayName"   type="string" >lmssvn_readArray</declare>
+		<declare name="readCallback"    type="string" >svnReadLogParse</declare>
+		<declare name="processCallback" type="string" >svnReadLogProcess</declare>
+
+		<declare name="readArrayKeys"   type="array" ></declare>
+		<declare name="printOrder"      type="array" ></declare>
+
+		<declare parent="readArrayKeys" type="element" name="date" />
+		<declare parent="readArrayKeys" type="element" name="time" />
+		<declare parent="readArrayKeys" type="element" name="function" />
+		<declare parent="readArrayKeys" type="element" name="line" />
+		<declare parent="readArrayKeys" type="element" name="code" />
+		<declare parent="readArrayKeys" type="element" name="message" />
+
+		<declare parent="printOrder"    type="element" name="date" />
+		<declare parent="printOrder"    type="element" name="time" />
+		<declare parent="printOrder"    type="element" name="function" />
+		<declare parent="printOrder"    type="element" name="line" />
+		<declare parent="printOrder"    type="element" name="code" />
+		<declare parent="printOrder"    type="element" name="message" />
+
+	</declarations>
+</lms>

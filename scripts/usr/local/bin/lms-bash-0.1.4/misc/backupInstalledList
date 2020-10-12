@@ -1,0 +1,78 @@
+#!/usr/bin/bash
+
+#####################################################################
+#
+#  backupInstalledList - copyright (c) 2015. EarthWalk Software.
+#
+#####################################################################
+
+#####################################################################
+#
+#  global declarations
+#
+#####################################################################
+
+YUMREPOS="/etc/yum.repos.d/"
+TARGETDIR="/var/local/installedLog"
+DATESTAMP=$(date +%Y%m%d)
+
+RPMLIST="${DATESTAMP}-rpmInstalled.list"
+REPOS="${DATESTAMP}-repositories.tar"
+
+INSTALLEDNAME="${DATESTAMP}-installed"
+
+INSTALLEDLIST=${INSTALLEDNAME}".list"
+INSTALLEDKST=${INSTALLEDNAME}".kst"
+INSTALLEDYUM=${INSTALLEDNAME}".yum"
+
+BACKUPLIST=${DATESTAMP}".tar"
+BACKUPFILES=${DATESTAMP}"-*.*"
+
+#####################################################################
+
+cd ${TARGETDIR}
+
+#
+#    Create a list of installed packages
+#
+
+/usr/bin/show-installed --quiet | sort > ${INSTALLEDLIST}
+
+#
+#    Create a tarball of all yum.repos.d files (repository configurations)
+#
+
+tar -cf ${REPOS} ${YUMREPOS}
+
+#
+#    Use RPM to create an RPM list of installed packages,
+#
+
+rpm -qa --qf "%{NAME}\n" | sort > ${RPMLIST}
+
+#
+#    and sed to create a software Yum reload shell script
+#
+
+sed 's/^/install /' ${RPMLIST} | sed '$ a\run' > ${INSTALLEDYUM}
+
+#
+#    Create a Kickstart list of installed packages
+#
+
+/usr/bin/show-installed -qf kickstart > ${INSTALLEDKST}
+
+#
+#    Wrap all the new files up in a tarball for easy storage
+#
+tar -cf ${BACKUPLIST} ${BACKUPFILES}
+
+#
+#    and remove the tar'ed source files
+#
+rm -f ${BACKUPFILES}
+
+#####################################################################
+
+exit 0
+

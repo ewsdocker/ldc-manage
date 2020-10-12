@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2016. EarthWalk Software. -->
+<lms>
+	<help>
+		<labels>
+			<label name="command">option=value option=value ... script-name</label>
+			<label name="options">Options  (brief detail)</label>
+			<label name="footer">Refer to the manpage for additional information</label>
+		</labels>
+
+		<options>
+			<var name="batch">
+				<use>batch  - the batch script to run</use>
+			</var>
+
+			<var name="bin">
+				<use>bin    - where to store scripts</use>
+			</var>
+
+			<var name="debug">
+				<use>debug  - 0=none, 1=minimal, 2=verbose</use>
+			</var>
+
+			<var name="etc">
+				<use>etc    - configuration file folder name</use>
+			</var>
+
+			<var name="fetch">
+				<use>fetch  - 'fetch', 'download', 'lib'</use>
+			</var>
+
+			<var name="host">
+				<use>host   - svn server name or address</use>
+			</var>
+
+			<var name="lang">
+				<use>lang   - bash, php, cpp</use>
+			</var>
+
+			<var name="lib">
+				<use>lib    - library version to install</use>
+			</var>
+
+			<var name="man">
+				<use>man    - the manpage folder</use>
+			</var>
+
+			<var name="path">
+				<use>path   - path to svn repository on server</use>
+			</var>
+
+			<var name="quiet">
+				<use>quiet  - 1=suppress all console output</use>
+			</var>
+
+			<var name="repo">
+				<use>repo   - the repository to install from</use>
+			</var>
+
+			<var name="root">
+				<use>root   - root directory path</use>
+			</var>
+
+			<var name="script">
+				<use>script - the script to install</use>
+			</var>
+
+			<var name="src">
+				<use>src    - the install source folder</use>
+			</var>
+
+			<var name="type">
+				<use>type   - the install source type</use>
+			</var>
+		</options>
+
+	</help>
+</lms>

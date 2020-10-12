@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2016. EarthWalk Software. -->
+<_global type="namespace" name="_global">
+
+	<_netUser type="string" name="_netUser">netshare</_netUser>
+	<_netPass type="password" name="_netPass">pass</_netPass>
+	<_netMountPoint type="string" name="_netMountPoint">Movies</_netMountPoint>
+
+	<_mountGroup type="string" name="_mountGroup">netshare</_mountGroup>
+
+	<_credentialName type="string" name="_credentialName">.credentials</_credentialName>
+	<_credentialPath type="string" name="_credentialPath">/var/local</_credentialPath>
+	<_credentialFile type="string" name="_credentialFile">/var/local/.credentials</_credentialFile>
+
+	<_debugTesting type="integer" name="_debugTesting">0</_debugTesting>
+	<_silentOutput type="integer" name="_silentOutput">0</_silentOutput>
+	<_batchMode type="integer" name="_batchMode">0</_batchMode>
+
+	<_override type="integer" name="_override">0</_override>
+	<_overrideNoReset type="integer" name="_overrideNoReset">0</_overrideNoReset>
+
+</_global>

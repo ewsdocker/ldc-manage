@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2016. EarthWalk Software. -->
+<global type="namespace" name="global">
+
+	<!-- 
+	=====================================================================
+	=====================================================================
+
+		cli global flags
+
+	=====================================================================
+	===================================================================== 
+	-->
+	<debugTesting type="integer" parent="global" name="debugTesting">0</debugTesting>
+	<silentOutput type="integer" parent="global" name="silentOutput">0</silentOutput>
+	<batchMode type="integer" parent="global" name="batchMode">0</batchMode>
+	<override type="integer" parent="global" name="override">0</override>
+	<overrideNoReset type="integer" parent="global" name="overrideNoReset">0</overrideNoReset>
+
+	<!-- 
+	=====================================================================
+	=====================================================================
+
+		allowed command-line input (cli) subversion options
+
+	=====================================================================
+	===================================================================== 
+	-->
+	<subversion type="associative" name="subversion">
+		<subversionVar type="element" parent="subversion" name="host">localhost</subversionVar>
+		<subversionVar type="element" parent="subversion" name="path">svn</subversionVar>
+		<subversionVar type="element" parent="subversion" name="repo">test</subversionVar>
+	</subversion>
+	
+	<!-- 
+	=====================================================================
+	=====================================================================
+
+		allowed command-line input (cli) installation options
+
+	=====================================================================
+	===================================================================== 
+	-->
+	<installOptions type="associative" name="installOptions">
+		<installVar type="element" parent="installOptions" name="lang">bash</installVar>
+		<installVar type="element" parent="installOptions" name="type">local</installVar>
+		<installVar type="element" parent="installOptions" name="rootDir">local</installVar>
+		<installVar type="element" parent="installOptions" name="srcDir">src</installVar>
+		<installVar type="element" parent="installOptions" name="binDir">bin</installVar>
+		<installVar type="element" parent="installOptions" name="manDir">share/man</installVar>
+		<installVar type="element" parent="installOptions" name="libDir">lib</installVar>
+		<installVar type="element" parent="installOptions" name="subDir">bash</installVar>
+		<installVar type="element" parent="installOptions" name="etcDir">etc</installVar>
+	</installOptions>
+
+	<!-- 
+	=====================================================================
+	=====================================================================
+
+		maps the option name to the internal variable name
+
+	=====================================================================
+	===================================================================== 
+	-->
+	<cliParametersMap type="associative" name="cliParametersMap">
+		<cliParameterMap type="element" parent="cliParametersMap" name="batch">batchMode</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="bin">binDir</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="debug">debugTesting</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="etc">etcDir</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="fetch">fetch</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="host">host</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="lang">lang</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="lib">lib</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="man">manDir</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="path">path</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="quiet">silentOutput</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="repoName">repo</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="rootdir">root</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="src">srcDir</cliParameterMap>
+		<cliParameterMap type="element" parent="cliParametersMap" name="type">type</cliParameterMap>
+	</cliParametersMap>
+
+	<cliValidCommands type="array" name="cliValidCommands">
+		<cliValidCommand type="element" parent="cliValidCommands" name="0">batch</cliValidCommand>
+		<cliValidCommand type="element" parent="cliValidCommands" name="1">fetch</cliValidCommand>
+		<cliValidCommand type="element" parent="cliValidCommands" name="2">help</cliValidCommand>
+		<cliValidCommand type="element" parent="cliValidCommands" name="3">script</cliValidCommand>
+	</cliValidCommands>
+
+	<!-- 
+	=====================================================================
+	=====================================================================
+
+		list of valid cli parameters
+
+	=====================================================================
+	===================================================================== 
+	-->
+	<cliValidParameters type="array" name="cliValidParameters">
+		<cliValidParameter type="element" parent="cliValidParameters" name="0">batch</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="1">bin</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="2">debug</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="3">etc</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="4">fetch</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="5">host</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="6">lang</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="7">lib</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="8">man</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="9">path</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="10">quiet</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="11">repoName</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="12">rootDir</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="13">src</cliValidParameter>
+		<cliValidParameter type="element" parent="cliValidParameters" name="14">type</cliValidParameter>
+	</cliValidParameters>
+
+
+</global>

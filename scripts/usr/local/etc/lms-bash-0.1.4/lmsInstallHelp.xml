@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2017. EarthWalk Software. -->
+<lms>
+
+	<optionsLabel>
+		<optionLabel name="command">[options] script-file-name</optionLabel>
+		<optionLabel name="options">Options  (brief detail)</optionLabel>
+		<optionLabel name="footer">Refer to the manpage for additional information</optionLabel>
+	</optionsLabel>
+
+	<options>
+		<var name="batch">0</var>
+		<var name="bin">bin</var>
+		<var name="debug">0</var>
+		<var name="etc">etc</var>
+		<var name="fetch">0</var>
+		<var name="host">localhost</var>
+		<var name="lang">bash</var>
+		<var name="lib">0.0.1</var>
+		<var name="man">share</var>
+		<var name="src">src</var>
+		<var name="type">local</var>
+		<var name="path">svn</var>
+		<var name="quiet">0</var>
+		<var name="repo">test</var>
+		<var name="root">local</var>
+		<var name="script">lmsInstallScript</var>
+	</options>
+
+	<optionsUse>
+		<optionUse name="batch">batch=batch-script-name   - the batch script to run</optionUse>
+		<optionUse name="bin">bin=bin-directory         - where to store scripts</optionUse>
+		<optionUse name="debug">debug=debug-level         - 0=none, 1=minimal, 2=verbose</optionUse>
+		<optionUse name="etc">etc=etc-directory         - configuration file folder name</optionUse>
+		<optionUse name="fetch">fetch=fetch-type          - 'fetch', 'download', 'lib'</optionUse>
+		<optionUse name="host">host=svn-host-name        - svn server name or address</optionUse>
+		<optionUse name="lang">lang=library-language     - 'bash', 'php', 'cpp'</optionUse>
+		<optionUse name="lib">lib=library-version       - library version to install</optionUse>
+		<optionUse name="man">man=manpage-directory     - the manpage folder</optionUse>
+		<optionUse name="src">src=src-directory         - the install source folder</optionUse>
+		<optionUse name="type">type=heirarchy            - 'system', 'local', 'user' or 'none'</optionUse>
+		<optionUse name="path">path=svn-repository-root  - path to svn repository on server</optionUse>
+		<optionUse name="quiet">quiet=quiet-flag          - 1=suppress all console output</optionUse>
+		<optionUse name="repo">repo=svn-repository-name  - the repository to install from</optionUse>
+		<optionUse name="root">root=root-folder-name     - root directory path</optionUse>
+		<optionUse name="script">script=script-name        - the script to install</optionUse>
+	</optionsUse>
+
+</lms>

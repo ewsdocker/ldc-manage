@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2017. EarthWalk Software. -->
+<lms>
+
+	<declarations name="lmscli_" >
+
+		<declare name="optBatch"    type="integer">0</declare>
+		<declare name="optBin"      type="string" >bin</declare>
+		<declare name="optDebug"    type="integer">0</declare>
+		<declare name="optEtc"      type="string" >etc</declare>
+		<declare name="optFetch"    type="integer">0</declare>
+		<declare name="optHelp"    	type="integer">0</declare>
+		<declare name="optLang"     type="string" >bash</declare>
+		<declare name="optLib"      type="string" >share/lib/lms</declare>
+		<declare name="optMan"      type="string" >share/man/manpage</declare>
+		<declare name="optNoReset"  type="integer">0</declare>
+		<declare name="optOverride" type="integer">0</declare>
+		<declare name="optPath"     type="string" >/media/WorkDrive/svn</declare>
+		<declare name="optRepo"     type="string" >LinuxManagementScripts</declare>
+		<declare name="optRoot"     type="string" >/usr/local</declare>
+		<declare name="optScript"   type="string" >testCliParameters.bash</declare>
+		<declare name="optSilent"   type="integer">0</declare>
+		<declare name="optSrc"      type="string" >src/lms</declare>
+		<declare name="optType"     type="string" >bash</declare>
+
+		<declare name="shellParam" type="associative" />
+
+		<declare parent="shellParam" type="element"  name="batch"  >optBatch</declare>
+		<declare parent="shellParam" type="element"  name="bin"    >optBin</declare>
+		<declare parent="shellParam" type="element"  name="debug"  >optDebug</declare>
+		<declare parent="shellParam" type="element"  name="etc"    >optEtc</declare>
+		<declare parent="shellParam" type="element"  name="fetch"  >optFetch</declare>
+		<declare parent="shellParam" type="element"  name="help"   >optHelp</declare>
+		<declare parent="shellParam" type="element"  name="host"   >optHost</declare>
+		<declare parent="shellParam" type="element"  name="lang"   >optLang</declare>
+		<declare parent="shellParam" type="element"  name="lib"    >optLib</declare>
+		<declare parent="shellParam" type="element"  name="man"    >optMan</declare>
+		<declare parent="shellParam" type="element"  name="path"   >optPath</declare>
+		<declare parent="shellParam" type="element"  name="quiet"  >optSilent</declare>
+		<declare parent="shellParam" type="element"  name="repo"   >optRepo</declare>
+		<declare parent="shellParam" type="element"  name="root"   >optRoot</declare>
+		<declare parent="shellParam" type="element"  name="script" >optScript</declare>
+		<declare parent="shellParam" type="element"  name="src"    >optSrc</declare>
+		<declare parent="shellParam" type="element"  name="type"   >optType</declare>
+
+		<declare name="cmndsValid" type="array" />
+
+			<declare parent="cmndsValid" type="element"  name="0" >fetch</declare>
+			<declare parent="cmndsValid" type="element"  name="1" >script</declare>
+			<declare parent="cmndsValid" type="element"  name="2" >help</declare>
+
+	</declarations>
+
+	<declarations name="lmstest_" >
+
+		<declare name="errorCodes" type="associative" />
+
+			<declare type="element" parent="errorCodes" name="NoError">No errors detected.</declare>
+			<declare type="element" parent="errorCodes" name="EndOfTest">End of test.</declare>
+			<declare type="element" parent="errorCodes" name="MissingParam">Missing required parameter.</declare>
+			<declare type="element" parent="errorCodes" name="BadValue">A bad value was entered.</declare>
+
+		<declare name="errorNumbers" type="array" />
+
+			<declare parent="errorNumbers" type="element" name="0" >NoError</declare>
+			<declare parent="errorNumbers" type="element" name="1" >EndOfTest</declare>
+			<declare parent="errorNumbers" type="element" name="2" >MissingParam</declare>
+			<declare parent="errorNumbers" type="element" name="3" >BadValue</declare>
+
+	</declarations>
+
+</lms>

@@ -1,0 +1,127 @@
+#!/bin/bash
+
+###############################################################################
+#
+# Filename: timer.sh
+# Version: 110212
+# Author: robz
+# Improved from the "Egg Timer" script, a countdown timer with progress bar.
+# This one has an indication of time remaining provided by Zenity's progress
+# bar function. As usual you'll need to find a sound and icon for the variables
+# below, you might find the icon variable is correct, check the directory.
+#
+###############################################################################
+#
+#  Modified to allow defaults to be entered on command line
+#
+###############################################################################
+
+NAME="#1"
+ICON=/usr/share/app-install/icons/alarm-clock.svg        # Existing icon?
+SOUND=$HOME/Sounds/femscrea2.wav                         # Your sound pref.
+TIME=""
+
+while test $# -gt 0
+do
+    case $1 in
+        -n)
+            NAME=$2
+            shift
+            ;;
+
+        --name)
+            NAME=$2
+            shift
+            ;;
+
+	-t)
+            COUNT=$2
+            shift
+            ;;
+
+        --time)
+            COUNT=$2
+            shift
+            ;;
+
+	-s)
+            SOUND=$2
+            shift
+            ;;
+
+        --sound)
+            SOUND=$2
+            shift
+            ;;
+
+	-h)
+	    echo "timer -n timer-name -t time-and-units -s path_to_sound file"
+	    exit 1
+            ;;
+
+	--help)
+	    echo "timer -n timer-name -t time-and-units -s path_to_sound file"
+	    exit 1
+            ;;
+
+        *)
+            echo >&2 "Invalid argument: $1"
+            ;;
+    esac
+    shift
+done
+
+TITLE="Timer: $NAME"
+if [ -z "$COUNT" ]
+then
+    COUNT=$(zenity --title "$TITLE" --window-icon "$ICON" --text "No decimals"\
+        --entry-text "eg. 10s or 5m or 2h" --entry)           # Input dialogue.
+    if [ $? = 1 ]; then exit $?; fi
+fi
+
+# Determine number of seconds to count down from depending on input suffix.
+case "${COUNT: -1}" in
+    "S" | "s" ) COUNT=$(echo $COUNT | sed -s "s/[Ss]//") ;;
+    "M" | "m" ) COUNT=$(echo $COUNT | sed -s "s/[Mm]//"); ((COUNT*=60)) ;;
+    "H" | "h" ) COUNT=$(echo $COUNT | sed -s "s/[Hh]//"); ((COUNT*=3600)) ;;
+    *         ) zenity --error --title "$TITLE" --text \
+    "<span color=\"red\"><b>\
+    \nUse the form of 10s or 5m or 2h\nNo decimals allowed either.</b></span>"
+#    sh -c "$0"                                           # On error restart.
+    sh -c "$0 -n $NAME -s $SOUND"                         # On error restart.
+    exit ;;
+esac
+
+START=$COUNT                                              # Set a start point.
+
+until [ "$COUNT" -eq "0" ]; do                            # Countdown loop.
+    ((COUNT-=1))                                          # Decrement seconds.
+    PERCENT=$((100-100*COUNT/START))                      # Calc percentage.
+    echo "#Time remaining$(echo "obase=60;$COUNT" | bc)"  # Convert to H:M:S.
+    echo $PERCENT                                         # Outut for progbar.
+    sleep 1
+done | zenity --title "$TITLE" --progress --percentage=0 --text="xx"\
+    --window-icon=$ICON --auto-close                      # Progbar/time left.
+if [ $? = 1 ]; then exit $?; fi
+notify-send -i "$ICON" "$TITLE  *** TIMES UP ***"         # Attention finish!
+
+#
+#  canberra-gtk-play is not working on Ubuntu Studio 14.04 TLS
+#
+#/usr/bin/canberra-gtk-play --volume 4 -f "$SOUND"           # Ding-dong finish!
+#
+# so, temporarily replaced with /usr/bin/aplay
+#
+/usr/bin/aplay -q "$SOUND"
+
+#
+# Ubuntu 14.04 - zenity --notification causes a glib fault
+#
+#zenity --notification --window-icon=$ICON \
+#   --text "Egg Timer > ## TIMES UP ##"                   # Indicate finished!
+#
+# Replaced with a zenity --warning instead << put back to original when fixed
+#
+zenity --warning --window-icon="$ICON"  --timeout=60 \
+   --text "$TITLE \n\n *** TIMES UP ***"                   # Indicate finished!
+

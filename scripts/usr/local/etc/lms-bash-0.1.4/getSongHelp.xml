@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2016. EarthWalk Software. -->
+<lms>
+	<help>
+		<labels>
+			<label name="command">[option][=value] ...</label>
+			<label name="options">Options  (brief detail)</label>
+			<label name="footer">    nn = numeric value | ss = string value</label>
+		</labels>
+
+		<options>
+			<var name="alter">
+				<use>alter  = alternative to use for single quote character</use>
+			</var>
+
+			<var name="base">
+				<use>base   = base directory for storing files (must have a trailing /)</use>
+			</var>
+
+			<var name="debug">
+				<use>debug  = debug flag setting</use>
+			</var>
+
+			<var name="help">
+				<use>help   = help (display this message)</use>
+			</var>
+
+			<var name="play">
+				<use>play   = seconds to wait between song playing queries</use>
+			</var>
+
+			<var name="quiet">
+				<use>quiet  = enable/disable output to the console</use>
+			</var>
+
+			<var name="reduce">
+				<use>reduce = apply 'alter' option if set to 1</use>
+			</var>
+
+			<var name="run">
+				<use>run    = seconds to wait between program running queries</use>
+			</var>
+
+			<var name="sleep">
+				<use>sleep  = seconds to wait between song ended queries</use>
+			</var>
+
+		</options>
+
+	</help>
+</lms>

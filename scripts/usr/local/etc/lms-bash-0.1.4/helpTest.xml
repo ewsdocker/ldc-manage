@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- copyright © 2014, 2017. EarthWalk Software. -->
+<lms>
+	<declarations name="lmshlp_" >
+		<declare name="section"  type="associative" />
+			<declare parent="section" type="element" name="hcommand">option=value option=value ... script-name</declare>
+			<declare parent="section" type="element" name="hoptions">Options  (brief detail)</declare>
+			<declare parent="section" type="element" name="hfooter" >Refer to the manpage for additional information</declare>
+		<declare name="option"  type="associative" />
+			<declare parent="option" type="element" name="batch">backup - create tar backup of source</declare>
+			<declare parent="option" type="element" name="debug">debug  - 0=none, 1=minimal, 2=verbose</declare>
+			<declare parent="option" type="element" name="etc"  >etc    - configuration file folder name</declare>
+			<declare parent="option" type="element" name="lib"  >lib    - library version to install</declare>
+			<declare parent="option" type="element" name="man"  >man    - the manpage folder</declare>
+			<declare parent="option" type="element" name="quiet">quiet  - 1=suppress all console output</declare>
+			<declare parent="option" type="element" name="root" >root   - root directory path</declare>
+			<declare parent="option" type="element" name="src"  >src    - the install source folder</declare>
+	</declarations>
+</lms>
