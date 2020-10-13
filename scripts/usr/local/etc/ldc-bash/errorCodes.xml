@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- copyright © 2014, 2017, 2018. EarthWalk Software. -->
-<lms>
+<ldc>
 	<ErrorMsgs>
 
 		<ErrorCode name="None">
@@ -268,5 +268,5 @@
 		</ErrorCode>
 
 	</ErrorMsgs>
-</lms>
+</ldc>
 

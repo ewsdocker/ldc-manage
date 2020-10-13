@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- copyright © 2014, 2017. EarthWalk Software. -->
-<lms>
-	<declarations name="lmshlp_" >
+<ldc>
+	<declarations name="ldchlp_" >
 		<declare name="section"  type="associative" />
 			<declare parent="section" type="element" name="hcommand">option=value option=value ... script-name</declare>
 			<declare parent="section" type="element" name="hoptions">Options  (brief detail)</declare>
@@ -16,4 +16,4 @@
 			<declare parent="option" type="element" name="root" >root   - root directory path</declare>
 			<declare parent="option" type="element" name="src"  >src    - the install source folder</declare>
 	</declarations>
-</lms>
+</ldc>

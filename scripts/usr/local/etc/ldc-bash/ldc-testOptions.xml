@@ -7,14 +7,14 @@
 <!--                                             -->
 <!-- =========================================== -->
 
-<lms>
-	<declarations name="lmstest_" >
+<ldc>
+	<declarations name="ldctest_" >
 
 		<!-- svnMakeRepo (cli) option defaults -->
 
 		<declare name="optBranch"     type="string" >trunk</declare>
 		<declare name="optLogDisplay" type="integer">1</declare>
-		<declare name="optLog"        type="string">/var/local/log/lms-test/testLmsLog.log</declare>
+		<declare name="optLog"        type="string">/var/local/log/ldc-test/testldcLog.log</declare>
 		<declare name="optRepo"       type="string" >defaultRepo</declare>
 		<declare name="optSelinux"    type="integer">0</declare>
 		<declare name="optService"    type="string" >apache2ctl restart</declare>
@@ -65,4 +65,4 @@
 		<declare parent="shellParam" type="element" name="queue"    >optQueueErrors</declare>
 		<declare parent="shellParam" type="element" name="quiet"    >optSilent</declare>
 	</declarations>
-</lms>
+</ldc>

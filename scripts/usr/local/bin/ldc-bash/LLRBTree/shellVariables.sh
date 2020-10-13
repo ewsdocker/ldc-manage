@@ -3,7 +3,7 @@
 # *********************************************************************************
 # *********************************************************************************
 #
-#   lmsDeclare.sh
+#   ldcDeclare.sh
 #
 #   Copyright (C) 2016. EarthWalk Software
 #
@@ -19,12 +19,12 @@
 #
 #		the following external functions are required
 #
-#			lmsConio
-#				lmsConioDebug
-#				lmsConioDisplay
+#			ldcConio
+#				ldcConioDebug
+#				ldcConioDisplay
 #
-#			lmsString
-#				lmsStrSplit
+#			ldcString
+#				ldcStrSplit
 #
 #			xmlParser
 #				parse_xml
@@ -34,7 +34,7 @@
 
 # *********************************************************************************
 #
-#	lmsDeclareSet
+#	ldcDeclareSet
 #
 #		creates a global variable and sets it's value
 #
@@ -47,7 +47,7 @@
 #			   = 1 if set error
 #
 # *********************************************************************************
-lmsDeclareSet()
+ldcDeclareSet()
 {
     local  svName=$1
     local  svValue=$2
@@ -58,7 +58,7 @@ lmsDeclareSet()
 
 # *********************************************************************************
 #
-#	lmsDeclareNs
+#	ldcDeclareNs
 #
 #		creates a global variable namespace
 #
@@ -70,17 +70,17 @@ lmsDeclareSet()
 #			   = 1 if set error
 #
 # *********************************************************************************
-lmsDeclareNs()
+ldcDeclareNs()
 {
 	local svBuffer="${1} ${2}"
-	lmsStrTrim "${svBuffer}" svBuffer
+	ldcStrTrim "${svBuffer}" svBuffer
 
-	lmsErrorQWriteX $LINENO "XmlInfo" "${svBuffer}"
+	ldcErrorQWriteX $LINENO "XmlInfo" "${svBuffer}"
 }
 
 # *********************************************************************************
 #
-#	lmsDeclareInt
+#	ldcDeclareInt
 #
 #		creates a global integer variable and sets it's value
 #
@@ -93,17 +93,17 @@ lmsDeclareNs()
 #			   = 1 if set error
 #
 # *********************************************************************************
-lmsDeclareInt()
+ldcDeclareInt()
 {
 	svName=${1}
 	svContent=${2}
 
 	declare -gi "$svName"
 
-	lmsDeclareSet ${svName} ${svContent}
+	ldcDeclareSet ${svName} ${svContent}
 	if [ $? != 0 ]
 	then
-    	lmsErrorQWrite $LINENO DeclareError  "Unable to declare ${svName}"
+    	ldcErrorQWrite $LINENO DeclareError  "Unable to declare ${svName}"
 		return 1
 	fi
 
@@ -112,7 +112,7 @@ lmsDeclareInt()
 
 # *********************************************************************************
 #
-#	lmsDeclareStr
+#	ldcDeclareStr
 #
 #		creates a global string variable and sets it's value
 #
@@ -125,17 +125,17 @@ lmsDeclareInt()
 #			   = 1 if set error
 #
 # *********************************************************************************
-lmsDeclareStr()
+ldcDeclareStr()
 {
 	svName=${1}
 	svContent="${2}"
 
-	lmsErrorQWriteX $LINENO "XmlInfo" "$svName = ${svContent}"
+	ldcErrorQWriteX $LINENO "XmlInfo" "$svName = ${svContent}"
 
-	lmsDeclareSet ${svName} "${svContent}"
+	ldcDeclareSet ${svName} "${svContent}"
 	if [ $? != 0 ]
 	then
-		lmsErrorQWrite $LINENO "XmlError" "Unable to declare ${svName}"
+		ldcErrorQWrite $LINENO "XmlError" "Unable to declare ${svName}"
 		return 1
 	fi
 
@@ -144,7 +144,7 @@ lmsDeclareStr()
 
 # *********************************************************************************
 #
-#	lmsDeclarePwd
+#	ldcDeclarePwd
 #
 #		creates a global string password variable and sets it's value
 #
@@ -157,19 +157,19 @@ lmsDeclareStr()
 #			   = 1 if set error
 #
 # *********************************************************************************
-lmsDeclarePwd()
+ldcDeclarePwd()
 {
 	svName=${1}
 	svContent="${2}"
 
-	lmsErrorQWriteX $LINENO "XmlInfo" "$svName = ${svContent}"
+	ldcErrorQWriteX $LINENO "XmlInfo" "$svName = ${svContent}"
 
 	svContent=$( echo -n ${svContent} | base64 )
 
-	lmsDeclareSet ${svName} "${svContent}"
+	ldcDeclareSet ${svName} "${svContent}"
 	if [ $? != 0 ]
 	then
-		lmsErrorQWrite $LINENO "XmlError" "Unable to declare ${svName}"
+		ldcErrorQWrite $LINENO "XmlError" "Unable to declare ${svName}"
 		return 1
 	fi
 
@@ -178,7 +178,7 @@ lmsDeclarePwd()
 
 # *********************************************************************************
 #
-#	lmsDeclareAssoc
+#	ldcDeclareAssoc
 #
 #		creates a global associative array variable
 #
@@ -191,17 +191,17 @@ lmsDeclarePwd()
 #			   = 1 if set error
 #
 # *********************************************************************************
-lmsDeclareAssoc()
+ldcDeclareAssoc()
 {
 	svName="${1}"
 
-	lmsErrorQWriteX $LINENO "XmlInfo" "$svName"
+	ldcErrorQWriteX $LINENO "XmlInfo" "$svName"
 	declare -gA "$svName"
 }
 
 # *********************************************************************************
 #
-#	lmsDeclareArray
+#	ldcDeclareArray
 #
 #		creates a global array variable
 #
@@ -214,17 +214,17 @@ lmsDeclareAssoc()
 #			   = 1 if set error
 #
 # *********************************************************************************
-lmsDeclareArray()
+ldcDeclareArray()
 {
 	svName="${1}"
-	lmsErrorQWriteX $LINENO "XmlInfo" "$svName"
+	ldcErrorQWriteX $LINENO "XmlInfo" "$svName"
 
 	declare -ga "${svName}"
 }
 
 # *********************************************************************************
 #
-#	lmsDeclareArrayEl
+#	ldcDeclareArrayEl
 #
 #		Adds an element to a global array variable
 #
@@ -238,13 +238,13 @@ lmsDeclareArray()
 #			   = 1 if set error
 #
 # *********************************************************************************
-lmsDeclareArrayEl()
+ldcDeclareArrayEl()
 {
 	svParent="${1}"
 	svName="${2}"
 	svValue="${3:-0}"
 
-	lmsErrorQWriteX $LINENO "XmlInfo" "$svParent [$svName] = $svValue"
+	ldcErrorQWriteX $LINENO "XmlInfo" "$svParent [$svName] = $svValue"
 	eval "$svParent[$svName]='${svValue}'"
 
 }

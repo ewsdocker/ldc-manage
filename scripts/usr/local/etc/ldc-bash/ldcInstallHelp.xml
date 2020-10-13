@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- copyright © 2014, 2017. EarthWalk Software. -->
-<lms>
+<ldc>
 
 	<optionsLabel>
 		<optionLabel name="command">[options] script-file-name</optionLabel>
@@ -24,7 +24,7 @@
 		<var name="quiet">0</var>
 		<var name="repo">test</var>
 		<var name="root">local</var>
-		<var name="script">lmsInstallScript</var>
+		<var name="script">ldcInstallScript</var>
 	</options>
 
 	<optionsUse>
@@ -46,4 +46,4 @@
 		<optionUse name="script">script=script-name        - the script to install</optionUse>
 	</optionsUse>
 
-</lms>
+</ldc>

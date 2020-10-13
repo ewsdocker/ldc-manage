@@ -2,7 +2,7 @@
 # *****************************************************************************
 # *****************************************************************************
 #
-#		lms-svn.sh
+#		ldc-svn.sh
 #
 # *****************************************************************************
 #
@@ -10,7 +10,7 @@
 # @version 0.1.3
 # @copyright © 2016. EarthWalk Software.
 # @license Licensed under the Academic Free License version 3.0
-# @package lms-svn
+# @package ldc-svn
 #
 # *****************************************************************************
 #
@@ -32,7 +32,7 @@
 #
 # *****************************************************************************
 # *****************************************************************************
-lmsscr_Version="0.1.3"
+ldcscr_Version="0.1.3"
 
 # *****************************************************************************
 # *****************************************************************************
@@ -42,13 +42,13 @@ lmsscr_Version="0.1.3"
 # *****************************************************************************
 # *****************************************************************************
 
-lmscli_optProduction=0
+ldccli_optProduction=0
 
-if [ $lmscli_optProduction -eq 1 ]
+if [ $ldccli_optProduction -eq 1 ]
 then
 	rootDir="/usr/local"
-	libDir="$rootDir/lib/lms/bash"
-	etcDir="$rootDir/etc/lms"
+	libDir="$rootDir/lib/ldc/bash"
+	etcDir="$rootDir/etc/ldc"
 else
 	rootDir="../.."
 	libDir="$rootDir/lib"
@@ -56,32 +56,32 @@ else
 fi
 
 . $libDir/arraySort.sh
-. $libDir/lmsCli.sh
-. $libDir/lmsColorDef.sh
-. $libDir/lmsConio.sh
-. $libDir/lmsXCfg.sh
-. $libDir/lmsDomN.sh
-. $libDir/lmsDomR.sh
-. $libDir/lmsDomTs.sh
-. $libDir/lmsDmpVar
+. $libDir/ldcCli.sh
+. $libDir/ldcColorDef.sh
+. $libDir/ldcConio.sh
+. $libDir/ldcXCfg.sh
+. $libDir/ldcDomN.sh
+. $libDir/ldcDomR.sh
+. $libDir/ldcDomTs.sh
+. $libDir/ldcDmpVar
 . $libDir/dynamicArrayFunctions.sh
 . $libDir/dynamicArrayIterator.sh
-. $libDir/lmsError.sh
-. $libDir/lmsErrorQDisp.sh
-. $libDir/lmsErrorQ.sh
-. $libDir/lmsHelp.sh
-. $libDir/lmsDeclare.sh
-. $libDir/lmsLog.sh
-. $libDir/lmsLogRead.sh
-. $libDir/lmsRlmsDomD.sh
-. $libDir/lmsScriptName.sh
-. $libDir/lmsStack.sh
-. $libDir/lmsStartup.sh
-. $libDir/lmsStr.sh
-. $libDir/lmsUId
-. $libDir/lmsUtilities.sh
-. $libDir/lmsXMLParse
-. $libDir/lmsXPath.sh
+. $libDir/ldcError.sh
+. $libDir/ldcErrorQDisp.sh
+. $libDir/ldcErrorQ.sh
+. $libDir/ldcHelp.sh
+. $libDir/ldcDeclare.sh
+. $libDir/ldcLog.sh
+. $libDir/ldcLogRead.sh
+. $libDir/ldcRldcDomD.sh
+. $libDir/ldcScriptName.sh
+. $libDir/ldcStack.sh
+. $libDir/ldcStartup.sh
+. $libDir/ldcStr.sh
+. $libDir/ldcUId
+. $libDir/ldcUtilities.sh
+. $libDir/ldcXMLParse
+. $libDir/ldcXPath.sh
 
 # *****************************************************************************
 # *****************************************************************************
@@ -91,13 +91,13 @@ fi
 # *****************************************************************************
 # *****************************************************************************
 
-lmsapp_errors="$etcDir/errorCodes.xml"  		# where to find the error code definitions
+ldcapp_errors="$etcDir/errorCodes.xml"  		# where to find the error code definitions
 
-lmssvn_help="$PWD/lms-svnHelp.xml"  			# where to find the help message file
-lmssvn_options="$PWD/lms-svnOptions.xml"		# where to find the options declarations
-lmssvn_variables="$PWD/lms-svnVariables.xml"	# where to find the options declarations
+ldcsvn_help="$PWD/ldc-svnHelp.xml"  			# where to find the help message file
+ldcsvn_options="$PWD/ldc-svnOptions.xml"		# where to find the options declarations
+ldcsvn_variables="$PWD/ldc-svnVariables.xml"	# where to find the options declarations
 
-lmscli_opt="$etcDir/cliOptions.xml"			# cli option defaults
+ldccli_opt="$etcDir/cliOptions.xml"			# cli option defaults
 
 # *****************************************************************************
 #
@@ -115,24 +115,24 @@ lmscli_opt="$etcDir/cliOptions.xml"			# cli option defaults
 # *****************************************************************************
 displayHelp()
 {
-	[[ -z "${lmssvn_helpMessage}" ]] &&
+	[[ -z "${ldcsvn_helpMessage}" ]] &&
 	 {
-		lmsHelpInit ${lmssvn_help}
+		ldcHelpInit ${ldcsvn_help}
 		[[ $? -eq 0 ]] ||
 		 {
-			lmsLogMessage $LINENO "HelpError" "Help initialize '${lmssvn_help}' failed: $?"
+			ldcLogMessage $LINENO "HelpError" "Help initialize '${ldcsvn_help}' failed: $?"
 			return 1
 		 }
 
-		lmssvn_helpMessage=$( lmsHelpToStr )
+		ldcsvn_helpMessage=$( ldcHelpToStr )
 		[[ $? -eq 0 ]] ||
 		 {
-			lmsLogMessage $LINENO "HelpError" "lmsHelpToStr failed: $?"
+			ldcLogMessage $LINENO "HelpError" "ldcHelpToStr failed: $?"
 			return 2
 		 }
 	 }
 
-	lmsLogDisplay "${lmssvn_helpMessage}"
+	ldcLogDisplay "${ldcsvn_helpMessage}"
 	return 0
 }
 
@@ -156,7 +156,7 @@ checkOption()
 	local optionLocal=${1:-""}
 	local optionName=${2:-""}
 
-	if [[ -z "${optionLocal}" || ! " ${!lmscli_shellParam[@]} " =~ "${optionLocal}" ||  -z "${optionName}" ]]
+	if [[ -z "${optionLocal}" || ! " ${!ldccli_shellParam[@]} " =~ "${optionLocal}" ||  -z "${optionName}" ]]
 	then
 		return 1
 	fi
@@ -180,7 +180,7 @@ checkOption()
 # *******************************************************************************
 getRepositoryBranch()
 {
-	checkOption "branch" "${lmscli_optBranch}"
+	checkOption "branch" "${ldccli_optBranch}"
 	return $?
 }
 
@@ -199,7 +199,7 @@ getRepositoryBranch()
 # *******************************************************************************
 getSourcePath()
 {
-	checkOption "source" "${lmscli_optSource}"
+	checkOption "source" "${ldccli_optSource}"
 	return $?
 }
 
@@ -219,7 +219,7 @@ getSourcePath()
 # *******************************************************************************
 getRepositoryPath()
 {
-	checkOption "svn" "${lmscli_optSvn}"
+	checkOption "svn" "${ldccli_optSvn}"
 	return $?
 }
 
@@ -239,7 +239,7 @@ getRepositoryPath()
 # *******************************************************************************
 getRepository()
 {
-	checkOption "repo" "${lmscli_optRepo}"
+	checkOption "repo" "${ldccli_optRepo}"
 	return $?
 }
 
@@ -259,7 +259,7 @@ getRepository()
 # *******************************************************************************
 getHost()
 {
-	checkOption "host" "${lmscli_optHost}"
+	checkOption "host" "${ldccli_optHost}"
 	return $?
 }
 
@@ -286,9 +286,9 @@ checkResult()
 
 	[[ ${result} -eq 0 ]] ||
 	 {
-   		lmsErrorQWrite $2 $3 $4
-		lmsErrorQDispPop
-		lmsErrorExitScript EndInError
+   		ldcErrorQWrite $2 $3 $4
+		ldcErrorQDispPop
+		ldcErrorExitScript EndInError
 	 }
 
 	return 0
@@ -309,7 +309,7 @@ checkResult()
 # *******************************************************************************
 getOptions()
 {
-	lmsUtilIsUser
+	ldcUtilIsUser
 	checkResult $? $LINENO SvnRepository "Program must be run by sudo user."
 
 	getHost
@@ -327,11 +327,11 @@ getOptions()
 	getRepositoryBranch
 	checkResult $? $LINENO "SvnRepository" "Missing repository branch"
 
-	lmssvn_baseDir="${lmscli_optSvn}${lmscli_optSvnName}"
-	lmssvn_url="http://${lmscli_optHost}/${lmscli_optSvnName}/"
-	lmssvn_repoUrl="${lmssvn_url}${lmscli_optRepo}/"
+	ldcsvn_baseDir="${ldccli_optSvn}${ldccli_optSvnName}"
+	ldcsvn_url="http://${ldccli_optHost}/${ldccli_optSvnName}/"
+	ldcsvn_repoUrl="${ldcsvn_url}${ldccli_optRepo}/"
 
-	lmssvn_repoPath="${lmssvn_baseDir}/${lmscli_optRepo}"
+	ldcsvn_repoPath="${ldcsvn_baseDir}/${ldccli_optRepo}"
 
 	return 0
 }
@@ -352,24 +352,24 @@ getOptions()
 # *****************************************************************************
 processCliOptions()
 {
-	lmsCliParse
+	ldcCliParse
 	[[ $? -eq 0 ]] ||
 	 {
-		lmsLogMessage $LINENO "ParamError" "cliParameterParse failed."
-		lmsErrorExitScript "ParamError"
+		ldcLogMessage $LINENO "ParamError" "cliParameterParse failed."
+		ldcErrorExitScript "ParamError"
 	 }
 
-	[[ ${lmscli_Errors} -eq 0 ]] &&
+	[[ ${ldccli_Errors} -eq 0 ]] &&
 	 {
-		lmsCliApply
+		ldcCliApply
 		[[ $? -eq 0 ]] ||
 		 {
-			lmsLogMessage $LINENO "ParamError" "lmsCliApply failed."
-			lmsErrorExitScript "ParamError"
+			ldcLogMessage $LINENO "ParamError" "ldcCliApply failed."
+			ldcErrorExitScript "ParamError"
 		 }
 	 }
 
-	[[ "${lmscli_optHelp}" == "1" ]] &&
+	[[ "${ldccli_optHelp}" == "1" ]] &&
 	 {
 		displayHelp
 		exit 0
@@ -385,43 +385,43 @@ processCliOptions()
 #
 # *****************************************************************************
 # *****************************************************************************
-lmscli_optDebug=0
+ldccli_optDebug=0
 
-lmsLogOpen "${lmssvn_logFile}"
+ldcLogOpen "${ldcsvn_logFile}"
 [[ $? -eq 0 ]] ||
  {
-	lmsConioDisplay "Unable to open log file: '${lmssvn_logFile}'"
+	ldcConioDisplay "Unable to open log file: '${ldcsvn_logFile}'"
 	exit 1
  }
 
-lmsStartupInit $lmsscr_Version ${lmsapp_errors}
+ldcStartupInit $ldcscr_Version ${ldcapp_errors}
 [[ $? -eq 0 ]] ||
  {
 	logMessaage $LINENO "Debug" "Unable to load error codes."
 	errorExit "Debug"
  }
 
-lmsConioDisplay "  Log-file: ${lmssvn_logFile}"
-lmsConioDisplay ""
+ldcConioDisplay "  Log-file: ${ldcsvn_logFile}"
+ldcConioDisplay ""
 
-lmsXPathSelect ${lmserr_arrayName}
+ldcXPathSelect ${ldcerr_arrayName}
 [[ $? -eq 0 ]] ||
  {
-	lmsLogMessage $LINENO "XmlError" "Unable to select ${lmserr_arrayName}"
+	ldcLogMessage $LINENO "XmlError" "Unable to select ${ldcerr_arrayName}"
 	errorExit "XmlError"
  }
 
-lmsXCfgLoad ${lmssvn_vars} "svnMakeRepo"
+ldcXCfgLoad ${ldcsvn_vars} "svnMakeRepo"
 [[ $? -eq 0 ]] ||
  {
-	lmsLogMessage $LINENO "ConfigXmlError" "lmsXCfgLoad '${lmssvn_vars}'"
+	ldcLogMessage $LINENO "ConfigXmlError" "ldcXCfgLoad '${ldcsvn_vars}'"
 	errorExit "ConfigXmlError"
  }
 
-lmsXCfgLoad ${lmssvn_options} "svnMakeRepo"
+ldcXCfgLoad ${ldcsvn_options} "svnMakeRepo"
 [[ $? -eq 0 ]] ||
  {
-	lmsLogMessage $LINENO "ConfigXmlError" "lmsXCfgLoad '${lmssvn_vars}'"
+	ldcLogMessage $LINENO "ConfigXmlError" "ldcXCfgLoad '${ldcsvn_vars}'"
 	errorExit "ConfigXmlError"
  }
 
@@ -431,137 +431,137 @@ processCliOptions
 
 # *****************************************************************************
 
-if [ ! -d ${lmssvn_baseDir} ]
+if [ ! -d ${ldcsvn_baseDir} ]
 then
-	lmsLogDisplay "Subversion base directory '${lmssvn_baseDir}' does not exist."
-	lmsConioDisplay ""
-	lmsLogDisplay "Making subversion base directory: '${lmssvn_baseDir}'"
-	sudo mkdir "${lmssvn_baseDir}"
-	checkResult $? $LINENO "SvnRepository" "mkdir '$lmssvn_baseDir}' failed."
+	ldcLogDisplay "Subversion base directory '${ldcsvn_baseDir}' does not exist."
+	ldcConioDisplay ""
+	ldcLogDisplay "Making subversion base directory: '${ldcsvn_baseDir}'"
+	sudo mkdir "${ldcsvn_baseDir}"
+	checkResult $? $LINENO "SvnRepository" "mkdir '$ldcsvn_baseDir}' failed."
 
-	lmsConioDisplay ""
-	lmsLogDisplay "Creating template folders in '${lmssvn_baseDir}/template'"
-	sudo mkdir -p "${lmssvn_baseDir}/template/trunk"
-	sudo mkdir "${lmssvn_baseDir}/template/branches"
-	sudo mkdir "${lmssvn_baseDir}/template/tags"
+	ldcConioDisplay ""
+	ldcLogDisplay "Creating template folders in '${ldcsvn_baseDir}/template'"
+	sudo mkdir -p "${ldcsvn_baseDir}/template/trunk"
+	sudo mkdir "${ldcsvn_baseDir}/template/branches"
+	sudo mkdir "${ldcsvn_baseDir}/template/tags"
 
-	lmsConioDisplay ""
-	lmsLogDisplay "Changing directory permissions on '${lmssvn_baseDir}'"
-	sudo chmod -R "${lmssvn_repoRights}" "${lmssvn_baseDir}"
-	checkResult $? $LINENO "SvnRepository" "chmod ${lmssvn_repoRights} ${lmssvn_baseDir} failed."
+	ldcConioDisplay ""
+	ldcLogDisplay "Changing directory permissions on '${ldcsvn_baseDir}'"
+	sudo chmod -R "${ldcsvn_repoRights}" "${ldcsvn_baseDir}"
+	checkResult $? $LINENO "SvnRepository" "chmod ${ldcsvn_repoRights} ${ldcsvn_baseDir} failed."
 
-	lmsConioDisplay ""
-	lmsLogDisplay "Changing repository directory owner on '${lmssvn_baseDir}' to ${lmscli_optSvnUser}:${lmscli_optSvnGroup}"
-	sudo chown -R "${lmscli_optSvnUser}:${lmscli_optSvnGroup}" "${lmssvn_baseDir}"
-	checkResult $? $LINENO "SvnRepository" "chown ${lmssvn_baseDir} failed."
+	ldcConioDisplay ""
+	ldcLogDisplay "Changing repository directory owner on '${ldcsvn_baseDir}' to ${ldccli_optSvnUser}:${ldccli_optSvnGroup}"
+	sudo chown -R "${ldccli_optSvnUser}:${ldccli_optSvnGroup}" "${ldcsvn_baseDir}"
+	checkResult $? $LINENO "SvnRepository" "chown ${ldcsvn_baseDir} failed."
 
-	lmsConioDisplay ""
-	lmsLogDisplay "Restarting Apache server"
-	sudo $lmscli_optService 1>/dev/null 2>&1
-	checkResult $? $LINENO "SvnRepository" "'${lmscli_optService}' failed."
+	ldcConioDisplay ""
+	ldcLogDisplay "Restarting Apache server"
+	sudo $ldccli_optService 1>/dev/null 2>&1
+	checkResult $? $LINENO "SvnRepository" "'${ldccli_optService}' failed."
 fi
 
 # *******************************************************************************
 
-lmsConioDisplay ""
-lmsLogDisplay "Creating repository directory: ${lmssvn_repoPath}"
-sudo svnadmin create "${lmssvn_repoPath}"
-checkResult $? $LINENO "SvnRepository" "create ${lmssvn_repoPath} failed."
+ldcConioDisplay ""
+ldcLogDisplay "Creating repository directory: ${ldcsvn_repoPath}"
+sudo svnadmin create "${ldcsvn_repoPath}"
+checkResult $? $LINENO "SvnRepository" "create ${ldcsvn_repoPath} failed."
 
-lmsConioDisplay ""
-lmsLogDisplay "Changing directory permissions on '${lmssvn_repoPath}' to ${lmssvn_repoRights}"
-sudo chmod -R "${lmssvn_repoRights}" "${lmssvn_repoPath}"
-checkResult $? $LINENO "SvnRepository" "chmod ${lmssvn_repoRights} ${lmssvn_repoPath} failed."
+ldcConioDisplay ""
+ldcLogDisplay "Changing directory permissions on '${ldcsvn_repoPath}' to ${ldcsvn_repoRights}"
+sudo chmod -R "${ldcsvn_repoRights}" "${ldcsvn_repoPath}"
+checkResult $? $LINENO "SvnRepository" "chmod ${ldcsvn_repoRights} ${ldcsvn_repoPath} failed."
 
-lmsConioDisplay ""
-lmsLogDisplay "Changing repository directory owner on '${lmssvn_repoPath}' to ${lmscli_optSvnUser}:${lmscli_optSvnGroup}"
-sudo chown -R "${lmscli_optSvnUser}:${lmscli_optSvnGroup}" "${lmssvn_repoPath}"
-checkResult $? $LINENO "SvnRepository" "chown ${lmssvn_repoPath} failed."
+ldcConioDisplay ""
+ldcLogDisplay "Changing repository directory owner on '${ldcsvn_repoPath}' to ${ldccli_optSvnUser}:${ldccli_optSvnGroup}"
+sudo chown -R "${ldccli_optSvnUser}:${ldccli_optSvnGroup}" "${ldcsvn_repoPath}"
+checkResult $? $LINENO "SvnRepository" "chown ${ldcsvn_repoPath} failed."
 
-[[ ${lmscli_optSelinux} == 1 ]] &&
+[[ ${ldccli_optSelinux} == 1 ]] &&
 {
-	lmsConioDisplay "Modifying selinux: httpd_sys_content_t"
-	sudo chcon -R -t httpd_sys_content_t "${lmssvn_repoPath}"
-	checkResult $? $LINENO "SvnRepository" "chcon ${lmssvn_repoPath} failed."
+	ldcConioDisplay "Modifying selinux: httpd_sys_content_t"
+	sudo chcon -R -t httpd_sys_content_t "${ldcsvn_repoPath}"
+	checkResult $? $LINENO "SvnRepository" "chcon ${ldcsvn_repoPath} failed."
 
-	lmsConioDisplay "Modifying selinux: httpd_sys_rw_content_t"
-	sudo chcon -R -t httpd_sys_rw_content_t "${lmssvn_repoPath}"
-	checkResult $? $LINENO "SvnRepository" "chcon ${lmssvn_repoPath} failed."
+	ldcConioDisplay "Modifying selinux: httpd_sys_rw_content_t"
+	sudo chcon -R -t httpd_sys_rw_content_t "${ldcsvn_repoPath}"
+	checkResult $? $LINENO "SvnRepository" "chcon ${ldcsvn_repoPath} failed."
 }
 
-lmsConioDisplay ""
-lmsLogDisplay "Restarting Apache server"
-sudo ${lmscli_optService}  1>/dev/null 2>&1
-checkResult $? $LINENO "SvnRepository" "'${lmscli_optService}' failed."
+ldcConioDisplay ""
+ldcLogDisplay "Restarting Apache server"
+sudo ${ldccli_optService}  1>/dev/null 2>&1
+checkResult $? $LINENO "SvnRepository" "'${ldccli_optService}' failed."
 
-lmsConioDisplay ""
-lmsLogDisplay "Importing template folders: ${lmssvn_baseDir}/template/ ${lmssvn_repoUrl}"
-if [ $lmscli_optDebug -eq 0 ]
+ldcConioDisplay ""
+ldcLogDisplay "Importing template folders: ${ldcsvn_baseDir}/template/ ${ldcsvn_repoUrl}"
+if [ $ldccli_optDebug -eq 0 ]
 then
-	sudo svn import -m 'Template import' "${lmssvn_baseDir}"/template/ "${lmssvn_repoUrl}" 1>/dev/null 2>&1
+	sudo svn import -m 'Template import' "${ldcsvn_baseDir}"/template/ "${ldcsvn_repoUrl}" 1>/dev/null 2>&1
 else
-	sudo svn import -m 'Template import' "${lmssvn_baseDir}"/template/ "${lmssvn_repoUrl}"
+	sudo svn import -m 'Template import' "${ldcsvn_baseDir}"/template/ "${ldcsvn_repoUrl}"
 fi
 
-checkResult $? $LINENO "SvnRepository" "Import template to ${lmssvn_repoUrl} failed."
+checkResult $? $LINENO "SvnRepository" "Import template to ${ldcsvn_repoUrl} failed."
 
 # *******************************************************************************
 
-[[ -n "$lmscli_optSource" ]] &&
+[[ -n "$ldccli_optSource" ]] &&
  {
-	branchURL="${lmssvn_repoUrl}${lmscli_optBranch}"
-	lmsConioDisplay ""
-	lmsLogDisplay "Importing source to $branchURL"
+	branchURL="${ldcsvn_repoUrl}${ldccli_optBranch}"
+	ldcConioDisplay ""
+	ldcLogDisplay "Importing source to $branchURL"
 	
-	if [ $lmscli_optDebug -eq 0 ]
+	if [ $ldccli_optDebug -eq 0 ]
 	then
-		sudo svn import -m 'Initial source import' "${lmscli_optSource}" "${branchURL}" 1>/dev/null 2>&1
+		sudo svn import -m 'Initial source import' "${ldccli_optSource}" "${branchURL}" 1>/dev/null 2>&1
 	else
-		sudo svn import -m 'Initial source import' "${lmscli_optSource}" "${branchURL}"
+		sudo svn import -m 'Initial source import' "${ldccli_optSource}" "${branchURL}"
 	fi
 
-	checkResult $? $LINENO "SvnRepository" "Importing source to ${lmssvn_repoPath} failed."
+	checkResult $? $LINENO "SvnRepository" "Importing source to ${ldcsvn_repoPath} failed."
  }
 
 # *******************************************************************************
 
-lmscli_optSilent=0
-lmscli_optOverride=1
-lmscli_optNoReset=1
+ldccli_optSilent=0
+ldccli_optOverride=1
+ldccli_optNoReset=1
 
-lmsConioDisplay ""
-lmsConioDisplay "*******************************************************"
-lmsConioDisplay ""
+ldcConioDisplay ""
+ldcConioDisplay "*******************************************************"
+ldcConioDisplay ""
 
-lmsLogDisplay "Repository ${lmssvn_repoPath} has been successfully created."
+ldcLogDisplay "Repository ${ldcsvn_repoPath} has been successfully created."
 
-lmsConioDisplay ""
-lmsLogDisplay "    URL: ${lmssvn_repoUrl}"
-lmsConioDisplay ""
-lmsConioDisplay "    Log: ${lmssvn_logFile}"
+ldcConioDisplay ""
+ldcLogDisplay "    URL: ${ldcsvn_repoUrl}"
+ldcConioDisplay ""
+ldcConioDisplay "    Log: ${ldcsvn_logFile}"
 
 # *******************************************************************************
 
-lmsLogClose
+ldcLogClose
 
-[[ ${lmscli_optLogDisplay} -ne 0 ]] &&
+[[ ${ldccli_optLogDisplay} -ne 0 ]] &&
  {
-	$lmsLogMessage=$( svnReadLog "${lmslog_file}" )
+	$ldcLogMessage=$( svnReadLog "${ldclog_file}" )
 	[[ $? -eq 0 ]] ||
 	{
-		lmsConioDebug $LINENO "LogError" "Unable to read log file '${lmslog_file}'"
+		ldcConioDebug $LINENO "LogError" "Unable to read log file '${ldclog_file}'"
 	}
 	
-	lmsConioDisplay "${lmsLogMessage}"
+	ldcConioDisplay "${ldcLogMessage}"
  }
 
 # *****************************************************************************
 # *****************************************************************************
 
-if [ $lmscli_optDebug -ne 0 ]
+if [ $ldccli_optDebug -ne 0 ]
 then
-	lmsErrorQDispPop $LINENO "EndOfTest"
+	ldcErrorQDispPop $LINENO "EndOfTest"
 fi
 
-lmsConioDisplay " "
+ldcConioDisplay " "
 exit 0

@@ -1,8 +1,8 @@
 # *****************************************************************************
 #
-#    testLmsDynnNew
+#    testLdcDynnNew
 #
-#      Test performance of the lmsDynnNew function
+#      Test performance of the ldcDynnNew function
 #
 #	parameters:
 #		arrayName = name of the array to iterate
@@ -12,25 +12,25 @@
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynnNew()
+function testLdcDynnNew()
 {
 	local arrayName=${1}
-	lmserr_result=0
+	ldcerr_result=0
 
-	lmsDynnNew $arrayName
+	ldcDynnNew $arrayName
 	[[ $? -eq 0 ]] || 
 	{
-		lmsLogDisplay "testLmsDynnNew ERROR ($?)"
+		ldcLogDisplay "testLdcDynnNew ERROR ($?)"
 		return 1
 	}
 	
-	lmsConioDisplay "testLmsDynnNew ----- successful"
+	ldcConioDisplay "testLdcDynnNew ----- successful"
 	return 0
 }
 
 # ******************************************************************************
 #
-#	testLmsDynnToStr
+#	testLdcDynnToStr
 #
 #		Create a printable string representation of the node arrays
 #
@@ -42,29 +42,29 @@ function testLmsDynnNew()
 #		non-zero = error code
 #
 # ******************************************************************************
-function testLmsDynnToStr()
+function testLdcDynnToStr()
 {
-	lmsConioDisplay ""
-	lmsConioDisplay "lmsDynnToStr: ${1}"
+	ldcConioDisplay ""
+	ldcConioDisplay "ldcDynnToStr: ${1}"
 
 	local nodeString
-	lmsDynnToStr ${1} nodeString
+	ldcDynnToStr ${1} nodeString
 	[[ $? -eq 0 ]] ||
 	 {
-		lmsLogDisplay "lmsDynnToStr exited with error number '$?'"
+		ldcLogDisplay "ldcDynnToStr exited with error number '$?'"
 		return 1
 	 }
 
-	lmsConioDisplay "${nodeString}"
+	ldcConioDisplay "${nodeString}"
 	
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynnDestruct
+#    testLdcDynnDestruct
 #
-#      Test performance of the lmsDynnDestruct function
+#      Test performance of the ldcDynnDestruct function
 #
 #	parameters:
 #		arrayName = name of the array to iterate
@@ -74,27 +74,27 @@ function testLmsDynnToStr()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynnDestruct()
+function testLdcDynnDestruct()
 {
 	local arrayName=${1}
-	lmserr_result=0
+	ldcerr_result=0
 
-	lmsDynnDestruct $arrayName
+	ldcDynnDestruct $arrayName
 	[[ $? -eq 0 ]] || 
 	{
-		lmsLogDisplay "testLmsDynnDestruct ERROR ($?)"
+		ldcLogDisplay "testLdcDynnDestruct ERROR ($?)"
 		return 1
 	}
 	
-	lmsConioDisplay "testLmsDynnDestruct ----- successful"
+	ldcConioDisplay "testLdcDynnDestruct ----- successful"
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynnReset
+#    testLdcDynnReset
 #
-#      Test performance of the lmsDynnReset function
+#      Test performance of the ldcDynnReset function
 #
 #	parameters:
 #		arrayName = name of the array to iterate
@@ -104,27 +104,27 @@ function testLmsDynnDestruct()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynnReset()
+function testLdcDynnReset()
 {
 	local arrayName=${1}
-	lmserr_result=0
+	ldcerr_result=0
 
-	lmsDynnReset $arrayName
+	ldcDynnReset $arrayName
 	[[ $? -eq 0 ]] || 
 	{
-		lmsLogDisplay "testLmsDynnReset ERROR ($?)"
+		ldcLogDisplay "testLdcDynnReset ERROR ($?)"
 		return 1
 	}
 	
-	lmsConioDisplay "testLmsDynnReset ----- successful"
+	ldcConioDisplay "testLdcDynnReset ----- successful"
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynnReload
+#    testLdcDynnReload
 #
-#      Test performance of the lmsDynnReload function
+#      Test performance of the ldcDynnReload function
 #
 #	parameters:
 #		arrayName = name of the array to iterate
@@ -134,27 +134,27 @@ function testLmsDynnReset()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynnReload()
+function testLdcDynnReload()
 {
 	local arrayName=${1}
-	lmserr_result=0
+	ldcerr_result=0
 
-	lmsDynnReload $arrayName
+	ldcDynnReload $arrayName
 	[[ $? -eq 0 ]] || 
 	{
-		lmsLogDisplay "testLmsDynnReload ERROR ($?)"
+		ldcLogDisplay "testLdcDynnReload ERROR ($?)"
 		return 1
 	}
 
-	lmsConioDisplay "testLmsDynnReload ----- successful"
+	ldcConioDisplay "testLdcDynnReload ----- successful"
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynnValid
+#    testLdcDynnValid
 #
-#      Test performance of the lmsDynnValid function
+#      Test performance of the ldcDynnValid function
 #
 #	parameters:
 #		arrayName = name of the array to iterate
@@ -164,26 +164,26 @@ function testLmsDynnReload()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynnValid()
+function testLdcDynnValid()
 {
 	local arrayName=${1}
 
-	lmsDynnValid $arrayName lmstst_valid
+	ldcDynnValid $arrayName ldctst_valid
 	[[ $? -eq 0 ]] || 
 	{
-		lmsLogDisplay "testLmsDynnValid ERROR ($?)"
+		ldcLogDisplay "testLdcDynnValid ERROR ($?)"
 		return 1
 	}
 	
-	lmsConioDisplay "testLmsDynnValid ----- valid = '${lmstst_valid}'"
+	ldcConioDisplay "testLdcDynnValid ----- valid = '${ldctst_valid}'"
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynnCount
+#    testLdcDynnCount
 #
-#      Test performance of the lmsDynnCount function
+#      Test performance of the ldcDynnCount function
 #
 #	parameters:
 #		arrayName = name of the array to iterate
@@ -193,27 +193,27 @@ function testLmsDynnValid()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynnCount()
+function testLdcDynnCount()
 {
 	local arrayName="${1}"
 	
-	lmsDynnCount $arrayName lmstst_count
+	ldcDynnCount $arrayName ldctst_count
 	[[ $? -eq 0 ]] || 
 	{
-		lmsLogDisplay "testLmsDynnCount ERROR ($?)"
+		ldcLogDisplay "testLdcDynnCount ERROR ($?)"
 		return 1
 	}
 
-	lmsConioDisplay "testLmsDynnCount ----- count = '${lmstst_count}'"
+	ldcConioDisplay "testLdcDynnCount ----- count = '${ldctst_count}'"
 
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynnCurrent
+#    testLdcDynnCurrent
 #
-#      Test performance of the lmsDynnCurrent function
+#      Test performance of the ldcDynnCurrent function
 #
 #	parameters:
 #		arrayName = name of the array to iterate
@@ -223,27 +223,27 @@ function testLmsDynnCount()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynnCurrent()
+function testLdcDynnCurrent()
 {
 	local arrayName="${1}"
 
-	lmsDynnCurrent $arrayName lmstst_current
+	ldcDynnCurrent $arrayName ldctst_current
 	[[ $? -eq 0 ]] || 
 	 {
-		lmsLogDisplay "testLmsDynnCurrent ERROR ($?)"
+		ldcLogDisplay "testLdcDynnCurrent ERROR ($?)"
 		return 1
 	}
 
-	lmsConioDisplay "testLmsDynnCurrent ----- current = '${lmstst_current}'"
+	ldcConioDisplay "testLdcDynnCurrent ----- current = '${ldctst_current}'"
 
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynnNext
+#    testLdcDynnNext
 #
-#      Test performance of the lmsDynnNext function
+#      Test performance of the ldcDynnNext function
 #
 #	parameters:
 #		arrayName = name of the array to iterate
@@ -253,39 +253,39 @@ function testLmsDynnCurrent()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynnNext()
+function testLdcDynnNext()
 {
 	local arrayName="${1}"
 
-	testLmsDynnCurrent $arrayName
+	testLdcDynnCurrent $arrayName
 	[[ $? -eq 0 ]] || 
 	{
-		lmsLogDisplay "testLmsDynnNext ERROR ($?)"
+		ldcLogDisplay "testLdcDynnNext ERROR ($?)"
 		return $?
 	}
 
-	lmsDynnNext $arrayName
+	ldcDynnNext $arrayName
 	[[ $? -eq 0 ]] || 
 	{
-		lmsLogDisplay "testLmsDynnNext ERROR ($?)"
+		ldcLogDisplay "testLdcDynnNext ERROR ($?)"
 		return $?
 	}
 
-	[[ ${lmsdyna_index} -eq $lmstst_current ]] && 
+	[[ ${ldcdyna_index} -eq $ldctst_current ]] && 
 	{
-		lmsLogDisplay "testLmsDynnNext ERROR index was ($lmsdyna_current), now ($lmsdyna_index)"
+		ldcLogDisplay "testLdcDynnNext ERROR index was ($ldcdyna_current), now ($ldcdyna_index)"
 		return 1
 	}
 
-	lmsConioDisplay "testLmsDynnNext ----- index = '${lmsdyna_index}'"
+	ldcConioDisplay "testLdcDynnNext ----- index = '${ldcdyna_index}'"
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynnKey
+#    testLdcDynnKey
 #
-#      Test performance of the lmsDynnKey function
+#      Test performance of the ldcDynnKey function
 #
 #	parameters:
 #		arrayName = name of the array to iterate
@@ -295,26 +295,26 @@ function testLmsDynnNext()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynnKey()
+function testLdcDynnKey()
 {
 	local arrayName="${1}"
 
-	lmsDynnKey $arrayName lmstst_key
+	ldcDynnKey $arrayName ldctst_key
 	[[ $? -eq 0 ]] || 
 	 {
-		lmsLogDisplay "testLmsDynnKey ERROR ($?)"
+		ldcLogDisplay "testLdcDynnKey ERROR ($?)"
 		return 1
 	 }
 
-	lmsConioDisplay "testLmsDynnKey ----- key = '${lmstst_key}'"
+	ldcConioDisplay "testLdcDynnKey ----- key = '${ldctst_key}'"
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynnMap
+#    testLdcDynnMap
 #
-#      Test performance of the lmsDynnMap function
+#      Test performance of the ldcDynnMap function
 #
 #	parameters:
 #		arrayName = name of the array to iterate
@@ -324,18 +324,18 @@ function testLmsDynnKey()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynnMap()
+function testLdcDynnMap()
 {
 	local arrayName="${1}"
 
-	lmsDynnMap $arrayName lmstst_value
+	ldcDynnMap $arrayName ldctst_value
 	[[ $? -eq 0 ]] || 
 	 {
-		lmsLogDisplay "testLmsDynnMap ERROR ($?)"
+		ldcLogDisplay "testLdcDynnMap ERROR ($?)"
 		return 1
 	 }
 
-	lmsConioDisplay "testLmsDynnMap ----- value = '${lmstst_value}'"
+	ldcConioDisplay "testLdcDynnMap ----- value = '${ldctst_value}'"
 	return 0
 }
 
@@ -357,29 +357,29 @@ function testDynaNodeItLabel()
 {
 	local arrayName="${1}"
 
-	lmstst_error=0
+	ldctst_error=0
 
-	lmstst_name="lmsDynnCount"
-	testLmsDynnCount ${arrayName}
+	ldctst_name="ldcDynnCount"
+	testLdcDynnCount ${arrayName}
 	[[ $? -eq 0 ]] || 
 	 {
-		lmstst_error=$?
+		ldctst_error=$?
 		return 1
 	 }
 
-	lmsConioDisplay " ${arrayName} contains $lmstst_count items."
-	lmsConioDisplay ""
-	lmsConioDisplay "    Field           Value"
-	lmsConioDisplay " ============   ============="
+	ldcConioDisplay " ${arrayName} contains $ldctst_count items."
+	ldcConioDisplay ""
+	ldcConioDisplay "    Field           Value"
+	ldcConioDisplay " ============   ============="
 	
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynnGetElement
+#    testLdcDynnGetElement
 #
-#      Test performance of the lmsDynnGetElement function
+#      Test performance of the ldcDynnGetElement function
 #
 #	parameters:
 #		none
@@ -389,16 +389,16 @@ function testDynaNodeItLabel()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynnGetElement()
+function testLdcDynnGetElement()
 {
-	lmsDynn_GetElement
+	ldcDynn_GetElement
 	[[ $? -eq 0 ]] || 
 	 {
-		lmsLogDisplay "testLmsDynnGetElement ERROR ($?)"
+		ldcLogDisplay "testLdcDynnGetElement ERROR ($?)"
 		return 1
 	}
 
-	lmsConioDisplay "testLmsDynnGetElement ----- key = '${lmsdyna_key}', value = '${lmsdyna_value}'"
+	ldcConioDisplay "testLdcDynnGetElement ----- key = '${ldcdyna_key}', value = '${ldcdyna_value}'"
 
 	return 0
 }
@@ -407,7 +407,7 @@ function testLmsDynnGetElement()
 #
 #    testDynaNodeIteration
 #
-#      Test performance of the lmsDynn_GetNext and iteration functions
+#      Test performance of the ldcDynn_GetNext and iteration functions
 #
 #	parameters:
 #		arrayName = name of the array to iterate
@@ -421,54 +421,54 @@ function testDynaNodeIteration()
 {
 	local arrayName="${1}"
 
-	testLmsDynnReset ${arrayName}
+	testLdcDynnReset ${arrayName}
 	[[ $? -eq 0 ]] || 
 	 {
-		lmstst_error=$?
-		lmsLogDisplay "testLmsDynnReset ERROR lmstst_error = '${lmstst_error}'"
+		ldctst_error=$?
+		ldcLogDisplay "testLdcDynnReset ERROR ldctst_error = '${ldctst_error}'"
 		return 1
 	 }
 
-	testLmsDynnReload ${arrayName}
+	testLdcDynnReload ${arrayName}
 	[[ $? -eq 0 ]] || 
 	 {
-		lmstst_error=$?
-		lmsLogDisplay "DynaNodeInfo" "testLmsDynnReload ERROR lmstst_error = '${lmstst_error}'"
+		ldctst_error=$?
+		ldcLogDisplay "DynaNodeInfo" "testLdcDynnReload ERROR ldctst_error = '${ldctst_error}'"
 		return 1
 	 }
 
 	testDynaNodeItLabel ${arrayName}
 	[[ $? -eq 0 ]] || 
 	 {
-		lmstst_error=$?
-		lmsLogDisplay "testDynaNodeITLabel ERROR lmstst_error = '${lmstst_error}'"
+		ldctst_error=$?
+		ldcLogDisplay "testDynaNodeITLabel ERROR ldctst_error = '${ldctst_error}'"
 		return 1
 	 }
 
 	while [ true ]
 	do
-		testLmsDynnGetElement ${arrayName}
+		testLdcDynnGetElement ${arrayName}
 		[[ $? -eq 0 ]] ||
 		 {
-			lmstst_error=$?
-			[[ $lmsdyna_valid -eq 0 ]] &&
+			ldctst_error=$?
+			[[ $ldcdyna_valid -eq 0 ]] &&
 			 {
-				lmsLogDisplay "testLmsDynnGetNext ----- end of iteration, valid = '${lmsdyna_valid}'"
-				lmstst_error=0
+				ldcLogDisplay "testLdcDynnGetNext ----- end of iteration, valid = '${ldcdyna_valid}'"
+				ldctst_error=0
 				return 0
 			 }
 
-			lmsLogDisplay "testLmsDynnGetNext ERROR lmstst_error = '${lmstst_error}'"
+			ldcLogDisplay "testLdcDynnGetNext ERROR ldctst_error = '${ldctst_error}'"
 			break
 		 }
 
-		lmsConioDisplay "testDynaNodeIteration ----- lmstst_key = '${lmsdyna_key}'"
-		lmsConioDisplay "testDynaNodeIteration ----- lmstst_value = '${lmsdyna_value}'"
+		ldcConioDisplay "testDynaNodeIteration ----- ldctst_key = '${ldcdyna_key}'"
+		ldcConioDisplay "testDynaNodeIteration ----- ldctst_value = '${ldcdyna_value}'"
 
-		printf "% 12s     %s\n" ${lmsdyna_key} ${lmsdyna_value}
+		printf "% 12s     %s\n" ${ldcdyna_key} ${ldcdyna_value}
 
-		lmstst_name="lmsDynnNext"
-		testLmsDynnNext ${arrayName}
+		ldctst_name="ldcDynnNext"
+		testLdcDynnNext ${arrayName}
 	done
 
 	return 1

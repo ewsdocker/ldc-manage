@@ -7,8 +7,8 @@
 <!--                                             -->
 <!-- =========================================== -->
 
-<lms>
-	<declarations name="lmstest_" >
+<ldc>
+	<declarations name="ldctest_" >
 
 		<declare name="optBatch"       type="integer">0</declare>
 		<declare name="optDebug"       type="integer">0</declare>
@@ -16,7 +16,7 @@
 		<declare name="optHelp"	       type="integer">0</declare>
 		<declare name="optHost"        type="string" >localhost</declare>
 		<declare name="optLog"         type="integer">1</declare>
-		<declare name="optLogDir"      type="string" >/var/local/log/LMS/Bash/0.1.1/test</declare>
+		<declare name="optLogDir"      type="string" >/var/local/log/ldc/Bash/0.1.1/test</declare>
 		<declare name="optLogName"     type="string" >testDOMToConfig.log</declare>
 		<declare name="optNoReset"     type="integer">0</declare>
 		<declare name="optOverride"    type="integer">0</declare>
@@ -40,4 +40,4 @@
 		<declare parent="shellParam" type="element" name="queue"    >optQueueErrors</declare>
 		<declare parent="shellParam" type="element" name="quiet"    >optSilent</declare>
 	</declarations>
-</lms>
+</ldc>

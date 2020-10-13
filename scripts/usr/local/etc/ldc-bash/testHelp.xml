@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- copyright © 2014, 2016. EarthWalk Software. -->
-<lms>
+<ldc>
 	<help>
 		<labels>
 			<label name="command">option=value option=value ... script-name</label>
@@ -75,4 +75,4 @@
 		</options>
 
 	</help>
-</lms>
+</ldc>

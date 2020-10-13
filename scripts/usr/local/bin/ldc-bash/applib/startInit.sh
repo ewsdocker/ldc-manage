@@ -9,7 +9,7 @@
 # @version 0.0.3
 # @copyright © 2016, 2017, 2018. EarthWalk Software.
 # @license Licensed under the GNU General Public License, GPL-3.0-or-later.
-# @package lms-bash
+# @package ldc-bash
 # @subpackage applications
 #
 # *****************************************************************************
@@ -17,20 +17,20 @@
 #	Copyright © 2016, 2017, 2018. EarthWalk Software
 #	Licensed under the GNU General Public License, GPL-3.0-or-later.
 #
-#   This file is part of ewsdocker/lms-bash.
+#   This file is part of ewsdocker/ldc-bash.
 #
-#   ewsdocker/lms-bash is free software: you can redistribute 
+#   ewsdocker/ldc-bash is free software: you can redistribute 
 #   it and/or modify it under the terms of the GNU General Public License 
 #   as published by the Free Software Foundation, either version 3 of the 
 #   License, or (at your option) any later version.
 #
-#   ewsdocker/lms-bash is distributed in the hope that it will 
+#   ewsdocker/ldc-bash is distributed in the hope that it will 
 #   be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
 #   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with ewsdocker/lms-bash.  If not, see 
+#   along with ewsdocker/ldc-bash.  If not, see 
 #   <http://www.gnu.org/licenses/>.
 #
 # *****************************************************************************
@@ -43,60 +43,60 @@
 #
 #	Run the startup initialize function(s)
 #
-lmsStartupInit $lmsscr_Version ${lmsapp_errors}
+ldcStartupInit $ldcscr_Version ${ldcapp_errors}
 [[ $? -eq 0 ]] ||
  {
-	lmsConioDebugL "Debug" "Unable to load error codes."
+	ldcConioDebugL "Debug" "Unable to load error codes."
 	exit 1
  }
 
 #
 #	Select the error codes from the XML error file
 #
-lmsXPathSelect "lmsErrors" ${lmserr_arrayName}
+ldcXPathSelect "ldcErrors" ${ldcerr_arrayName}
 [[ $? -eq 0 ]] ||
  {
-	lmsConioDebugL "XmlError" "Unable to select ${lmserr_arrayName}"
-	lmsErrorExitScript "XmlError"
+	ldcConioDebugL "XmlError" "Unable to select ${ldcerr_arrayName}"
+	ldcErrorExitScript "XmlError"
  }
 
-lmsDomCLoad "${lmsapp_declare}" "${lmsapp_stackName}" 0
+ldcDomCLoad "${ldcapp_declare}" "${ldcapp_stackName}" 0
 [[ $? -eq 0 ]] ||
  {
-	lmsapp_result=$?
-echo "Startup failed in lmsDomCLoad error: ${lmsapp_result}"
-	lmsConioDebugL "DOMError" "Startup failed in lmsDomCLoad error: ${lmsapp_result}"
-	lmsErrorExitScript "DOMError"
+	ldcapp_result=$?
+echo "Startup failed in ldcDomCLoad error: ${ldcapp_result}"
+	ldcConioDebugL "DOMError" "Startup failed in ldcDomCLoad error: ${ldcapp_result}"
+	ldcErrorExitScript "DOMError"
  }
 
-lmsCliParse
+ldcCliParse
 [[ $? -eq 0 ]] || 
 {
-	lmsConioDebugL "CliError" "cliParameterParse failed"
-	lmsErrorExitScript "CliError"
+	ldcConioDebugL "CliError" "cliParameterParse failed"
+	ldcErrorExitScript "CliError"
 }
 
-[[ ${lmscli_Errors} -eq 0 ]] ||
+[[ ${ldccli_Errors} -eq 0 ]] ||
  {
-	lmsConioDebugL "CliError" "cliErrors = ${lmscli_Errors}, param = ${lmscli_paramErrors}, cmnd = ${lmscli_cmndErrors}"
-	lmsErrorExitScript "CliError"
+	ldcConioDebugL "CliError" "cliErrors = ${ldccli_Errors}, param = ${ldccli_paramErrors}, cmnd = ${ldccli_cmndErrors}"
+	ldcErrorExitScript "CliError"
  }
 
-lmsCliApply
+ldcCliApply
 [[ $? -eq 0 ]] || 
  {
-	lmsConioDebugL "CliError" "lmsCliApply failed: $?"
-	lmsErrorExitScript "CliError"
+	ldcConioDebugL "CliError" "ldcCliApply failed: $?"
+	ldcErrorExitScript "CliError"
  }
 
-echo "Init lmsHelp"
+echo "Init ldcHelp"
 
-lmsHelpInit ${lmsapp_help}
+ldcHelpInit ${ldcapp_help}
 [[ $? -eq 0 ]] ||
  {
-	lmsConioDebugL "HelpError" "Help init failed."
-	lmsErrorExitScript "HelpError"
+	ldcConioDebugL "HelpError" "Help init failed."
+	ldcErrorExitScript "HelpError"
  }
 
-echo "lmsHelp inited"
+echo "ldcHelp inited"
 

@@ -2,7 +2,7 @@
 # ***************************************************************************************************
 # ***************************************************************************************************
 #
-#   lmsInstallDirs.sh
+#   ldcInstallDirs.sh
 #
 # ***************************************************************************************************
 #
@@ -11,7 +11,7 @@
 # @copyright © 2017. EarthWalk Software.
 # @license Licensed under the Academic Free License version 3.0
 # @package Linux Management Scripts
-# @subpackage lmsInstall
+# @subpackage ldcInstall
 #
 # ***************************************************************************************************
 #
@@ -30,26 +30,26 @@
 # ***************************************************************************************************
 # ***************************************************************************************************
 
-declare    lmsapp_name="lmsInstallDirs"
-declare    lmscli_optRelease="0.1.1"
+declare    ldcapp_name="ldcInstallDirs"
+declare    ldccli_optRelease="0.1.1"
 
-declare    lmsscr_Version="0.0.1"					# script version
-
-# **********************************************************************
-
-lmscli_optRoot="/usr/local"
-
-lmscli_optBash="${lmscli_optRoot}/share/LMS/Bash/${lmscli_optRelease}"
-lmscli_optEtc="${lmscli_optRoot}/etc/LMS/Bash/${lmscli_optRelease}"
-lmscli_optLib="${lmscli_optRoot}/lib/LMS/Bash/${lmscli_optRelease}"
+declare    ldcscr_Version="0.0.1"					# script version
 
 # **********************************************************************
 
-lmscli_optVar="/var/local"
+ldccli_optRoot="/usr/local"
 
-lmsbase_dirAppLog="${lmscli_optVar}/log/LMS/Bash/${lmscli_optRelease}"
-dirAppBkup="${lmscli_optVar}/backup/LMS/Bash/${lmscli_optRelease}"
-dirAppTmp="${lmscli_optVar}/temp/LMS"
+ldccli_optBash="${ldccli_optRoot}/share/ldc/Bash/${ldccli_optRelease}"
+ldccli_optEtc="${ldccli_optRoot}/etc/ldc/Bash/${ldccli_optRelease}"
+ldccli_optLib="${ldccli_optRoot}/lib/ldc/Bash/${ldccli_optRelease}"
+
+# **********************************************************************
+
+ldccli_optVar="/var/local"
+
+ldcbase_dirAppLog="${ldccli_optVar}/log/ldc/Bash/${ldccli_optRelease}"
+dirAppBkup="${ldccli_optVar}/backup/ldc/Bash/${ldccli_optRelease}"
+dirAppTmp="${ldccli_optVar}/temp/ldc"
 
 # **********************************************************************
 # **********************************************************************
@@ -63,7 +63,7 @@ dirAppTmp="${lmscli_optVar}/temp/LMS"
 #
 #	isInstalled
 #
-#		Return 0 if the directory /var/local/log/LMS/Bash exists
+#		Return 0 if the directory /var/local/log/ldc/Bash exists
 #			   1 if not
 #
 #	parameters:
@@ -76,7 +76,7 @@ dirAppTmp="${lmscli_optVar}/temp/LMS"
 # **********************************************************************
 function isInstalled()
 {
-	[[ -d "/var/local/log/LMS/Bash" ]] && return 0
+	[[ -d "/var/local/log/ldc/Bash" ]] && return 0
 	
 	return 1
 }
@@ -95,13 +95,13 @@ function isInstalled()
 # **********************************************************************
 displayHelp()
 {
-	[[ -z "${lmsapp_helpBuffer}" ]] &&
+	[[ -z "${ldcapp_helpBuffer}" ]] &&
 	 {
-		lmsHelpToStrV lmsapp_helpBuffer
+		ldcHelpToStrV ldcapp_helpBuffer
 		[[ $? -eq 0 ]] || return 1
 	 }
 
-	lmsConioDisplay "${lmsapp_helpBuffer}"
+	ldcConioDisplay "${ldcapp_helpBuffer}"
 }
 
 # **********************************************************************
@@ -140,7 +140,7 @@ function processCliOptions()
 # *****************************************************************************
 function tarName()
 {
-	lmsapp_tarName="${dirAppBkup}/${1}-$(date '+%F').tar.gz"
+	ldcapp_tarName="${dirAppBkup}/${1}-$(date '+%F').tar.gz"
 }
 
 # **********************************************************************
@@ -171,7 +171,7 @@ function makeDir()
 #
 #	installDirs
 #
-#		Create the directories requird for the installation of LMS/Bash libraries
+#		Create the directories requird for the installation of ldc/Bash libraries
 #
 #	parameters:
 #		none
@@ -188,7 +188,7 @@ function installDirs()
 
 	# ******************************************************************
 
-	makeDir "${lmsbase_dirAppLog}"
+	makeDir "${ldcbase_dirAppLog}"
 	[[ $? -eq 0 ]] || return 1
 
 	makeDir "${dirAppBkup}"
@@ -199,13 +199,13 @@ function installDirs()
 
 	# ******************************************************************
 
-	makeDir "${lmscli_optBash}"
+	makeDir "${ldccli_optBash}"
 	[[ $? -eq 0 ]] || return 4
 
-	makeDir "${lmscli_optEtc}"
+	makeDir "${ldccli_optEtc}"
 	[[ $? -eq 0 ]] || return 5
 
-	makeDir "${lmscli_optLib}"
+	makeDir "${ldccli_optLib}"
 	[[ $? -eq 0 ]] || return 6
 
 	# ******************************************************************
@@ -220,10 +220,10 @@ function installDirs()
 #
 # **********************************************************************
 # **********************************************************************
-lmsScriptFileName "${0}"
+ldcScriptFileName "${0}"
 
-. $lmsbase_dirLib/openLog.sh
-. $lmsbase_dirLib/startInit.sh
+. $ldcbase_dirLib/openLog.sh
+. $ldcbase_dirLib/startInit.sh
 
 # **********************************************************************
 # **********************************************************************
@@ -232,21 +232,21 @@ lmsScriptFileName "${0}"
 #
 # **********************************************************************
 # **********************************************************************
-lmscli_optDebug=1
-[[ -z "${lmscli_command}" ]] &&
+ldccli_optDebug=1
+[[ -z "${ldccli_command}" ]] &&
 {
 	displayHelp
-	lmsErrorExitScript "None"
+	ldcErrorExitScript "None"
 }
 
-case "${lmscli_command}" in
+case "${ldccli_command}" in
 
 	"install")
 		installDirs
 		[[ $? -eq 0 ]] ||
 		 {
-			lmsapp_result=$?
-			lmsConioDebugL "InstallError" "Installation failed: ${lmsapp_result}."
+			ldcapp_result=$?
+			ldcConioDebugL "InstallError" "Installation failed: ${ldcapp_result}."
 		 }
 		;;
 
@@ -255,15 +255,15 @@ case "${lmscli_command}" in
 		;;
 
 	*)	
-		lmsConioDisplay "Unknown option: '${lmscli_command}'."
+		ldcConioDisplay "Unknown option: '${ldccli_command}'."
 		;;
 esac
 
-#lmsDmpVar "lmsapp_ lmscli_"
+#ldcDmpVar "ldcapp_ ldccli_"
 
 # **********************************************************************
 
-. $lmsbase_dirLib/scriptEnd.sh
+. $ldcbase_dirLib/scriptEnd.sh
 
 # **********************************************************************
 

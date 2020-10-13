@@ -1,7 +1,7 @@
 # *****************************************************************************
 # *****************************************************************************
 #
-#   lmsInstallToRepo.sh
+#   ldcInstallToRepo.sh
 #
 # *****************************************************************************
 #
@@ -10,7 +10,7 @@
 # @copyright © 2016. EarthWalk Software.
 # @license Licensed under the Academic Free License version 3.0
 # @package Linux Management Scripts
-# @subpackage lmsInstallScript
+# @subpackage ldcInstallScript
 #
 # *****************************************************************************
 #
@@ -37,13 +37,13 @@
 # *******************************************************
 # *******************************************************
 
-declare -i lmscli_optProduction=0
+declare -i ldccli_optProduction=0
 
-if [ $lmscli_optProduction -eq 1 ]
+if [ $ldccli_optProduction -eq 1 ]
 then
 	rootDir="/usr/local"
-	libDir="$rootDir/lib/lms/bash"
-	etcDir="$rootDir/etc/lms"
+	libDir="$rootDir/lib/ldc/bash"
+	etcDir="$rootDir/etc/ldc"
 else
 	rootDir=".."
 	libDir="$rootDir/lib"
@@ -51,20 +51,20 @@ else
 fi
 
 . $libDir/arraySort.sh
-. $libDir/lmsCli.sh
-. $libDir/lmsColorDef.sh
-. $libDir/lmsConio.sh
-. $libDir/lmsError.sh
-. $libDir/lmsErrorQDisp.sh
-. $libDir/lmsErrorQ.sh
-. $libDir/lmsScriptName.sh
-. $libDir/lmsDeclare.sh
-. $libDir/lmsStack.sh
-. $libDir/lmsStartup.sh
-. $libDir/lmsStr.sh
-. $libDir/lmsUId
+. $libDir/ldcCli.sh
+. $libDir/ldcColorDef.sh
+. $libDir/ldcConio.sh
+. $libDir/ldcError.sh
+. $libDir/ldcErrorQDisp.sh
+. $libDir/ldcErrorQ.sh
+. $libDir/ldcScriptName.sh
+. $libDir/ldcDeclare.sh
+. $libDir/ldcStack.sh
+. $libDir/ldcStartup.sh
+. $libDir/ldcStr.sh
+. $libDir/ldcUId
 . $libDir/xmlParser.sh
-. $libDir/lmsXPath.sh
+. $libDir/ldcXPath.sh
 
 # *******************************************************
 # *******************************************************
@@ -74,8 +74,8 @@ fi
 # *******************************************************
 # *******************************************************
 
-lmsscr_Version="0.0.1"		# script version
-lmsapp_errors="$etcDir/errorCodes.xml"
+ldcscr_Version="0.0.1"		# script version
+ldcapp_errors="$etcDir/errorCodes.xml"
 
 # *******************************************************
 # *******************************************************
@@ -104,12 +104,12 @@ displayHelp()
 		startupBuildHelp
 	fi
 
-	lmsConioDisplay "${helpMessage}"
+	ldcConioDisplay "${helpMessage}"
 }
 
 # *******************************************************
 #
-#	lmsDmpVar
+#	ldcDmpVar
 #
 #	parameters:
 #		none
@@ -118,42 +118,42 @@ displayHelp()
 #		$? = 0 ==> no errors.
 #
 # *******************************************************
-lmsDmpVar()
+ldcDmpVar()
 {
-	lmscli_optOverride=1
-	lmscli_optNoReset=1
+	ldccli_optOverride=1
+	ldccli_optNoReset=1
 
-	lmsConioDisplay "subversion:"
+	ldcConioDisplay "subversion:"
 	if [ ${#subversion[@]} -ne 0 ]
 	then
 		for name in "${!subversion[@]}"
 		do
-			lmsConioDisplay "    lmsDmpVar         $name => ${subversion[$name]}"
+			ldcConioDisplay "    ldcDmpVar         $name => ${subversion[$name]}"
 		done
 	else
-		lmsConioDisplay "lmsDmpVar         ***** NO ENTRIES *****"
+		ldcConioDisplay "ldcDmpVar         ***** NO ENTRIES *****"
 	fi
 
 	# *******************************************************
 
-	lmsConioDisplay "installOptions:"
+	ldcConioDisplay "installOptions:"
 	if [ ${#installOptions[@]} -ne 0 ]
 	then
 		for name in "${!installOptions[@]}"
 		do
-			lmsConioDisplay "    installlmsDmpVar         $name => ${installOptions[$name]}"
+			ldcConioDisplay "    installldcDmpVar         $name => ${installOptions[$name]}"
 		done
 	else
-		lmsConioDisplay "installlmsDmpVar         ***** NO ENTRIES *****"
+		ldcConioDisplay "installldcDmpVar         ***** NO ENTRIES *****"
 	fi
 
 	# *******************************************************
 
-	lmsConioDisplay "cli structures:"
-	lmsDmpVarCli
+	ldcConioDisplay "cli structures:"
+	ldcDmpVarCli
 
-	lmscli_optNoReset=0
-	lmscli_optOverride=0
+	ldccli_optNoReset=0
+	ldccli_optOverride=0
 }
 
 # *******************************************************
@@ -172,14 +172,14 @@ lmsDmpVar()
 # *******************************************************
 getRepositoryBranch()
 {
-	if [[ " ${!lmscli_shellParam[@]} " =~ "branch" ]]
+	if [[ " ${!ldccli_shellParam[@]} " =~ "branch" ]]
 	then
-		svnBranch=${lmscli_shellParam[branch]}
+		svnBranch=${ldccli_shellParam[branch]}
 	fi
 
 	if [ -z "${svnBranch}" ]
 	then
-		lmsErrorQWrite $LINENO "SvnRepository" "Missing repository branch"
+		ldcErrorQWrite $LINENO "SvnRepository" "Missing repository branch"
 		return 1
 	fi
 
@@ -201,9 +201,9 @@ getRepositoryBranch()
 # *******************************************************
 getSourcePath()
 {
-	if [[ " ${!lmscli_shellParam[@]} " =~ "source" ]]
+	if [[ " ${!ldccli_shellParam[@]} " =~ "source" ]]
 	then
-		repoSource=${lmscli_shellParam[source]}
+		repoSource=${ldccli_shellParam[source]}
 	fi
 
 	return 0
@@ -225,17 +225,17 @@ getSourcePath()
 # *******************************************************
 getRepositoryPath()
 {
-	if [[ " ${!lmscli_shellParam[@]} " =~ "svn" ]]
+	if [[ " ${!ldccli_shellParam[@]} " =~ "svn" ]]
 	then
-		svnPath=${lmscli_shellParam[svn]}
+		svnPath=${ldccli_shellParam[svn]}
 	else
 		if [ -z "${svnPath}" ]
 		then
-			lmsConioPrompt "Enter path to SVN Repository Folder"
+			ldcConioPrompt "Enter path to SVN Repository Folder"
 
 			if [ -z "${REPLY}" ]
 			then
-				lmsErrorQWrite $LINENO "SvnRepository" "Missing repository path"
+				ldcErrorQWrite $LINENO "SvnRepository" "Missing repository path"
 				return 1
 			fi
 
@@ -262,16 +262,16 @@ getRepositoryPath()
 # *******************************************************
 getRepository()
 {
-	if [[ " ${!lmscli_shellParam[@]} " =~ "name" ]]
+	if [[ " ${!ldccli_shellParam[@]} " =~ "name" ]]
 	then
-		repository=${lmscli_shellParam[name]}
+		repository=${ldccli_shellParam[name]}
 	else 
 		if [ -z "${repository}" ]
 		then
-			lmsConioPrompt "Enter SVN Repository name"
+			ldcConioPrompt "Enter SVN Repository name"
 			if [ -z "${REPLY}" ]
 			then
-				lmsErrorQWrite $LINENO "SvnRepository" "Missing repository name"
+				ldcErrorQWrite $LINENO "SvnRepository" "Missing repository name"
 				return 1
 			fi
 
@@ -305,17 +305,17 @@ getRepository()
 # *******************************************************
 getHost()
 {
-	if [[ " ${!lmscli_shellParam[@]} " =~ "host" ]]
+	if [[ " ${!ldccli_shellParam[@]} " =~ "host" ]]
 	then
-		svnHost=${lmscli_shellParam[host]}
+		svnHost=${ldccli_shellParam[host]}
 	else
 		if [ -z "${svnHost}" ]
 		then
-			lmsConioPrompt "Enter host name/address"
+			ldcConioPrompt "Enter host name/address"
 
 			if [ -z "${REPLY}" ]
 			then
-				lmsErrorQWrite $LINENO "SvnRepository" "Missing host name/address"
+				ldcErrorQWrite $LINENO "SvnRepository" "Missing host name/address"
 				return 1
 			fi
 
@@ -330,7 +330,7 @@ getHost()
 #
 #   getOptions
 #
-#	 get/set lmsInstallScript variables
+#	 get/set ldcInstallScript variables
 #
 #	parameters:
 #		none
@@ -341,7 +341,7 @@ getHost()
 # *******************************************************
 getOptions()
 {
-	lmsUtilIsUser
+	ldcUtilIsUser
 	checkResult $? $LINENO SvnRepository "Program must be run by sudo user."
 
 	getHost
@@ -384,9 +384,9 @@ checkResult()
 
 	if [ $result -ne 0 ]
 	then
-   		lmsErrorQWrite $2 $3 $4
-		lmsErrorQDispPop
-		lmsErrorExitScript EndInError
+   		ldcErrorQWrite $2 $3 $4
+		ldcErrorQDispPop
+		ldcErrorExitScript EndInError
 	fi
 
 	return 0
@@ -400,14 +400,14 @@ checkResult()
 # *******************************************************
 # *******************************************************
 
-lmscli_Validate=1
+ldccli_Validate=1
 
-lmscli_ParamBuffer=( "$@" )
-lmsStartupInit "1.0.0" $lmsapp_errors $lmsvar_help $lmsVariables
+ldccli_ParamBuffer=( "$@" )
+ldcStartupInit "1.0.0" $ldcapp_errors $ldcvar_help $ldcVariables
 
 case $? in
 
-	0)	if [[ " ${!lmscli_shellParam[@]} " =~ "help" ]] || [ "$lmscli_command" = "help" ]
+	0)	if [[ " ${!ldccli_shellParam[@]} " =~ "help" ]] || [ "$ldccli_command" = "help" ]
 		then
 			displayHelp
 			$LINENO "EndOfTest"			
@@ -415,10 +415,10 @@ case $? in
 		;;
 
 	1)	dumpNameTable
-		lmsErrorExitScript MissAssign
+		ldcErrorExitScript MissAssign
 		;;
 
-	*)	lmsErrorExitScript Unknown
+	*)	ldcErrorExitScript Unknown
 		;;
 
 esac
@@ -429,42 +429,42 @@ esac
 #
 # *******************************************************
 
-if [ $lmscli_optProduction -ne 1 ]
+if [ $ldccli_optProduction -ne 1 ]
 then
 	varShellDum
-	lmsConioDisplay "**************************"
+	ldcConioDisplay "**************************"
 
-	lmsDmpVar
-	lmsConioDisplay "**************************"
+	ldcDmpVar
+	ldcConioDisplay "**************************"
 
 	$LINENO "EndOfTest"
 fi
 
 getOptions
 
-lmsConioDisplay "Creating repository directory: ${repoPath}"
+ldcConioDisplay "Creating repository directory: ${repoPath}"
 sudo svnadmin create "${repoPath}"
 checkResult $? $LINENO SvnRepository "create ${repoPath} failed."
 
-lmsConioDisplay "Changing repository directory owner"
+ldcConioDisplay "Changing repository directory owner"
 sudo chown -R apache.apache "${repoPath}"
 checkResult $? $LINENO SvnRepository "chown ${repoPath} failed."
 
-lmsConioDisplay "Modifying selinux: httpd_sys_content_t"
+ldcConioDisplay "Modifying selinux: httpd_sys_content_t"
 sudo chcon -R -t httpd_sys_content_t "${repoPath}"
 checkResult $? $LINENO SvnRepository "chcon ${repoPath} failed."
 
-lmsConioDisplay "Modifying selinux: httpd_sys_rw_content_t"
+ldcConioDisplay "Modifying selinux: httpd_sys_rw_content_t"
 sudo chcon -R -t httpd_sys_rw_content_t "${repoPath}"
 checkResult $? $LINENO SvnRepository "chcon ${repoPath} failed."
 
-lmsConioDisplay "Restarting httpd service"
+ldcConioDisplay "Restarting httpd service"
 sudo systemctl restart httpd.service
 checkResult $? $LINENO SvnRepository "systemctl restart httpd.service failed."
 
-lmsConioDisplay "Importing folder template"
+ldcConioDisplay "Importing folder template"
 
-if [ $lmscli_optDebug -ne 0 ]
+if [ $ldccli_optDebug -ne 0 ]
 then
 	svn import -m 'Template import' "${svnPath}"/template/ "${svnURL}"
 else
@@ -476,9 +476,9 @@ checkResult $? $LINENO SvnRepository "Import template to ${repoPath} failed."
 if [ -n "$repoSource" ]
 then
 	branchURL="${svnURL}/${svnBranch}"
-	lmsConioDisplay "Importing source to $branchURL"
+	ldcConioDisplay "Importing source to $branchURL"
 	
-	if [ $lmscli_optDebug -ne 0 ]
+	if [ $ldccli_optDebug -ne 0 ]
 	then
 		svn import -m 'Initial source import' "${repoSource}" "${branchURL}"
 	else
@@ -488,20 +488,20 @@ then
 	checkResult $? $LINENO SvnRepository "Importing source to ${repoPath} failed."
 fi
 
-lmsConioDisplay ""
-lmsConioDisplay "*******************************************************"
-lmsConioDisplay ""
-lmsConioDisplay "Repository ${repository} successfully created."
-lmsConioDisplay "    URL: ${svnURL}";
+ldcConioDisplay ""
+ldcConioDisplay "*******************************************************"
+ldcConioDisplay ""
+ldcConioDisplay "Repository ${repository} successfully created."
+ldcConioDisplay "    URL: ${svnURL}";
 
 # *******************************************************
 # *******************************************************
 
-if [ $lmscli_optDebug -ne 0 ]
+if [ $ldccli_optDebug -ne 0 ]
 then
-	lmsErrorQDispPop
+	ldcErrorQDispPop
 	$LINENO "EndOfTest"
 fi
 
-lmsConioDisplay " "
+ldcConioDisplay " "
 exit 0

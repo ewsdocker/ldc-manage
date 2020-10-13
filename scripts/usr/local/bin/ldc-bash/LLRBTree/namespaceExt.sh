@@ -93,10 +93,10 @@ nsxInitialize()
 # *********************************************************************************
 nsxOpenStack()
 {
-	lmsStackCreate nsxStack
+	ldcStackCreate nsxStack
 	if [ $? -ne 0 ]
 	then
-		lmsErrorQWrite $LINENO "NsxStackError" "Unable to create/open stack"
+		ldcErrorQWrite $LINENO "NsxStackError" "Unable to create/open stack"
 		return 1
 	fi
 
@@ -127,10 +127,10 @@ nsxParseNamespace()
 
 	local nsList
 
-	lmsStrTrim " ${1} " nsString
+	ldcStrTrim " ${1} " nsString
 	if [ -z $nsString ]
 	then
-		lmsErrorQWrite $LINENO "NsxParse" "Namespace string is missing or empty"
+		ldcErrorQWrite $LINENO "NsxParse" "Namespace string is missing or empty"
 		return 1
 	fi
 
@@ -141,7 +141,7 @@ nsxParseNamespace()
 
 	if [ ${#nsElements[@]} -eq 0 ]
 	then
-		lmsErrorQWrite $LINENO "NsxParse" "Namespace contains no elements"
+		ldcErrorQWrite $LINENO "NsxParse" "Namespace contains no elements"
 		return 1
 	fi
 
@@ -153,17 +153,17 @@ nsxParseNamespace()
 		namespaceSet element "${nsElement}"
 		if [ $? -ne 0 ]
 		then
-			lmsErrorQWrite $LINENO "NsxParse" "Unable to create/open namespace ${nsElement}"
+			ldcErrorQWrite $LINENO "NsxParse" "Unable to create/open namespace ${nsElement}"
 			return 1
 		fi
 
 		nsxVarNsUids=element
 	done
 
-	lmsStrTrim nsxCurrentNamespace "_${nsNamespaceNames[@]}"
+	ldcStrTrim nsxCurrentNamespace "_${nsNamespaceNames[@]}"
 	nsxCurrentNamespace=$( echo ${nsxCurrentNamespace} | tr " " "_")
 
-	lmsStrTrim nsxCurrentUid "_${nsNamespaceUids[@]}"
+	ldcStrTrim nsxCurrentUid "_${nsNamespaceUids[@]}"
 	nsxCurrentUid=$( echo ${nsxCurrentUid} | tr " " "_")
 
 	return 0
@@ -199,7 +199,7 @@ nsxGet()
 
 	if [ -z "${nsVarTable[$ns]}" ]
 	then
-		lmsErrorQWrite $LINENO "NsxGet" "Namespace '${ns}' was NOT found"
+		ldcErrorQWrite $LINENO "NsxGet" "Namespace '${ns}' was NOT found"
 		return 1
 	fi
 
@@ -238,14 +238,14 @@ nsxSet()
 			break
 		fi
 
-		lmsUIdUnique luid $length
+		ldcUIdUnique luid $length
 		if [ $? -eq 0 ]
 		then
 			nsVarTable["${name}"]="$luid"
 			break
 		fi
 
-		lmsErrorQWrite $LINENO NsxSet "Unable to generate a new uid"
+		ldcErrorQWrite $LINENO NsxSet "Unable to generate a new uid"
 		return $?
 	done
 

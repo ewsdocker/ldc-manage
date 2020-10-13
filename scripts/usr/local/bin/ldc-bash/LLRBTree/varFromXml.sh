@@ -14,7 +14,7 @@
 # *********************************************************************************
 # *********************************************************************************
 
-declare -r lmslib_varFromXml="0.1.0"	# version of library
+declare -r ldclib_varFromXml="0.1.0"	# version of library
 
 declare -ar varTypes=( integer string password associative array element )
 declare -ar attributeNames=( entity name type parent value ns password )
@@ -62,7 +62,7 @@ parseDataEntity()
 
 	if [ ${#attributeArray[@]} == 0 ]
 	then
-		lmsErrorQWrite $LINENO "XmlError" "Empty attribute array"
+		ldcErrorQWrite $LINENO "XmlError" "Empty attribute array"
 		return 5
 	fi
 
@@ -75,36 +75,36 @@ parseDataEntity()
 
 	for attrib in "${attributeArray[@]}"
 	do
-		lmsErrorQWriteX $LINENO "XmlInfo" "attribute: '${attrib}'"
+		ldcErrorQWriteX $LINENO "XmlInfo" "attribute: '${attrib}'"
 
-		lmsStrSplit "${attrib}" xmlAttribute xmlValue "="
+		ldcStrSplit "${attrib}" xmlAttribute xmlValue "="
 
-		lmsErrorQWriteX $LINENO "XmlInfo" "attribute: ${xmlAttribute}, value    : ${xmlValue}"
+		ldcErrorQWriteX $LINENO "XmlInfo" "attribute: ${xmlAttribute}, value    : ${xmlValue}"
 
 		case "${xmlAttribute}" in
 
 			"entity")
-				lmsErrorQWriteX $LINENO "XmlInfo" "Entity '$xmlValue}'"
+				ldcErrorQWriteX $LINENO "XmlInfo" "Entity '$xmlValue}'"
 				;;
 
 			"name")
 				varParts[name]=$xmlValue
-				lmsErrorQWriteX $LINENO "XmlInfo" "Name '${varParts[name]}'"
+				ldcErrorQWriteX $LINENO "XmlInfo" "Name '${varParts[name]}'"
 				;;
 
 			"password")
 				varParts[name]=$xmlValue
-				lmsErrorQWriteX $LINENO "XmlInfo" "Password ${varParts[name]}"
+				ldcErrorQWriteX $LINENO "XmlInfo" "Password ${varParts[name]}"
 				;;
 
 			"element")
 				varParts[name]=$xmlValue
-				lmsErrorQWriteX $LINENO "XmlInfo" "Element '${varParts[name]}'"
+				ldcErrorQWriteX $LINENO "XmlInfo" "Element '${varParts[name]}'"
 				;;
 
 			"type")
 				varParts[type]=$xmlValue
-				lmsErrorQWriteX $LINENO "XmlInfo" "Type '${varParts[type]}'"
+				ldcErrorQWriteX $LINENO "XmlInfo" "Type '${varParts[type]}'"
 
 				if [[ ${varTypes[@]} =~ ${type} ]]
 				then
@@ -114,20 +114,20 @@ parseDataEntity()
 
 			"parent")
 				varParts[parent]=$xmlValue
-				lmsErrorQWriteX $LINENO "XmlInfo" "Parent '${varParts[parent]}'"
+				ldcErrorQWriteX $LINENO "XmlInfo" "Parent '${varParts[parent]}'"
 				;;
 
 			"value")
 				varParts[content]=$xmlValue
-				lmsErrorQWriteX $LINENO "XmlInfo" "Value '${varParts[content]}'"
+				ldcErrorQWriteX $LINENO "XmlInfo" "Value '${varParts[content]}'"
 				;;
 
 			"namespace")
-				lmsErrorQWriteX $LINENO "XmlInfo" "Namespace '${xmlValue}'"
+				ldcErrorQWriteX $LINENO "XmlInfo" "Namespace '${xmlValue}'"
 				;;
 
 			*)
-				lmsErrorQWriteX $LINENO "XmlError" "Unknown attribute: '$xmlAttribute', value: '$xmlValue'"
+				ldcErrorQWriteX $LINENO "XmlError" "Unknown attribute: '$xmlAttribute', value: '$xmlValue'"
 				xmlAttributeErrors+=1
 				;;
 
@@ -136,7 +136,7 @@ parseDataEntity()
 
 	if [ $xmlAttributeErrors != 0 ]
 	then
-		lmsErrorQWrite $LINENO "XmlError" "${xmlAttributeErrors} attribute errors were detected."
+		ldcErrorQWrite $LINENO "XmlError" "${xmlAttributeErrors} attribute errors were detected."
 		return 1
 	fi
 
@@ -147,48 +147,48 @@ parseDataEntity()
 
 	if [ ! -z "${varParts[content]}" ]
 	then
-		lmsStrUnquote "${varParts[content]}" content
+		ldcStrUnquote "${varParts[content]}" content
 	fi
 
 	xmltype="${varParts[type]}"
 	case $xmltype in
 
 		"password")
-			lmsDeclarePwd "${varParts[name]}" "${varParts[content]}"
+			ldcDeclarePwd "${varParts[name]}" "${varParts[content]}"
 			;;
 
 		"string")
-			lmsDeclareStr "${varParts[name]}" "${varParts[content]}"
+			ldcDeclareStr "${varParts[name]}" "${varParts[content]}"
 			;;
 
 		"integer")
-			lmsDeclareInt "${varParts[name]}" "${varParts[content]}"
+			ldcDeclareInt "${varParts[name]}" "${varParts[content]}"
 			;;
 
 		"element")
 			if [[ -z "${varParts[parent]}" || -z "${varParts[name]}" ]]
 			then
-    			lmsErrorQWrite $LINENO "XmlError" "Unknown XML parent (${varParts[parent]}) and/or name (${varParts[name]})"
+    			ldcErrorQWrite $LINENO "XmlError" "Unknown XML parent (${varParts[parent]}) and/or name (${varParts[name]})"
 			else
-				lmsDeclareArrayEl "${varParts[parent]}" "${varParts[name]}" "${varParts[content]}"
+				ldcDeclareArrayEl "${varParts[parent]}" "${varParts[name]}" "${varParts[content]}"
 			fi
 			;;
 
 		"associative")
-			lmsDeclareAssoc "${varParts[name]}"
+			ldcDeclareAssoc "${varParts[name]}"
 			;;
 
 		"array")
-			lmsDeclareArray "${varParts[name]}"
+			ldcDeclareArray "${varParts[name]}"
 			;;
 
 		"namespace")
-			lmsDeclareNs "${varParts[name]}" "${varParts[content]}"
+			ldcDeclareNs "${varParts[name]}" "${varParts[content]}"
 
 			;;
 
 		*)
-    		lmsErrorQWrite $LINENO "XmlError" "Unknown XML Type: '$xmltype'"
+    		ldcErrorQWrite $LINENO "XmlError" "Unknown XML Type: '$xmltype'"
 			;;
 
 	esac
@@ -203,12 +203,12 @@ parseDataEntity()
 # *********************************************************************************
 displayXmlEntities()
 {
-	lmsErrorQWriteX $LINENO "XmlInfo" "Entity:   ${XML_ENTITY}"
-	lmsErrorQWriteX $LINENO "XmlInfo" "Content:  ${XML_CONTENT}"
-	lmsErrorQWriteX $LINENO "XmlInfo" "TAG_NAME: ${XML_TAG_NAME}"
-	lmsErrorQWriteX $LINENO "XmlInfo" "TAG_TYPE: ${XML_TAG_TYPE}"
-	lmsErrorQWriteX $LINENO "XmlInfo" "COMMENT:  ${XML_COMMENT}"
-	lmsErrorQWriteX $LINENO "XmlInfo" "XML_PATH: ${XML_PATH}"
+	ldcErrorQWriteX $LINENO "XmlInfo" "Entity:   ${XML_ENTITY}"
+	ldcErrorQWriteX $LINENO "XmlInfo" "Content:  ${XML_CONTENT}"
+	ldcErrorQWriteX $LINENO "XmlInfo" "TAG_NAME: ${XML_TAG_NAME}"
+	ldcErrorQWriteX $LINENO "XmlInfo" "TAG_TYPE: ${XML_TAG_TYPE}"
+	ldcErrorQWriteX $LINENO "XmlInfo" "COMMENT:  ${XML_COMMENT}"
+	ldcErrorQWriteX $LINENO "XmlInfo" "XML_PATH: ${XML_PATH}"
 }
 
 # *********************************************************************************
@@ -236,7 +236,7 @@ loadVariables()
 			parseDataEntity "${XML_ENTITY}"
 			if [ $? -ne 0 ]
 			then
-				lmsErrorQWrite $LINENO "XmlError" "OPEN Parse data entity error"
+				ldcErrorQWrite $LINENO "XmlError" "OPEN Parse data entity error"
 				return $?
 			fi
 			;;
@@ -249,7 +249,7 @@ loadVariables()
 			parseDataEntity "${XML_ENTITY}"
 			if [ $? -ne 0 ]
 			then
-				lmsErrorQWrite $LINENO "XmlError" "OPENCLOSE Parse data entity error"
+				ldcErrorQWrite $LINENO "XmlError" "OPENCLOSE Parse data entity error"
 				return $?
 			fi
 			;;

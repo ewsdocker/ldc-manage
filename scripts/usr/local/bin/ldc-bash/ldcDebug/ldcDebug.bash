@@ -3,7 +3,7 @@
 # *******************************************************
 # *******************************************************
 #
-#   lmsDebug.bash
+#   ldcDebug.bash
 #
 #   Copyright (C) 2016. EarthWalk Software
 #
@@ -22,21 +22,21 @@
 # *******************************************************
 # *******************************************************
 
-declare -i lmscli_optProduction=0
+declare -i ldccli_optProduction=0
 
-if [ $lmscli_optProduction -eq 1 ]
+if [ $ldccli_optProduction -eq 1 ]
 then
 	rootDir="/usr/local"
-	libDir="$rootDir/lib/lms/bash"
-	etcDir="$rootDir/etc/lms"
+	libDir="$rootDir/lib/ldc/bash"
+	etcDir="$rootDir/etc/ldc"
 else
 	rootDir="$PWD/../.."
 	libDir="$rootDir/lib"
 	etcDir="$rootDir/etc"
 fi
 
-. $libDir/lmsColorDef.bash
-. $libDir/lmsDebug.bash
+. $libDir/ldcColorDef.bash
+. $libDir/ldcDebug.bash
 
 # *******************************************************
 # *******************************************************
@@ -63,14 +63,14 @@ then
 
 		*)
 				FLAGS='-x'
-				PS4="${lmsclr_Black}${lmsclr_Level}+${lmsclr_Script}"'(${BASH_SOURCE##*/}'":${lmsclr_Line}"'${LINENO}'"${lmsclr_Script}): ${lmsclr_Function}"'${FUNCNAME[0]}'"(): ${lmsclr_Command}"
+				PS4="${ldcclr_Black}${ldcclr_Level}+${ldcclr_Script}"'(${BASH_SOURCE##*/}'":${ldcclr_Line}"'${LINENO}'"${ldcclr_Script}): ${ldcclr_Function}"'${FUNCNAME[0]}'"(): ${ldcclr_Command}"
 				export PS4
 				SCRIPT=$1
 				;;
 
 	esac
 
-	lmsDebugFuncCommand
+	ldcDebugFuncCommand
 fi
 
-lmsDebugResetScreen
+ldcDebugResetScreen

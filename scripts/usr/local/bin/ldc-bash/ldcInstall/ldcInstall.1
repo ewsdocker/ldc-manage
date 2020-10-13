@@ -1,21 +1,21 @@
-.\" Title: lmsInstall
+.\" Title: ldcInstall
 .\" Author: Jay Wheeler <jaywheeler@users.sourceforge.net>
 .\" Generator: manedit
 .\" Date: 05/18/2016
 .\" Manual: Subversion
-.\" Source: lmsInstall 0.0.1
+.\" Source: ldcInstall 0.0.1
 .\" Language: English
 .\" 
 .\" disable hyphenation
 .\" disable justification (adjust text to left margin only)
 .\" -----------------------------------------------------------
-.TH "lmsInstall" "1" "March 2017" "version 0.0.1" ""
+.TH "ldcInstall" "1" "March 2017" "version 0.0.1" ""
 .SH "NAME"
-\fBlmsInstall\fR \- Install LMS Bash folders and files
+\fBldcInstall\fR \- Install ldc Bash folders and files
 .SH "SYNOPSIS"
-\fB lmsInstall\fR <option=value><option=value>...\fBname\fR=[repository\-name]
+\fB ldcInstall\fR <option=value><option=value>...\fBname\fR=[repository\-name]
 .SH "DESCRIPTION"
-\fBlmsInstall\fR is a bash script which automates the installation of the LMS-Bash release files.
+\fBldcInstall\fR is a bash script which automates the installation of the ldc-Bash release files.
 .PP 
 The script automatically creates the requested repository in the current Subversion repository folder.
 .SH "OPTIONS"
@@ -42,21 +42,21 @@ Absolute path to svn repository folder.
 Create an empty repository named \fBBar\fR at the default location:
  
 .RS 5
-lmsInstallScriptsitory name=\fBBar\fR
+ldcInstallScriptsitory name=\fBBar\fR
 .RE
 .PP 
 .XP 3
 Create a repository named \fBBar\fR with initial content from \fB/media/source/\fBFoo\fR:
 
 .RS 5
-lmsInstallScriptsitory source=\fB/media/source/Foo\fR name=\fBBar\fR
+ldcInstallScriptsitory source=\fB/media/source/Foo\fR name=\fBBar\fR
 .RE
 .PP 
 .XP 3
 Create a repository named \fBBar\fR with initial content from \fB/media/source/Foo\fR loaded to the \fBtags\fR branch:
 
 .RS 5
-lmsInstallScriptsitory source=\fB/media/source/Foo\fR branch=\fBtags\fR name=\fBBar\fR
+ldcInstallScriptsitory source=\fB/media/source/Foo\fR branch=\fBtags\fR name=\fBBar\fR
 .RE
 .PP 
 .SH "REPORTING BUGS"
@@ -64,7 +64,7 @@ Report bugs at \fBhttp://subversion.net\fR
 .PP 
 Website: \fBhttp:///\fR
 .SH "COPYRIGHT"
-\fBlmsInstallScript\fR is copyright © 2016. EarthWalk Software.
+\fBldcInstallScript\fR is copyright © 2016. EarthWalk Software.
 .PP 
 Licensed under the \fBAcademic Free License version 3.0\fR (or later). Refer to the file named License.txt provided with the source, or from http://opensource.org/licenses/academic.php
 .SH "AUTHOR"

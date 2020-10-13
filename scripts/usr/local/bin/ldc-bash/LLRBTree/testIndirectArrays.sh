@@ -40,26 +40,26 @@
 # *******************************************************
 # *******************************************************
 
-lmscli_optDebug=0				# (d) Debug output if not 0
-lmscli_optSilent=0    			# (q) Quiet setting: non-zero for absolutely NO output
-lmscli_optBatch=0					# (b) Batch mode - missing parameters fail
-lmscli_optOverride=0					# set to 1 to lmscli_optOverride the lmscli_optSilent flag
-lmscli_optNoReset=0			# not automatic reset of lmscli_optOverride if 1
+ldccli_optDebug=0				# (d) Debug output if not 0
+ldccli_optSilent=0    			# (q) Quiet setting: non-zero for absolutely NO output
+ldccli_optBatch=0					# (b) Batch mode - missing parameters fail
+ldccli_optOverride=0					# set to 1 to ldccli_optOverride the ldccli_optSilent flag
+ldccli_optNoReset=0			# not automatic reset of ldccli_optOverride if 1
 
 applicationVersion="1.0"	# Application version
 
 # *******************************************************
 
-lmsErrorInitialize
-lmsErrorQInit
+ldcErrorInitialize
+ldcErrorQInit
 if [ $? -ne 0 ]
 then
-	lmsConioDisplay "Unable to initialize error queue."
+	ldcConioDisplay "Unable to initialize error queue."
 	exit 1
 fi
 
-lmsConioDisplay ""
-lmsScriptDisplayName
+ldcConioDisplay ""
+ldcScriptDisplayName
 
 # *******************************************************
 
@@ -72,60 +72,60 @@ A3=( color television colortv )
 	Aref=A1[index]
 	index=0
 
-	lmsConioDisplay "${!Aref}"
+	ldcConioDisplay "${!Aref}"
 
 	# ***************************************************
 
 	Aref=A2[index]
 	index=1
 
-	lmsConioDisplay "${!Aref}"
+	ldcConioDisplay "${!Aref}"
 
 	# ***************************************************
 
 	Aref=A3[index]
 	index=2
 
-	lmsConioDisplay "${!Aref}"
+	ldcConioDisplay "${!Aref}"
 
 # *******************************************************
 
-	lmsConioDisplay ""
-	lmsConioDisplay	"***************************************************"
-	lmsConioDisplay ""
+	ldcConioDisplay ""
+	ldcConioDisplay	"***************************************************"
+	ldcConioDisplay ""
 
 	array=2
 	ArrayRef=A$array[index]
 	index=1
 
-	lmsConioDisplay "${!ArrayRef}"
+	ldcConioDisplay "${!ArrayRef}"
 
 	index=2
 	ArrayRef="newitem"
 
 	ArrayRef=A$array[index]
-	lmsConioDisplay "${!ArrayRef}"
+	ldcConioDisplay "${!ArrayRef}"
 
 	# ***************************************************
 
-	lmsConioDisplay ""
-	lmsConioDisplay	"***************************************************"
-	lmsConioDisplay ""
+	ldcConioDisplay ""
+	ldcConioDisplay	"***************************************************"
+	ldcConioDisplay ""
 
 	array=2
 	ArrayRef=A$array[@]
 
 	message=$( echo "${!ArrayRef}")
-	lmsConioDisplay "$message"
+	ldcConioDisplay "$message"
 
-	lmsConioDisplay	"***************************************************"
-	lmsConioDisplay ""
+	ldcConioDisplay	"***************************************************"
+	ldcConioDisplay ""
 
 # *******************************************************
 
-lmscli_optDebug=0
+ldccli_optDebug=0
 
-lmsErrorExitScript None
+ldcErrorExitScript None
 
 # *******************************************************
 

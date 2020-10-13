@@ -9,7 +9,7 @@
 # @version 0.0.3
 # @copyright © 2016, 2017, 2018. EarthWalk Software.
 # @license Licensed under the GNU General Public License, GPL-3.0-or-later.
-# @package lms-bash
+# @package ldc-bash
 # @subpackage tests
 #
 # *****************************************************************************
@@ -17,20 +17,20 @@
 #	Copyright © 2016, 2017, 2018. EarthWalk Software
 #	Licensed under the GNU General Public License, GPL-3.0-or-later.
 #
-#   This file is part of ewsdocker/lms-bash.
+#   This file is part of ewsdocker/ldc-bash.
 #
-#   ewsdocker/lms-bash is free software: you can redistribute 
+#   ewsdocker/ldc-bash is free software: you can redistribute 
 #   it and/or modify it under the terms of the GNU General Public License 
 #   as published by the Free Software Foundation, either version 3 of the 
 #   License, or (at your option) any later version.
 #
-#   ewsdocker/lms-bash is distributed in the hope that it will 
+#   ewsdocker/ldc-bash is distributed in the hope that it will 
 #   be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
 #   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with ewsdocker/lms-bash.  If not, see 
+#   along with ewsdocker/ldc-bash.  If not, see 
 #   <http://www.gnu.org/licenses/>.
 #
 # *****************************************************************************
@@ -58,7 +58,7 @@ function testHighlightMessage()
 	local message="${1}"
 	local color=1
 
-	lmsConioDisplay "$( tput bold ; tput setaf $color )     $message $( tput sgr0 )"
+	ldcConioDisplay "$( tput bold ; tput setaf $color )     $message $( tput sgr0 )"
 }
 
 # ****************************************************************************
@@ -102,31 +102,31 @@ function testIndentFmt()
 function testDisplayHelp()
 {
 	local hlpPath="${1}"
-	[[ -z "${lmshlp_XmlFile}" ]] &&
+	[[ -z "${ldchlp_XmlFile}" ]] &&
 	 {
-		lmsHelpInit ${hlpPath}
+		ldcHelpInit ${hlpPath}
 		[[ $? -eq 0 ]] ||
 		 {
-			lmstst_resultCode=$?
-	 	    lmsLogDisplay "lmsHelpInit '${hlpPath}' failed: ${lmstst_resultCode}"
-			return ${lmstst_resultCode}
+			ldctst_resultCode=$?
+	 	    ldcLogDisplay "ldcHelpInit '${hlpPath}' failed: ${ldctst_resultCode}"
+			return ${ldctst_resultCode}
 		 }
 	 }
 
-	[[ -z "${lmstst_buffer}" ]] &&
+	[[ -z "${ldctst_buffer}" ]] &&
 	 {
-		lmstst_buffer=$( lmsHelpToStr )
+		ldctst_buffer=$( ldcHelpToStr )
 		[[ $? -eq 0 ]] ||
 		 {
-			lmstst_resultCode=$?
-			lmsLogDisplay "lmsHelpToStr failed: ${lmstst_resultCode}"
-			return ${lmstst_resultCode}
+			ldctst_resultCode=$?
+			ldcLogDisplay "ldcHelpToStr failed: ${ldctst_resultCode}"
+			return ${ldctst_resultCode}
 		 }
 	 }
 
-	lmsConioDisplay ""	
-	lmsConioDisplay "${lmstst_buffer}"
-	lmsConioDisplay ""	
+	ldcConioDisplay ""	
+	ldcConioDisplay "${ldctst_buffer}"
+	ldcConioDisplay ""	
 
 	return 0
 }
@@ -142,33 +142,33 @@ function testDomShowData()
 {
 	local content
 
-	lmsConioDisplay ""
-	lmsConioDisplay "XML_ENTITY    : '${lmsdom_Entity}'"
+	ldcConioDisplay ""
+	ldcConioDisplay "XML_ENTITY    : '${ldcdom_Entity}'"
 
-	lmsConioDisplay "XML_CONTENT   :     '${lmsdom_Content}'"
+	ldcConioDisplay "XML_CONTENT   :     '${ldcdom_Content}'"
 
-	lmsConioDisplay "XML_TAG_NAME  :     '${lmsdom_TagName}'"
-	lmsConioDisplay "XML_TAG_TYPE  :     '${lmsdom_TagType}'"
+	ldcConioDisplay "XML_TAG_NAME  :     '${ldcdom_TagName}'"
+	ldcConioDisplay "XML_TAG_TYPE  :     '${ldcdom_TagType}'"
 
-	[[ "${lmsdom_TagType}" == "OPEN" || "${lmsdom_TagType}" == "OPENCLOSE" ]] &&
+	[[ "${ldcdom_TagType}" == "OPEN" || "${ldcdom_TagType}" == "OPENCLOSE" ]] &&
 	 {
-		[[ ${lmsdom_attribCount} -eq 0 ]] ||
+		[[ ${ldcdom_attribCount} -eq 0 ]] ||
 		 {
-			lmsConioDisplay "XML_ATT_COUNT :     '${lmsdom_attribCount}'"
+			ldcConioDisplay "XML_ATT_COUNT :     '${ldcdom_attribCount}'"
 		
-			for attribute in "${!lmsdom_attribs[@]}"
+			for attribute in "${!ldcdom_attribs[@]}"
 			do
-				lmsConioDisplay "XML_ATT_NAME  :     '${attribute}'"
-				lmsConioDisplay "XML_ATT_VAL   :     '${lmsdom_attribs[$attribute]}'"
+				ldcConioDisplay "XML_ATT_NAME  :     '${attribute}'"
+				ldcConioDisplay "XML_ATT_VAL   :     '${ldcdom_attribs[$attribute]}'"
 				
 			done
 		 }
 	 }
 
-	lmsConioDisplay "XML_COMMENT   :     '${lmsdom_Comment}'"
-	lmsConioDisplay "XML_PATH      :     '${lmsdom_Path}'"
+	ldcConioDisplay "XML_COMMENT   :     '${ldcdom_Comment}'"
+	ldcConioDisplay "XML_PATH      :     '${ldcdom_Path}'"
 
-	lmsConioDisplay "XPATH         :     '${lmsdom_XPath}'"
+	ldcConioDisplay "XPATH         :     '${ldcdom_XPath}'"
 }
 
 

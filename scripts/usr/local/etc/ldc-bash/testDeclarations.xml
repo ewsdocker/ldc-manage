@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- copyright © 2014, 2016. EarthWalk Software. -->
-<lms>
+<ldc>
 
-	<declarations name="lmstest_" >
+	<declarations name="ldctest_" >
 
 		<declare name="optDebug"    type="integer">10</declare>
 		<declare name="optSilent"   type="integer">20</declare>
@@ -28,7 +28,7 @@
 			<declare parent="shellParam" type="element"  name="quiet"     >0</declare>
 			<declare parent="shellParam" type="element"  name="repoName"  >test</declare>
 			<declare parent="shellParam" type="element"  name="rootdir"   >local</declare>
-			<declare parent="shellParam" type="element"  name="script"    >lmsInstallScript</declare>
+			<declare parent="shellParam" type="element"  name="script"    >ldcInstallScript</declare>
 			<declare parent="shellParam" type="element"  name="src"       >src</declare>
 			<declare parent="shellParam" type="element"  name="type"      >local</declare>
 
@@ -66,8 +66,8 @@
 			<declare parent="errorNumbers" type="element" name="2" >MissingParam</declare>
 			<declare parent="errorNumbers" type="element" name="3" >BadValue</declare>
 
-		<declare name="lmsPassword" type="password">7mcMF596gcYa</declare>
+		<declare name="ldcPassword" type="password">7mcMF596gcYa</declare>
 
 	</declarations>
 
-</lms>
+</ldc>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- copyright © 2014, 2016. EarthWalk Software. -->
-<lms>
+<ldc>
 	<options>
 
-		<lms_optDebug>0</lms_optDebug>
-		<lms_optSilent>0</lms_optSilent>
-		<lms_optBatch>0</lms_optBatch>
-		<lms_optOverride>0</lms_optOverride>
-		<lms_optNoReset>0</lms_optNoReset>
+		<ldc_optDebug>0</ldc_optDebug>
+		<ldc_optSilent>0</ldc_optSilent>
+		<ldc_optBatch>0</ldc_optBatch>
+		<ldc_optOverride>0</ldc_optOverride>
+		<ldc_optNoReset>0</ldc_optNoReset>
 
 		<subversion>
 			<var name="host">localhost</var>
@@ -32,102 +32,102 @@
 		<cliParameters>
 
 			<parameter name="batch">
-				<map>lms_optBatch</map>
+				<map>ldc_optBatch</map>
 				<type>1</type>
 				<default>0</default>
 			</parameter>
 
 			<parameter name="bin">
-				<map>lms_optBinDir</map>
+				<map>ldc_optBinDir</map>
 				<type>0</type>
 				<default>bin</default>
 			</parameter>
 
 			<parameter name="debug">
-				<map>lms_optDebug</map>
+				<map>ldc_optDebug</map>
 				<type>0</type>
 				<default>0</default>
 			</parameter>
 
 			<parameter name="etc">
-				<map>lms_optEtcDir</map>
+				<map>ldc_optEtcDir</map>
 				<type>0</type>
 				<default>etc</default>
 			</parameter>
 
 			<parameter name="fetch">
-				<map>lms_optFetch</map>
+				<map>ldc_optFetch</map>
 				<type>1</type>
 				<default>0</default>
 			</parameter>
 
 			<parameter name="help">
-				<map>lms_optHelp</map>
+				<map>ldc_optHelp</map>
 				<type>1</type>
 			</parameter>
 
 			<parameter name="host">
-				<map>lms_optHost</map>
+				<map>ldc_optHost</map>
 				<type>0</type>
 				<default>localhost</default>
 			</parameter>
 	
 			<parameter name="lang">
-				<map>lms_optLang</map>
+				<map>ldc_optLang</map>
 				<type>0</type>
 				<default>bash</default>
 			</parameter>
 
 			<parameter name="lib">
-				<map>lms_optLib</map>
+				<map>ldc_optLib</map>
 				<type>0</type>
 				<default>0.0.1</default>
 			</parameter>
 
 			<parameter name="man">
-				<map>lms_optManDir</map>
+				<map>ldc_optManDir</map>
 				<type>0</type>
 				<default>share</default>
 			</parameter>
 
 			<parameter name="path">
-				<map>lms_optPath</map>
+				<map>ldc_optPath</map>
 				<type>0</type>
 				<default>svn</default>
 			</parameter>
 
 			<parameter name="quiet">
-				<map>lms_optSilent</map>
+				<map>ldc_optSilent</map>
 				<type>0</type>
 				<default>0</default>
 			</parameter>
 
 			<parameter name="repoName">
-				<map>lms_optRepo</map>
+				<map>ldc_optRepo</map>
 				<type>0</type>
 				<default>test</default>
 			</parameter>
 
 			<parameter name="rootdir">
-				<map>lms_optRoot</map>
+				<map>ldc_optRoot</map>
 				<type>0</type>
 				<default>local</default>
 			</parameter>
 
 			<parameter name="script">
-				<map>lms_optScript</map>
+				<map>ldc_optScript</map>
 				<type>1</type>
-				<default>lmsInstallScript</default>
+				<default>ldcInstallScript</default>
 			</parameter>
 
 			<parameter name="src">
-				<map>lms_optSrcDir</map>
+				<map>ldc_optSrcDir</map>
 				<type>0</type>
 				<default>src</default>
 			</parameter>
 
 			<parameter name="type">
-				<map>lms_optType</map>
+				<map>ldc_optType</map>
 				<type>0</type>
 				<default>local</default>
 			</parameter>
@@ -137,4 +137,4 @@
 
 	</options>
 
-</lms>
+</ldc>

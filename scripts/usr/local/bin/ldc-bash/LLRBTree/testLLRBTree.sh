@@ -22,31 +22,31 @@
 # *******************************************************
 # *******************************************************
 
-declare -i lmscli_optProduction=0
+declare -i ldccli_optProduction=0
 
-if [ $lmscli_optProduction -eq 1 ]
+if [ $ldccli_optProduction -eq 1 ]
 then
 	rootDir="/usr/local"
-	libDir="$rootDir/lib/lms/bash"
-	lmsapp_errors="$rootDir/etc/lms/errorCodes.xml"
+	libDir="$rootDir/lib/ldc/bash"
+	ldcapp_errors="$rootDir/etc/ldc/errorCodes.xml"
 else
 	rootDir="../.."
 	libDir="$rootDir/lib"
-	lmsapp_errors="$rootDir/etc/errorCodes.xml"
+	ldcapp_errors="$rootDir/etc/errorCodes.xml"
 fi
 
 . $libDir/arraySort.sh
-. $libDir/lmsConio.sh
-. $libDir/lmsCli.sh
-. $libDir/lmsError.sh
-. $libDir/lmsErrorQDisp.sh
-. $libDir/lmsErrorQ.sh
-. $libDir/lmsScriptName.sh
-. $libDir/lmsDeclare.sh
-. $libDir/lmsStack.sh
-. $libDir/lmsStartup.sh
-. $libDir/lmsStr.sh
-. $libDir/lmsUId
+. $libDir/ldcConio.sh
+. $libDir/ldcCli.sh
+. $libDir/ldcError.sh
+. $libDir/ldcErrorQDisp.sh
+. $libDir/ldcErrorQ.sh
+. $libDir/ldcScriptName.sh
+. $libDir/ldcDeclare.sh
+. $libDir/ldcStack.sh
+. $libDir/ldcStartup.sh
+. $libDir/ldcStr.sh
+. $libDir/ldcUId
 . $libDir/varsFromXml.sh
 . $libDir/xmlParser.sh
 
@@ -62,14 +62,14 @@ fi
 function runFirstTests()
 {
 	treeName="NoblePineLodge"
-	lmsLLRBtCreate "${treeName}"
+	ldcLLRBtCreate "${treeName}"
 	if [ $? -ne 0 ]
 	then
-		lmsErrorQWrite $LINENO TreeCreate "Unable to create the requested tree: $treeName"
+		ldcErrorQWrite $LINENO TreeCreate "Unable to create the requested tree: $treeName"
 		errorQueueDisplay 0 1 EndOfTest
 	fi
 
-	lmsConioDisplay "Created tree '$treeName'"
+	ldcConioDisplay "Created tree '$treeName'"
 
 	# **************************************************************************
 	# **************************************************************************
@@ -77,55 +77,55 @@ function runFirstTests()
 	keynodeName="${treeName}"
 	keynodeUID=""
 
-	result=$( lmsLLRBtIsRed $keynodeName )
+	result=$( ldcLLRBtIsRed $keynodeName )
 
-	lmsConioDisplay "result = $result"
+	ldcConioDisplay "result = $result"
 
-	lmsConioDisplay "$( lmsLLRBnTS $keynodeName )"
+	ldcConioDisplay "$( ldcLLRBnTS $keynodeName )"
 
 	# **************************************************************************
 
-	lmsConioDisplay ""
-	lmsConioDisplay "*******************************************************"
-	lmsConioDisplay ""
+	ldcConioDisplay ""
+	ldcConioDisplay "*******************************************************"
+	ldcConioDisplay ""
 
 	leftnodeData="the maid"
 	leftnodeName="Bridget"
 	leftnodeUID=""
 
-	lmsConioDisplay "Creating node: ${leftnodeName}"
+	ldcConioDisplay "Creating node: ${leftnodeName}"
 
-	lmsLLRBnCreate "${leftnodeName}" leftnodeUID "${leftnodeData}"
-	lmsLLRBnSet "${leftnodeName}" "color" 0
+	ldcLLRBnCreate "${leftnodeName}" leftnodeUID "${leftnodeData}"
+	ldcLLRBnSet "${leftnodeName}" "color" 0
 
-	lmsConioDisplay "Created node: ${leftnodeName} = $leftnodeUID, linking left child of $keynodeName"
-	lmsConioDisplay ""
+	ldcConioDisplay "Created node: ${leftnodeName} = $leftnodeUID, linking left child of $keynodeName"
+	ldcConioDisplay ""
 
-	lmsLLRBnSet $keynodeName "left" $leftnodeName
+	ldcLLRBnSet $keynodeName "left" $leftnodeName
 
-	lmsConioDisplay "$( lmsLLRBnTS $keynodeName )"
+	ldcConioDisplay "$( ldcLLRBnTS $keynodeName )"
 
 	# **************************************************************************
 
-	lmsConioDisplay ""
-	lmsConioDisplay "*******************************************************"
-	lmsConioDisplay ""
+	ldcConioDisplay ""
+	ldcConioDisplay "*******************************************************"
+	ldcConioDisplay ""
 
 	rightnodeData="Bridgets brother"
 	rightnodeName="Zandar"
 	rightnodeUID=""
 
-	lmsConioDisplay "Creating node: ${rightnodeName}"
+	ldcConioDisplay "Creating node: ${rightnodeName}"
 
-	lmsLLRBnCreate "${rightnodeName}" rightnodeUID "${rightnodeData}"
-	lmsLLRBnSet "${rightnodeName}" "color" 0
+	ldcLLRBnCreate "${rightnodeName}" rightnodeUID "${rightnodeData}"
+	ldcLLRBnSet "${rightnodeName}" "color" 0
 
-	lmsConioDisplay "Created node: ${rightnodeName} = $rightnodeUID, linking right child of $keynodeName"
-	lmsConioDisplay "" and unwind properly
+	ldcConioDisplay "Created node: ${rightnodeName} = $rightnodeUID, linking right child of $keynodeName"
+	ldcConioDisplay "" and unwind properly
 
-	lmsLLRBnSet $keynodeName "right" $rightnodeName
+	ldcLLRBnSet $keynodeName "right" $rightnodeName
 
-	lmsConioDisplay "$( lmsLLRBnTS $keynodeName )"
+	ldcConioDisplay "$( ldcLLRBnTS $keynodeName )"
 
 	# **************************************************************************
 
@@ -133,13 +133,13 @@ function runFirstTests()
 
 	# **************************************************************************
 
-	lmsConioDisplay "flipping color"
-	lmsConioDisplay ""
+	ldcConioDisplay "flipping color"
+	ldcConioDisplay ""
 
-	lmsLLRBtFlipC "$keynodeName"
+	ldcLLRBtFlipC "$keynodeName"
 	if [ $? -ne 0 ]
 	then
-		lmsErrorQWrite $LINENO TreeModifyNode "Unable to flip color on the requested node: $keynodeName"
+		ldcErrorQWrite $LINENO TreeModifyNode "Unable to flip color on the requested node: $keynodeName"
 		errorQueueDisplay 0 1 EndOfTest
 	fi
 
@@ -147,13 +147,13 @@ function runFirstTests()
 
 	# **************************************************************************
 
-	lmsConioDisplay "flipping color AGAIN"
-	lmsConioDisplay ""
+	ldcConioDisplay "flipping color AGAIN"
+	ldcConioDisplay ""
 
-	lmsLLRBtFlipC $keynodeName
+	ldcLLRBtFlipC $keynodeName
 	if [ $? -ne 0 ]
 	then
-		lmsErrorQWrite $LINENO TreeModifyNode "Unable to flip color on the requested node: $keynodeName"
+		ldcErrorQWrite $LINENO TreeModifyNode "Unable to flip color on the requested node: $keynodeName"
 		errorQueueDisplay 0 1 EndOfTest
 	fi
 
@@ -161,13 +161,13 @@ function runFirstTests()
 
 	# **************************************************************************
 
-	lmsConioDisplay "comparison"
-	lmsConioDisplay ""
+	ldcConioDisplay "comparison"
+	ldcConioDisplay ""
 
-	rname=$( lmsLLRBnGet $rightnodeName 'key' )
-	lname=$( lmsLLRBnGet $leftnodeName  'key' )
+	rname=$( ldcLLRBnGet $rightnodeName 'key' )
+	lname=$( ldcLLRBnGet $leftnodeName  'key' )
 
-	lmsConioDisplay "Comparing $rname with $lname"
+	ldcConioDisplay "Comparing $rname with $lname"
 
 	displayComparison $rname $lname
 
@@ -176,19 +176,19 @@ function runFirstTests()
 
 function displayNodes()
 {
-	lmsConioDisplay ""
-	lmsConioDisplay "******************* NODES *****************************"
-	lmsConioDisplay ""
+	ldcConioDisplay ""
+	ldcConioDisplay "******************* NODES *****************************"
+	ldcConioDisplay ""
 
-	lmsConioDisplay "$( lmsLLRBnTS $keynodeName )"
+	ldcConioDisplay "$( ldcLLRBnTS $keynodeName )"
 
-	lmsConioDisplay "$( lmsLLRBnTS $leftnodeName )"
+	ldcConioDisplay "$( ldcLLRBnTS $leftnodeName )"
 
-	lmsConioDisplay "$( lmsLLRBnTS $rightnodeName )"
+	ldcConioDisplay "$( ldcLLRBnTS $rightnodeName )"
 
-	lmsConioDisplay ""
-	lmsConioDisplay "*************** END NODES *****************************"
-	lmsConioDisplay ""
+	ldcConioDisplay ""
+	ldcConioDisplay "*************** END NODES *****************************"
+	ldcConioDisplay ""
 
 }
 
@@ -197,22 +197,22 @@ function displayComparison()
 	local rightnodeName="${1}"
 	local leftnodeName="${2}"
 
-	lmsLLRBnCompare "${rightnodeName}" "${leftnodeName}"
+	ldcLLRBnCompare "${rightnodeName}" "${leftnodeName}"
 	result=$?
 
-	lmsConioDisplay "Compare result = '$result'"
+	ldcConioDisplay "Compare result = '$result'"
 	case $result in
 
-			0)	lmsConioDisplay "$rightnodeName = $leftnodeName"
+			0)	ldcConioDisplay "$rightnodeName = $leftnodeName"
 				;;
 
-			1)	lmsConioDisplay "$rightnodeName > $leftnodeName"
+			1)	ldcConioDisplay "$rightnodeName > $leftnodeName"
 				;;
 
-			2)	lmsConioDisplay "$rightnodeName < $leftnodeName"
+			2)	ldcConioDisplay "$rightnodeName < $leftnodeName"
 				;;
 
-			*)	lmsErrorQWrite $LINENO NodeCompare "Unable to perform comparison"
+			*)	ldcErrorQWrite $LINENO NodeCompare "Unable to perform comparison"
 				errorQueueDisplay 0 1 EndOfTest
 				;;
 	esac
@@ -226,10 +226,10 @@ function displayComparison()
 # *******************************************************
 # *******************************************************
 
-lmscli_optDebug=0				# (d) Debug output if not 0
-lmscli_optSilent=0    			# (q) Quiet setting: non-zero for absolutely NO output
-lmscli_optBatch=0					# (b) Batch mode - missing parameters fail
-silentOverride=0			# set to 1 to lmscli_optOverride the lmscli_optSilent flag
+ldccli_optDebug=0				# (d) Debug output if not 0
+ldccli_optSilent=0    			# (q) Quiet setting: non-zero for absolutely NO output
+ldccli_optBatch=0					# (b) Batch mode - missing parameters fail
+silentOverride=0			# set to 1 to ldccli_optOverride the ldccli_optSilent flag
 
 applicationVersion="1.0"	# Application version
 
@@ -238,25 +238,25 @@ testErrors=0
 # *************************************************************************************************
 # *************************************************************************************************
 
-lmsErrorInitialize
+ldcErrorInitialize
 
-lmsErrorQInit
+ldcErrorQInit
 if [ $? -ne 0 ]
 then
-	lmsConioDisplay "Unable to initialize error queue."
+	ldcConioDisplay "Unable to initialize error queue."
 	exit 1
 fi
 
-lmsConioDisplay ""
-lmsConioDisplay "*******************************************************"
-lmsConioDisplay "*******************************************************"
-lmsConioDisplay ""
+ldcConioDisplay ""
+ldcConioDisplay "*******************************************************"
+ldcConioDisplay "*******************************************************"
+ldcConioDisplay ""
 
-lmsScriptDisplayName
+ldcScriptDisplayName
 
-lmsConioDisplay ""
-lmsConioDisplay "*******************************************************"
-lmsConioDisplay "*******************************************************"
+ldcConioDisplay ""
+ldcConioDisplay "*******************************************************"
+ldcConioDisplay "*******************************************************"
 
 # *************************************************************************************************
 
@@ -265,29 +265,29 @@ lmsConioDisplay "*******************************************************"
 # *************************************************************************************************
 
 treeName="LLRBTree"
-lmsLLRBtCreate "${treeName}"
+ldcLLRBtCreate "${treeName}"
 if [ $? -ne 0 ]
 then
-	lmsErrorQWrite $LINENO TreeCreate "Unable to create the requested tree: $treeName"
+	ldcErrorQWrite $LINENO TreeCreate "Unable to create the requested tree: $treeName"
 	errorQueueDisplay 0 1 EndOfTest
 fi
 
-lmsConioDisplay "Created tree '$treeName'"
+ldcConioDisplay "Created tree '$treeName'"
 
 # *************************************************************************************************
 # *************************************************************************************************
 
-lmsConioDisplay ""
-lmsConioDisplay "*******************************************************"
-lmsConioDisplay ""
+ldcConioDisplay ""
+ldcConioDisplay "*******************************************************"
+ldcConioDisplay ""
 
 memberData="1980-11-01"
 memberName="Edward"
 memberUID=""
 
-lmsConioDisplay "Insertting node: ${memberName}"
+ldcConioDisplay "Insertting node: ${memberName}"
 
-lmsLLRBtInsert "${memberName}" "${memberData}"
+ldcLLRBtInsert "${memberName}" "${memberData}"
 
 
 #dumpNameTable
@@ -295,34 +295,34 @@ exit 1
 
 
 
-lmsConioDisplay "Created node: ${leftnodeName} = $leftnodeUID, linking left child of $keynodeName"
-lmsConioDisplay ""
+ldcConioDisplay "Created node: ${leftnodeName} = $leftnodeUID, linking left child of $keynodeName"
+ldcConioDisplay ""
 
-lmsLLRBnSet $keynodeName "left" $leftnodeName
+ldcLLRBnSet $keynodeName "left" $leftnodeName
 
-lmsConioDisplay "$( lmsLLRBnTS $keynodeName )"
+ldcConioDisplay "$( ldcLLRBnTS $keynodeName )"
 
 # *************************************************************************************************
 
-lmsConioDisplay ""
-lmsConioDisplay "*******************************************************"
-lmsConioDisplay ""
+ldcConioDisplay ""
+ldcConioDisplay "*******************************************************"
+ldcConioDisplay ""
 
 rightnodeData="Bridgets brother"
 rightnodeName="Zandar"
 rightnodeUID=""
 
-lmsConioDisplay "Creating node: ${rightnodeName}"
+ldcConioDisplay "Creating node: ${rightnodeName}"
 
-lmsLLRBnCreate "${rightnodeName}" rightnodeUID "${rightnodeData}"
-lmsLLRBnSet "${rightnodeName}" "color" 0
+ldcLLRBnCreate "${rightnodeName}" rightnodeUID "${rightnodeData}"
+ldcLLRBnSet "${rightnodeName}" "color" 0
 
-lmsConioDisplay "Created node: ${rightnodeName} = $rightnodeUID, linking right child of $keynodeName"
-lmsConioDisplay ""
+ldcConioDisplay "Created node: ${rightnodeName} = $rightnodeUID, linking right child of $keynodeName"
+ldcConioDisplay ""
 
-lmsLLRBnSet $keynodeName "right" $rightnodeName
+ldcLLRBnSet $keynodeName "right" $rightnodeName
 
-lmsConioDisplay "$( lmsLLRBnTS $keynodeName )"
+ldcConioDisplay "$( ldcLLRBnTS $keynodeName )"
 
 # *************************************************************************************************
 

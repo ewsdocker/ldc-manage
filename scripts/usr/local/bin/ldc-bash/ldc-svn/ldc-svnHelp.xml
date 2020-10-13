@@ -7,7 +7,7 @@
 <!--                                             -->
 <!-- =========================================== -->
 
-<lms>
+<ldc>
 	<help>
 		<labels>
 			<label name="command">[options] ... repo=Repository-name</label>
@@ -75,4 +75,4 @@
 		</options>
 
 	</help>
-</lms>
+</ldc>

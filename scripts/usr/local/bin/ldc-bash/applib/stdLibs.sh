@@ -10,7 +10,7 @@
 # @version 0.0.3
 # @copyright © 2016, 2017, 2018. EarthWalk Software.
 # @license Licensed under the GNU General Public License, GPL-3.0-or-later.
-# @package lms-bash
+# @package ldc-bash
 # @subpackage applications
 #
 # *****************************************************************************
@@ -18,20 +18,20 @@
 #	Copyright © 2016, 2017, 2018. EarthWalk Software
 #	Licensed under the GNU General Public License, GPL-3.0-or-later.
 #
-#   This file is part of ewsdocker/lms-bash.
+#   This file is part of ewsdocker/ldc-bash.
 #
-#   ewsdocker/lms-bash is free software: you can redistribute 
+#   ewsdocker/ldc-bash is free software: you can redistribute 
 #   it and/or modify it under the terms of the GNU General Public License 
 #   as published by the Free Software Foundation, either version 3 of the 
 #   License, or (at your option) any later version.
 #
-#   ewsdocker/lms-bash is distributed in the hope that it will 
+#   ewsdocker/ldc-bash is distributed in the hope that it will 
 #   be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
 #   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with ewsdocker/lms-bash.  If not, see 
+#   along with ewsdocker/ldc-bash.  If not, see 
 #   <http://www.gnu.org/licenses/>.
 #
 # *****************************************************************************
@@ -41,44 +41,44 @@
 # *****************************************************************************
 # *****************************************************************************
 
-source $lmsbase_dirLib/lmsCli.sh
-source $lmsbase_dirLib/lmsColorDef.sh
-source $lmsbase_dirLib/lmsConio.sh
+source $ldcbase_dirLib/ldcCli.sh
+source $ldcbase_dirLib/ldcColorDef.sh
+source $ldcbase_dirLib/ldcConio.sh
 
-source $lmsbase_dirLib/lmsDomC.sh
-source $lmsbase_dirLib/lmsDomD.sh
-source $lmsbase_dirLib/lmsDomN.sh
-source $lmsbase_dirLib/lmsDomR.sh
+source $ldcbase_dirLib/ldcDomC.sh
+source $ldcbase_dirLib/ldcDomD.sh
+source $ldcbase_dirLib/ldcDomN.sh
+source $ldcbase_dirLib/ldcDomR.sh
 
-source $lmsbase_dirLib/lmsDmpVar.sh
+source $ldcbase_dirLib/ldcDmpVar.sh
 
-source $lmsbase_dirLib/lmsDynSort.sh
-source $lmsbase_dirLib/lmsDynNode.sh
-source $lmsbase_dirLib/lmsDynArray.sh
+source $ldcbase_dirLib/ldcDynSort.sh
+source $ldcbase_dirLib/ldcDynNode.sh
+source $ldcbase_dirLib/ldcDynArray.sh
 
-source $lmsbase_dirLib/lmsError.sh
-source $lmsbase_dirLib/lmsErrorQDisp.sh
-source $lmsbase_dirLib/lmsErrorQ.sh
+source $ldcbase_dirLib/ldcError.sh
+source $ldcbase_dirLib/ldcErrorQDisp.sh
+source $ldcbase_dirLib/ldcErrorQ.sh
 
-source $lmsbase_dirLib/lmsHelp.sh
+source $ldcbase_dirLib/ldcHelp.sh
 
-source $lmsbase_dirLib/lmsDeclare.sh
+source $ldcbase_dirLib/ldcDeclare.sh
 
-source $lmsbase_dirLib/lmsLog.sh
-source $lmsbase_dirLib/lmsLogRead.sh
+source $ldcbase_dirLib/ldcLog.sh
+source $ldcbase_dirLib/ldcLogRead.sh
 
-source $lmsbase_dirLib/lmsRDomD.sh
+source $ldcbase_dirLib/ldcRDomD.sh
 
-source $lmsbase_dirLib/lmsScriptName.sh
-source $lmsbase_dirLib/lmsStack.sh
-source $lmsbase_dirLib/lmsStartup.sh
-source $lmsbase_dirLib/lmsStr.sh
+source $ldcbase_dirLib/ldcScriptName.sh
+source $ldcbase_dirLib/ldcStack.sh
+source $ldcbase_dirLib/ldcStartup.sh
+source $ldcbase_dirLib/ldcStr.sh
 
-source $lmsbase_dirLib/lmsUId.sh
-source $lmsbase_dirLib/lmsUtilities.sh
+source $ldcbase_dirLib/ldcUId.sh
+source $ldcbase_dirLib/ldcUtilities.sh
 
-source $lmsbase_dirLib/lmsXCfg.sh
+source $ldcbase_dirLib/ldcXCfg.sh
 
-source $lmsbase_dirLib/lmsXMLParse.sh
-source $lmsbase_dirLib/lmsXPath.sh
+source $ldcbase_dirLib/ldcXMLParse.sh
+source $ldcbase_dirLib/ldcXPath.sh
 

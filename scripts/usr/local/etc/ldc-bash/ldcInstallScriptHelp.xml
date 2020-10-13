@@ -42,7 +42,7 @@
 		<optionsVar type="element" parent="options" name="quiet">0</optionsVar>
 		<optionsVar type="element" parent="options" name="repo">test</optionsVar>
 		<optionsVar type="element" parent="options" name="root">local</optionsVar>
-		<optionsVar type="element" parent="options" name="script">lmsInstallScript</optionsVar>
+		<optionsVar type="element" parent="options" name="script">ldcInstallScript</optionsVar>
 	</options>
 
 	<!-- 

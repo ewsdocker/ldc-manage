@@ -7,8 +7,8 @@
 <!--                                             -->
 <!-- =========================================== -->
 
-<lms>
-	<declarations name="lmscli_" >
+<ldc>
+	<declarations name="ldccli_" >
 
 		<declare name="optBatch"       type="integer">0</declare>
 		<declare name="optDebug"       type="integer">0</declare>
@@ -16,8 +16,8 @@
 		<declare name="optHelp"	       type="integer">0</declare>
 		<declare name="optHost"        type="string" >localhost</declare>
 		<declare name="optLog"         type="integer">1</declare>
-		<declare name="optLogDir"      type="string" >/var/local/log/lms-test/</declare>
-		<declare name="optLogName"     type="string" >testLmsLog.log</declare>
+		<declare name="optLogDir"      type="string" >/var/local/log/ldc-test/</declare>
+		<declare name="optLogName"     type="string" >testldcLog.log</declare>
 		<declare name="optNoReset"     type="integer">0</declare>
 		<declare name="optOverride"    type="integer">0</declare>
 		<declare name="optProduction"  type="integer">0</declare>
@@ -40,4 +40,4 @@
 		<declare parent="shellParam" type="element" name="queue"    >optQueueErrors</declare>
 		<declare parent="shellParam" type="element" name="quiet"    >optSilent</declare>
 	</declarations>
-</lms>
+</ldc>

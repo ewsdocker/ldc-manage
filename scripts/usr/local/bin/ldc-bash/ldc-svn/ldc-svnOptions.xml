@@ -7,14 +7,14 @@
 <!--                                             -->
 <!-- =========================================== -->
 
-<lms>
-	<declarations name="lmscli_" >
+<ldc>
+	<declarations name="ldccli_" >
 
 		<!-- svnMakeRepo (cli) option defaults -->
 
 		<declare name="optionsBranch"     type="string" >trunk</declare>
 		<declare name="optionsLogDisplay" type="integer">1</declare>
-		<declare name="optionsLog"        type="string">/var/log/lms-svn/svnMake.log</declare>
+		<declare name="optionsLog"        type="string">/var/log/ldc-svn/svnMake.log</declare>
 		<declare name="optionsRepo"       type="string" >defaultRepo</declare>
 		<declare name="optionsSelinux"    type="integer">0</declare>
 		<declare name="optionsService"    type="string" >apache2ctl restart</declare>
@@ -65,4 +65,4 @@
 		<declare parent="shellParameters" type="element" name="queue"    >optionsQueueErrors</declare>
 		<declare parent="shellParameters" type="element" name="quiet"    >optionsSilent</declare>
 	</declarations>
-</lms>
+</ldc>

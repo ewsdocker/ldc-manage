@@ -31,14 +31,14 @@
 
 . testlib/installDirs.sh
 
-. $lmsbase_dirLib/stdLibs.sh
-. $lmsbase_dirLib/cliOptions.sh
+. $ldcbase_dirLib/stdLibs.sh
+. $ldcbase_dirLib/cliOptions.sh
 
-. $lmsbase_dirLib/commonVars.sh
+. $ldcbase_dirLib/commonVars.sh
 
 # *****************************************************************************
 
-lmsscr_Version="0.1.1"						# script version
+ldcscr_Version="0.1.1"						# script version
 
 # *****************************************************************************
 # *****************************************************************************
@@ -48,8 +48,8 @@ lmsscr_Version="0.1.1"						# script version
 # *****************************************************************************
 # *****************************************************************************
 
-. $lmsbase_dirLib/testDump.sh
-. $lmsbase_dirLib/testUtilities.sh
+. $ldcbase_dirLib/testDump.sh
+. $ldcbase_dirLib/testUtilities.sh
 
 # *****************************************************************************
 # *****************************************************************************
@@ -86,10 +86,10 @@ function testFunction()
 # *****************************************************************************
 # *****************************************************************************
 
-lmsScriptFileName $0
+ldcScriptFileName $0
 
-. $lmsbase_dirLib/openLog.sh
-. $lmsbase_dirLib/startInit.sh
+. $ldcbase_dirLib/openLog.sh
+. $ldcbase_dirLib/startInit.sh
 
 # *****************************************************************************
 # *****************************************************************************
@@ -102,6 +102,6 @@ lmsScriptFileName $0
 
 # *****************************************************************************
 
-. $lmsbase_dirLib/scriptEnd.sh
+. $ldcbase_dirLib/scriptEnd.sh
 
 # *****************************************************************************

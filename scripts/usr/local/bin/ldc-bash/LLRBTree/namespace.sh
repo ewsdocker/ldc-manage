@@ -53,10 +53,10 @@ namespaceDumpTable()
 {
 	local nsName
 
-	lmsConioDisplay "namespace table:"
+	ldcConioDisplay "namespace table:"
 	for nsName in "${!nsVarTable[@]}"
 	do
-		lmsConioDisplay "    ${nsName} = ${nsVarTable[$nsName]}"
+		ldcConioDisplay "    ${nsName} = ${nsVarTable[$nsName]}"
 	done
 }
 
@@ -84,7 +84,7 @@ namespaceLength()
 		nsVarLength=${2}
 	fi
 
-    lmsErrorQWrite $LINENO NSLength "Namespace length = ${nsVarLength}"
+    ldcErrorQWrite $LINENO NSLength "Namespace length = ${nsVarLength}"
 	eval $varName="'${nsVarLength}'"
 
 	return 0
@@ -113,7 +113,7 @@ namespaceGet()
 
 	if [ -z "${nsVarTable[$ns]}" ]
 	then
-    	lmsErrorQWrite $LINENO NSGet "Namespace '${ns}' was NOT found"
+    	ldcErrorQWrite $LINENO NSGet "Namespace '${ns}' was NOT found"
 		return 1
 	fi
 
@@ -155,14 +155,14 @@ namespaceSet()
 			break
 		fi
 
-		lmsUIdUnique luid $length
+		ldcUIdUnique luid $length
 		if [ $? -eq 0 ]
 		then
 			nsVarTable["${name}"]="$luid"
 			break
 		fi
 
-    	lmsErrorQWrite $LINENO NSGenUid "Unable to generate a new uid"
+    	ldcErrorQWrite $LINENO NSGenUid "Unable to generate a new uid"
 		return $?
 	done
 

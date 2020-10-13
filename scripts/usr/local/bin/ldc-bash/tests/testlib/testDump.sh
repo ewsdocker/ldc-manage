@@ -9,7 +9,7 @@
 # @version 0.0.3
 # @copyright © 2016, 2017, 2018. EarthWalk Software.
 # @license Licensed under the GNU General Public License, GPL-3.0-or-later.
-# @package lms-bash
+# @package ldc-bash
 # @subpackage tests
 #
 # *****************************************************************************
@@ -17,20 +17,20 @@
 #	Copyright © 2016, 2017, 2018. EarthWalk Software
 #	Licensed under the GNU General Public License, GPL-3.0-or-later.
 #
-#   This file is part of ewsdocker/lms-bash.
+#   This file is part of ewsdocker/ldc-bash.
 #
-#   ewsdocker/lms-bash is free software: you can redistribute 
+#   ewsdocker/ldc-bash is free software: you can redistribute 
 #   it and/or modify it under the terms of the GNU General Public License 
 #   as published by the Free Software Foundation, either version 3 of the 
 #   License, or (at your option) any later version.
 #
-#   ewsdocker/lms-bash is distributed in the hope that it will 
+#   ewsdocker/ldc-bash is distributed in the hope that it will 
 #   be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
 #   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with ewsdocker/lms-bash.  If not, see 
+#   along with ewsdocker/ldc-bash.  If not, see 
 #   <http://www.gnu.org/licenses/>.
 #
 # *****************************************************************************
@@ -42,7 +42,7 @@
 
 # **************************************************************************
 #
-#	testLmsDmpVarStack
+#	testLdcDmpVarStack
 #
 #      dump call stack
 #
@@ -54,15 +54,15 @@
 #		1 = error
 #
 # **************************************************************************
-function testLmsDmpVarStack()
+function testLdcDmpVarStack()
 {
-	lmsDmpVarStack
-	lmsConioDisplay ""
+	ldcDmpVarStack
+	ldcConioDisplay ""
 }
 
 # **************************************************************************
 #
-#	testLmsDmpVar
+#	testLdcDmpVar
 #
 #      dump selected varialbes
 #
@@ -74,22 +74,22 @@ function testLmsDmpVarStack()
 #		1 = error
 #
 # **************************************************************************
-function testLmsDmpVar()
+function testLdcDmpVar()
 {
-	local lmsVars=${1:-"lmstst_ lmscli_"}
+	local ldcVars=${1:-"ldctst_ ldccli_"}
 
 	local varList
-	lmsStrExplode "${1}" " " varList
+	ldcStrExplode "${1}" " " varList
 
 	local varName
 	for varname in "${varList[@]}"
 	do
-		lmsDmpVarSelected "${varname}"
-		lmsConioDisplay ""
+		ldcDmpVarSelected "${varname}"
+		ldcConioDisplay ""
 	done
 
-	lmsConioDisplay "---------------------------"
-	lmsConioDisplay ""
+	ldcConioDisplay "---------------------------"
+	ldcConioDisplay ""
 }
 
 # **************************************************************************
@@ -108,7 +108,7 @@ function testLmsDmpVar()
 # **************************************************************************
 function testDumpExit()
 {
-	testLmsDmpVar "${1}"
+	testLdcDmpVar "${1}"
 	exit 1
 }
 

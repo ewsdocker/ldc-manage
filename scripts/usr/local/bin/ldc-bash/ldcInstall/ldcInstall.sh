@@ -2,7 +2,7 @@
 # ***************************************************************************************************
 # ***************************************************************************************************
 #
-#   lmsInstall.sh
+#   ldcInstall.sh
 #
 # ***************************************************************************************************
 #
@@ -11,27 +11,27 @@
 # @copyright © 2017, 2018. EarthWalk Software.
 # @license Licensed under the GNU General Public License, GPL-3.0-or-later.
 # @package Linux Management Scripts
-# @subpackage lmsInstall
+# @subpackage ldcInstall
 #
 # ***************************************************************************************************
 #
 #	Copyright © 2017, 2018. EarthWalk Software
 #	Licensed under the GNU General Public License, GPL-3.0-or-later.
 #
-#   This file is part of ewsdocker/lms-bash.
+#   This file is part of ewsdocker/ldc-bash.
 #
-#   ewsdocker/lms-bash is free software: you can redistribute 
+#   ewsdocker/ldc-bash is free software: you can redistribute 
 #   it and/or modify it under the terms of the GNU General Public License 
 #   as published by the Free Software Foundation, either version 3 of the 
 #   License, or (at your option) any later version.
 #
-#   ewsdocker/lms-bash is distributed in the hope that it will 
+#   ewsdocker/ldc-bash is distributed in the hope that it will 
 #   be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
 #   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with ewsdocker/lms-bash.  If not, see 
+#   along with ewsdocker/ldc-bash.  If not, see 
 #   <http://www.gnu.org/licenses/>.
 #
 # ***************************************************************************************************
@@ -42,10 +42,10 @@
 # ***************************************************************************************************
 # ***************************************************************************************************
 
-declare    lmsapp_name="lmsInstall"
-declare    lmslib_bashRelease="0.1.4"
+declare    ldcapp_name="ldcInstall"
+declare    ldclib_bashRelease="0.1.4"
 
-declare -i lmscli_optProduction=0
+declare -i ldccli_optProduction=0
 
 # ***************************************************************************************************
 
@@ -59,12 +59,12 @@ source testlib/commonVars.sh
 
 # ***************************************************************************************************
 
-lmsscr_Version="0.0.2"					# script version
+ldcscr_Version="0.0.2"					# script version
 
-lmsapp_declare="$lmsbase_dirEtc/lmsInstallDcl.xml"
-lmsvar_help="$lmsbase_dirEtc/lmsInstallHelp.xml"
+ldcapp_declare="$ldcbase_dirEtc/ldcInstallDcl.xml"
+ldcvar_help="$ldcbase_dirEtc/ldcInstallHelp.xml"
 
-lmsapp_bashInstalled=0
+ldcapp_bashInstalled=0
 
 # ***************************************************************************************************
 # ***************************************************************************************************
@@ -87,7 +87,7 @@ lmsapp_bashInstalled=0
 #
 #	isInstalled
 #
-#		Return 0 if the directory /var/local/log/LMS/Bash exists
+#		Return 0 if the directory /var/local/log/ldc/Bash exists
 #			   1 if not
 #
 #	parameters:
@@ -100,7 +100,7 @@ lmsapp_bashInstalled=0
 # ***************************************************************************************************
 function isInstalled()
 {
-	[[ -d "/var/local/log/LMS/Bash" ]] && return 0
+	[[ -d "/var/local/log/ldc/Bash" ]] && return 0
 	
 	return 1
 }
@@ -120,13 +120,13 @@ function isInstalled()
 displayHelp()
 {
 return 0
-	[[ -z "${lmsapp_helpBuffer}" ]] &&
+	[[ -z "${ldcapp_helpBuffer}" ]] &&
 	 {
-		lmsHelpToStrV lmsapp_helpBuffer
+		ldcHelpToStrV ldcapp_helpBuffer
 		[[ $? -eq 0 ]] || return 1
 	 }
 
-	lmsConioDisplay "${lmsapp_helpBuffer}"
+	ldcConioDisplay "${ldcapp_helpBuffer}"
 }
 
 # ***************************************************************************************************
@@ -165,7 +165,7 @@ function processCliOptions()
 # *****************************************************************************
 function tarName()
 {
-	lmsapp_tarName="${dirAppBkup}/${1}-$(date '+%F').tar.gz"
+	ldcapp_tarName="${dirAppBkup}/${1}-$(date '+%F').tar.gz"
 }
 
 # *****************************************************************************
@@ -191,14 +191,14 @@ function extractTgz()
 	cd "${lDst}" >/dev/null 2>&1
 	[[ $? -eq 0 ]] || 
 	{
-		lmsConioDebugL "CDError" "CD to '${lDst}' failed."
+		ldcConioDebugL "CDError" "CD to '${lDst}' failed."
 		return 1
 	}
 
 	echo `tar xf "${lSrc}"` >/dev/null 2>&1
 	[[ $? -eq 0 ]] || 
 	{
-		lmsConioDebugL "TarError" "'tar' of '${lSrc}' failed."
+		ldcConioDebugL "TarError" "'tar' of '${lSrc}' failed."
 		return 2
 	}
 
@@ -224,30 +224,30 @@ function extractTgz()
 # *****************************************************************************
 function extractSource()
 {
-	[[ ${lmscli_optProduction} -eq 0 ]] &&
+	[[ ${ldccli_optProduction} -eq 0 ]] &&
 	 {
-		lmsConioDebugL "ExtractError" "Extract (extract) may only be run in production mode."
-		lmsErrorExitScript "ExtractError"
+		ldcConioDebugL "ExtractError" "Extract (extract) may only be run in production mode."
+		ldcErrorExitScript "ExtractError"
 	 }
 
 	tarName "bkp"
-	extractTgz "${dirAppTemp}" "${lmsapp_tarName}"
+	extractTgz "${dirAppTemp}" "${ldcapp_tarName}"
 	[[ $? -eq 0 ]] || return 2
 
 	tarName "src"
-	extractTgz "${lmsbase_dirAppSrc}" "${lmsapp_tarName}"
+	extractTgz "${ldcbase_dirAppSrc}" "${ldcapp_tarName}"
 	[[ $? -eq 0 ]] || return 3
 
 	tarName "lib"
-	extractTgz "${lmsbase_dirLib}" "${lmsapp_tarName}"
+	extractTgz "${ldcbase_dirLib}" "${ldcapp_tarName}"
 	[[ $? -eq 0 ]] || return 4
 
 	tarName "etc"
-	extractTgz "${lmsbase_dirEtc}" "${lmsapp_tarName}"
+	extractTgz "${ldcbase_dirEtc}" "${ldcapp_tarName}"
 	[[ $? -eq 0 ]] || return 5
 
 	tarName "tst"
-	extractTgz "${dirBash}/test" "${lmsapp_tarName}"
+	extractTgz "${dirBash}/test" "${ldcapp_tarName}"
 	[[ $? -eq 0 ]] || return 6
 
 	return 0
@@ -276,14 +276,14 @@ function createTgz()
 	cd "${lSrc}" >/dev/null 2>&1
 	[[ $? -eq 0 ]] || 
 	{
-		lmsConioDebugL "CDError" "CD to '${lSrc}' failed."
+		ldcConioDebugL "CDError" "CD to '${lSrc}' failed."
 		return 1
 	}
 
 	echo `tar czf "${lDst}" *` >/dev/null 2>&1
 	[[ $? -eq 0 ]] || 
 	{
-		lmsConioDebugL "TarError" "'tar' of '${lDst}' failed."
+		ldcConioDebugL "TarError" "'tar' of '${lDst}' failed."
 		return 2
 	}
 
@@ -311,23 +311,23 @@ function createTgz()
 function backupSource()
 {
 	tarName "src"
-	createTgz "${lmsbase_dirAppSrc}" "${lmsapp_tarName}"
+	createTgz "${ldcbase_dirAppSrc}" "${ldcapp_tarName}"
 	[[ $? -eq 0 ]] || return 1
 
 	tarName "lib"
-	createTgz "${lmsbase_dirLib}" "${lmsapp_tarName}"
+	createTgz "${ldcbase_dirLib}" "${ldcapp_tarName}"
 	[[ $? -eq 0 ]] || return 2
 
 	tarName "etc"
-	createTgz "${lmsbase_dirEtc}" "${lmsapp_tarName}"
+	createTgz "${ldcbase_dirEtc}" "${ldcapp_tarName}"
 	[[ $? -eq 0 ]] || return 3
 
 	tarName "tst"
-	createTgz "${dirBash}/test" "${lmsapp_tarName}"
+	createTgz "${dirBash}/test" "${ldcapp_tarName}"
 	[[ $? -eq 0 ]] || return 4
 	
 	tarName "bkp"
-	createTgz "${dirAppBkup}" "${lmsapp_tarName}"
+	createTgz "${dirAppBkup}" "${ldcapp_tarName}"
 	[[ $? -eq 0 ]] || return 5
 
 	return 0
@@ -349,7 +349,7 @@ function backupSource()
 # ***************************************************************************************************
 function makeDir()
 {
-	`sudo mkdir -p /var/local/log/LMS/Bash`
+	`sudo mkdir -p /var/local/log/ldc/Bash`
 	[[ $? -eq 0 ]] || return 1
 
 	return 0
@@ -359,7 +359,7 @@ function makeDir()
 #
 #	installDirs
 #
-#		Create the directories required for the installation of LMS/Bash system
+#		Create the directories required for the installation of ldc/Bash system
 #
 #	parameters:
 #		none
@@ -371,21 +371,21 @@ function makeDir()
 # ***************************************************************************************************
 function installDirs()
 {
-	#[[ ${lmscli_optProduction} -eq 0 ]] &&
+	#[[ ${ldccli_optProduction} -eq 0 ]] &&
 	# {
-	#	lmsConioDebugL "InstallError" "Install may only be run in production mode."
-	#	lmsErrorExitScript "InstallError"
+	#	ldcConioDebugL "InstallError" "Install may only be run in production mode."
+	#	ldcErrorExitScript "InstallError"
 	# }
 
 	isInstalled
 	[[ $? -eq 0 ]] && return 0
 	
-	`mkdir -p /var/local/log/LMS/Bash/${lmslib_bashRelease}`
-	`mkdir -p /var/local/backup/LMS/Bash/${lmslib_bashRelease}`
+	`mkdir -p /var/local/log/ldc/Bash/${ldclib_bashRelease}`
+	`mkdir -p /var/local/backup/ldc/Bash/${ldclib_bashRelease}`
 
-	`mkdir -p /usr/local/share/LMS/Bash/${lmslib_bashRelease}`
-	`mkdir -p /usr/local/etc/LMS/Bash/${lmslib_bashRelease}`
-	`mkdir -p /usr/local/lib/LMS/Bash/${lmslib_bashRelease}`
+	`mkdir -p /usr/local/share/ldc/Bash/${ldclib_bashRelease}`
+	`mkdir -p /usr/local/etc/ldc/Bash/${ldclib_bashRelease}`
+	`mkdir -p /usr/local/lib/ldc/Bash/${ldclib_bashRelease}`
 	
 	return 0
 }
@@ -398,10 +398,10 @@ function installDirs()
 # *****************************************************************************
 # *****************************************************************************
 
-lmsScriptFileName "${0}"
+ldcScriptFileName "${0}"
 
-. $lmsbase_dirLib/openLog.sh
-. $lmsbase_dirLib/startInit.sh
+. $ldcbase_dirLib/openLog.sh
+. $ldcbase_dirLib/startInit.sh
 
 # *****************************************************************************
 # *****************************************************************************
@@ -414,25 +414,25 @@ lmsScriptFileName "${0}"
 processCliOptions
 [[ $? -eq 0 ]] ||
 {
-	lmsapp_result=$?
-	lmsConioDebugL "CliError" "Unable to process cli options: $?"
-	lmsErrorExitScript "CliError"
+	ldcapp_result=$?
+	ldcConioDebugL "CliError" "Unable to process cli options: $?"
+	ldcErrorExitScript "CliError"
 }
 
-[[ -z "${lmscli_command}" ]] &&
+[[ -z "${ldccli_command}" ]] &&
 {
 #	displayHelp
-	lmsErrorExitScript "None"
+	ldcErrorExitScript "None"
 }
 
-case "${lmscli_command}" in
+case "${ldccli_command}" in
 
 	"backup")
 		backupSource
 		[[ $? -eq 0 ]] ||
 		 {
-			lmsapp_result=$?
-			lmsConioDebugL "BackupError" "Backup source failed: ${lmsapp_result}."
+			ldcapp_result=$?
+			ldcConioDebugL "BackupError" "Backup source failed: ${ldcapp_result}."
 		 }
 		;;
 
@@ -440,8 +440,8 @@ case "${lmscli_command}" in
 		installDirs
 		[[ $? -eq 0 ]] ||
 		 {
-			lmsapp_result=$?
-			lmsConioDebugL "InstallError" "Installation failed: ${lmsapp_result}."
+			ldcapp_result=$?
+			ldcConioDebugL "InstallError" "Installation failed: ${ldcapp_result}."
 		 }
 		;;
 
@@ -449,8 +449,8 @@ case "${lmscli_command}" in
 		extractSource
 		[[ $? -eq 0 ]] ||
 		 {
-			lmsapp_result=$?
-			lmsConioDebugL "ExtractError" "Source extraction failed: ${lmsapp_result}."
+			ldcapp_result=$?
+			ldcConioDebugL "ExtractError" "Source extraction failed: ${ldcapp_result}."
 		 }
 		;;
 
@@ -460,15 +460,15 @@ echo "HELP"
 		;;
 
 	*)	
-		lmsConioDisplay "Unknown option: '${lmscli_command}'."
+		ldcConioDisplay "Unknown option: '${ldccli_command}'."
 		;;
 esac
 
-#lmsDmpVar "lmsapp_ lmscli_"
+#ldcDmpVar "ldcapp_ ldccli_"
 
 # *****************************************************************************
 
-. $lmsbase_dirLib/scriptEnd.sh
+. $ldcbase_dirLib/scriptEnd.sh
 
 # *****************************************************************************
 

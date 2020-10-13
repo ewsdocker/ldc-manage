@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- copyright © 2014, 2016. EarthWalk Software. -->
-<lms>
+<ldc>
 
-	<declarations name="lmscli_" >
+	<declarations name="ldccli_" >
 
 		<declare name="shellParam" type="associative" />
 
@@ -30,7 +30,7 @@
 
 	</declarations>
 
-	<declarations name="lmssng_" >
+	<declarations name="ldcsng_" >
 
 		<declare name="fileRoot"           type="string">/media/sf_Shared/MBroadcast/songlists/</declare>
 
@@ -41,9 +41,9 @@
 		<declare name="fileRootList"       type="string">/media/sf_Shared/MBroadcast/songlists/djmaster/</declare>
 		<declare name="fileListName"       type="string">SongList</declare>
 
-		<declare name="lmssng_reduceQuote" type="integer">1</declare>
+		<declare name="ldcsng_reduceQuote" type="integer">1</declare>
 
 	</declarations>
 
-</lms>
+</ldc>
 

@@ -1,7 +1,7 @@
 # *****************************************************************************
 # *****************************************************************************
 #
-#		lms-svnReadLog.sh
+#		ldc-svnReadLog.sh
 #
 # *****************************************************************************
 #
@@ -29,13 +29,13 @@
 # *****************************************************************************
 # *****************************************************************************
 
-declare    lmslib_svnReadLog="0.0.1"	# version of the library
+declare    ldclib_svnReadLog="0.0.1"	# version of the library
 
 # **************************************************************************
 
 # *****************************************************************************
 #
-#	svnReadlmsLogOpen
+#	svnReadldcLogOpen
 #
 #		Set the log name to open and check for existence
 #
@@ -47,40 +47,40 @@ declare    lmslib_svnReadLog="0.0.1"	# version of the library
 #		non-zero = error code
 #
 # *****************************************************************************
-function svnReadlmsLogOpen()
+function svnReadldcLogOpen()
 {
-	local logName=${1:-"$lmscli_optLogFile"}
+	local logName=${1:-"$ldccli_optLogFile"}
 
-	lmssvn_readOpen=0
+	ldcsvn_readOpen=0
 
 	[[ -z "${logName}" ]] &&
 	 {
-		lmsConioDebug $LINENO "LogError" "Missing log file name"
+		ldcConioDebug $LINENO "LogError" "Missing log file name"
 		return 1
 	 }
 	
-	lmssvn_readFileName=$logName
+	ldcsvn_readFileName=$logName
 
-	touch ${lmssvn_readFileName}
+	touch ${ldcsvn_readFileName}
 	[[ $? -eq 0 ]] ||
 	 {
 		return 2
 	 }
 	
-	dynArrayIsRegistered "${lmssvn_readArrayName}"
+	dynArrayIsRegistered "${ldcsvn_readArrayName}"
 	[[ $? -ne 0 ]] &&
 	 {
-		lmsDynaUnset "${lmssvn_readArrayName}"
+		ldcDynaUnset "${ldcsvn_readArrayName}"
 	 }
 
-	dynArrayNew "${lmssvn_readArrayName}" "A"
+	dynArrayNew "${ldcsvn_readArrayName}" "A"
 	[[ $? -eq 0 ]] ||
 	 {
-		lmsConioDebug $LINENO "LogError" "Unable to create dynamic array '${lmssvn_readArrayName}'"
+		ldcConioDebug $LINENO "LogError" "Unable to create dynamic array '${ldcsvn_readArrayName}'"
 		return 3
 	 }
 
-	lmssvn_readOpen=1
+	ldcsvn_readOpen=1
 
 	return 0
 }
@@ -104,46 +104,46 @@ function svnReadLogProcess()
 	local    logField=""
 	local -i keyIndex=0
 
-	lmssvn_printBuffer=""
+	ldcsvn_printBuffer=""
 
-	while [ $keyIndex -lt ${#lmssvn_readArrayKeys[@]} ]
+	while [ $keyIndex -lt ${#ldcsvn_readArrayKeys[@]} ]
 	do
-		key=${lmssvn_readArrayKeys[$keyIndex]}
+		key=${ldcsvn_readArrayKeys[$keyIndex]}
 
-		lmsDynaGetAt "${lmssvn_readArrayName}" "${key}" logField
+		ldcDynaGetAt "${ldcsvn_readArrayName}" "${key}" logField
 		[[ $? -eq 0 ]] ||
 		 {
-			lmsConioDebug $LINENO "LogError" "Unable to get key '${key}' from '${lmssvn_readArrayName}'"
+			ldcConioDebug $LINENO "LogError" "Unable to get key '${key}' from '${ldcsvn_readArrayName}'"
 			return 1
 		 }
 
 		case $keyIndex in
 
 			0)
-				printf -v lmssvn_printBuffer "%s(%s)" "${lmssvn_printBuffer}" "${logField}"
+				printf -v ldcsvn_printBuffer "%s(%s)" "${ldcsvn_printBuffer}" "${logField}"
 				;;
 
 			1)
-				printf -v lmssvn_printBuffer "%s %s:\n" "${lmssvn_printBuffer}" "${logField}"
+				printf -v ldcsvn_printBuffer "%s %s:\n" "${ldcsvn_printBuffer}" "${logField}"
 				;;
 
 			*)
-				printf -v lmssvn_printBuffer "%s    %s" "${lmssvn_printBuffer}" "${key}"
+				printf -v ldcsvn_printBuffer "%s    %s" "${ldcsvn_printBuffer}" "${key}"
 
 				let blanks=10-${#key}
 				[[ ${blanks} -gt 0 ]]
 				 {
-					printf -v lmssvn_printBuffer "%s%*s" "${lmssvn_printBuffer}" ${blanks}
+					printf -v ldcsvn_printBuffer "%s%*s" "${ldcsvn_printBuffer}" ${blanks}
 				 }
 
-				printf -v lmssvn_printBuffer "%s: %s\n" "${lmssvn_printBuffer}" "${logField}"
+				printf -v ldcsvn_printBuffer "%s: %s\n" "${ldcsvn_printBuffer}" "${logField}"
 				;;
 		esac
 
 		keyIndex+=1
 	done
 
-	lmsConioDisplay "${lmssvn_printBuffer}"
+	ldcConioDisplay "${ldcsvn_printBuffer}"
 
 	return 0
 }
@@ -164,30 +164,30 @@ function svnReadLogProcess()
 # *****************************************************************************
 function svnReadLogParse()
 {
-	local -i keyCount=${#lmssvn_readArrayKeys[@]}
+	local -i keyCount=${#ldcsvn_readArrayKeys[@]}
 
-	lmsStrExplode "${lmssvn_readBuffer}" "-"
+	ldcStrExplode "${ldcsvn_readBuffer}" "-"
 	[[ $? -eq 0 ]] ||
 	 {
-		lmsConioDebug $LINENO "LogError" "Unable to parse '${lmssvn_readBuffer}}'"
+		ldcConioDebug $LINENO "LogError" "Unable to parse '${ldcsvn_readBuffer}}'"
 		return 1
 	 }
 
-	local -i explodedCount=${#lmsstr_Exploded[@]}
+	local -i explodedCount=${#ldcstr_Exploded[@]}
 	local -i keyIndex=0
 	local -i msgLength=0
 
 	while [ ${keyIndex} -lt ${keyCount} ]
 	do
 
-		lmsDynaSetAt ${lmssvn_readArrayName} ${lmssvn_readArrayKeys[$keyIndex]} "${lmsstr_Exploded[${keyIndex}]}"
+		ldcDynaSetAt ${ldcsvn_readArrayName} ${ldcsvn_readArrayKeys[$keyIndex]} "${ldcstr_Exploded[${keyIndex}]}"
 		[[ $? -eq 0 ]] ||
 		{
-			lmsConioDebug $LINENO "LogError" "Unable to add key '$key' to '${lmssvn_readArrayName}'"
+			ldcConioDebug $LINENO "LogError" "Unable to add key '$key' to '${ldcsvn_readArrayName}'"
 			return 2
 		}
 		
-		msgLength+=${#lmsstr_Exploded[${keyIndex}]}
+		msgLength+=${#ldcstr_Exploded[${keyIndex}]}
 		msgLength+=1
 
 		keyIndex+=1
@@ -200,24 +200,24 @@ function svnReadLogParse()
 	 {
 		let key=$keyCount-1
 
-		lmsDynaGetAt "${lmssvn_readArrayName}" "${lmssvn_readArrayKeys[$key]}" msgBuffer
+		ldcDynaGetAt "${ldcsvn_readArrayName}" "${ldcsvn_readArrayKeys[$key]}" msgBuffer
 		[[ $? -eq 0 ]] ||
 		 {
-			lmsConioDebug $LINENO "LogError" "lmsDynaGetAt failed."
+			ldcConioDebug $LINENO "LogError" "ldcDynaGetAt failed."
 			return 3
 		 }
 
-		msgBuffer="${msgBuffer}-${lmssvn_readBuffer:$msgLength}"
+		msgBuffer="${msgBuffer}-${ldcsvn_readBuffer:$msgLength}"
 
-		lmsDynaSetAt "${lmssvn_readArrayName}" "${lmssvn_readArrayKeys[$key]}" "${msgBuffer}"
+		ldcDynaSetAt "${ldcsvn_readArrayName}" "${ldcsvn_readArrayKeys[$key]}" "${msgBuffer}"
 		[[ $? -eq 0 ]] ||
 		 {
-			lmsConioDebug $LINENO "LogError" "lmsDynaSetAt failed."
+			ldcConioDebug $LINENO "LogError" "ldcDynaSetAt failed."
 			return 4
 		 }
 	 }
 
-	eval "${lmssvn_processCallback}"
+	eval "${ldcsvn_processCallback}"
 	return 0
 }
 
@@ -238,31 +238,31 @@ function svnReadLogParse()
 # *****************************************************************************
 function svnReadLogNext()
 {
-	[[ -z ${lmssvn_readOpen} ]] &&   # never initialized, or eof
+	[[ -z ${ldcsvn_readOpen} ]] &&   # never initialized, or eof
 	 {
-		lmsConioDebug $LINENO "LogError" "Log file is not open for reading!"
+		ldcConioDebug $LINENO "LogError" "Log file is not open for reading!"
 		return 1
 	 }
 
-	exec 3<"${lmssvn_logName}"
+	exec 3<"${ldcsvn_logName}"
 	[[ $? -eq 0 ]] ||
 	 {
-		lmsConioDebug $LINENO "LogError" "Unable to open '${lmssvn_logName}'"
+		ldcConioDebug $LINENO "LogError" "Unable to open '${ldcsvn_logName}'"
 		return 1
 	 }
 
-	while  read -u3 lmssvn_readBuffer
+	while  read -u3 ldcsvn_readBuffer
 	do
-		eval ${lmssvn_readCallback}
+		eval ${ldcsvn_readCallback}
 		[[ $? -eq 0 ]] ||
 		 {
-			lmsConioDebug $LINENO "LogError" "readcallback failed on '${lmssvn_readBuffer}'"
+			ldcConioDebug $LINENO "LogError" "readcallback failed on '${ldcsvn_readBuffer}'"
 			return 2
 		 }
 
 	done
 
-	lmssvn_readOpen=0
+	ldcsvn_readOpen=0
 
 	return 0
 }
@@ -283,11 +283,11 @@ function svnReadLogNext()
 # *****************************************************************************
 function svnReadLogSetCallback()
 {
-	lmssvn_readCallback="${1}"
+	ldcsvn_readCallback="${1}"
 
-	[[ -z "${lmssvn_readCallback}" ]] &&
+	[[ -z "${ldcsvn_readCallback}" ]] &&
 	{
-		lmsConioDebug $LINENO "LogError" "Log read callback is empty"
+		ldcConioDebug $LINENO "LogError" "Log read callback is empty"
 		return 1
 	}
 	
@@ -310,11 +310,11 @@ function svnReadLogSetCallback()
 # *****************************************************************************
 function svnReadLogSetProcess()
 {
-	lmssvn_processCallback="${1}"
+	ldcsvn_processCallback="${1}"
 
-	[[ -z "${lmssvn_processCallback}" ]] &&
+	[[ -z "${ldcsvn_processCallback}" ]] &&
 	{
-		lmsConioDebug $LINENO "LogError" "Log read process callback is empty"
+		ldcConioDebug $LINENO "LogError" "Log read process callback is empty"
 		return 1
 	}
 
@@ -323,7 +323,7 @@ function svnReadLogSetProcess()
 
 # *****************************************************************************
 #
-#	svnReadlmsLogClose
+#	svnReadldcLogClose
 #
 #		Close the read log file
 #
@@ -335,10 +335,10 @@ function svnReadLogSetProcess()
 #		non-zero = error code
 #
 # *****************************************************************************
-function svnReadlmsLogClose()
+function svnReadldcLogClose()
 {
-	lmssvn_readOpen=0
-	lmsLogClose
+	ldcsvn_readOpen=0
+	ldcLogClose
 
 	return 0
 }

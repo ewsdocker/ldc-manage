@@ -2,7 +2,7 @@
 # ***************************************************************************************************
 # ***************************************************************************************************
 #
-#   testLmsDomD.sh
+#   testLdcDomD.sh
 #
 # ***************************************************************************************************
 #
@@ -34,22 +34,22 @@
 # ***************************************************************************************************
 # ***************************************************************************************************
 
-declare    lmsapp_name="testLmsDynDomD"
-declare    lmslib_bashRelease="0.1.1"
+declare    ldcapp_name="testLdcDynDomD"
+declare    ldclib_bashRelease="0.1.1"
 
 # *****************************************************************************
 
 . testlib/installDirs.sh
 
-. $lmsbase_dirLib/stdLibs.sh
+. $ldcbase_dirLib/stdLibs.sh
 
-. $lmsbase_dirLib/cliOptions.sh
-. $lmsbase_dirLib/commonVars.sh
+. $ldcbase_dirLib/cliOptions.sh
+. $ldcbase_dirLib/commonVars.sh
 
 # *****************************************************************************
 
-declare    lmsscr_Version="0.1.3"					# script version
-declare	   lmstst_Declarations="$lmsbase_dirEtc/testVariables.xml"
+declare    ldcscr_Version="0.1.3"					# script version
+declare	   ldctst_Declarations="$ldcbase_dirEtc/testVariables.xml"
 
 # *****************************************************************************
 # *****************************************************************************
@@ -59,7 +59,7 @@ declare	   lmstst_Declarations="$lmsbase_dirEtc/testVariables.xml"
 # *****************************************************************************
 # *****************************************************************************
 
-. $lmsbase_dirLib/testDump.sh
+. $ldcbase_dirLib/testDump.sh
 
 # *****************************************************************************
 # *****************************************************************************
@@ -80,39 +80,39 @@ function testShowXmlData()
 {
 	local content
 
-	lmsConioDisplay ""
-	lmsConioDisplay "XML_ENTITY    : '${lmsdom_Entity}'"
+	ldcConioDisplay ""
+	ldcConioDisplay "XML_ENTITY    : '${ldcdom_Entity}'"
 
-	lmsStrTrim "${lmsdom_Content}" lmsdom_Content
+	ldcStrTrim "${ldcdom_Content}" ldcdom_Content
 
-	lmsConioDisplay "XML_CONTENT   :     '${lmsdom_Content}'"
+	ldcConioDisplay "XML_CONTENT   :     '${ldcdom_Content}'"
 
-	lmsConioDisplay "XML_TAG_NAME  :     '${lmsdom_TagName}'"
-	lmsConioDisplay "XML_TAG_TYPE  :     '${lmsdom_TagType}'"
+	ldcConioDisplay "XML_TAG_NAME  :     '${ldcdom_TagName}'"
+	ldcConioDisplay "XML_TAG_TYPE  :     '${ldcdom_TagType}'"
 
-	[[ "${lmsdom_TagType}" == "OPEN" || "${lmsdom_TagType}" == "OPENCLOSE" ]] &&
+	[[ "${ldcdom_TagType}" == "OPEN" || "${ldcdom_TagType}" == "OPENCLOSE" ]] &&
 	 {
-		[[ -n "${lmsdom_attribs}" ]] &&
+		[[ -n "${ldcdom_attribs}" ]] &&
 		 {
-			lmsDomDParseAtt
+			ldcDomDParseAtt
 
-			lmsConioDisplay "XML_ATT_COUNT :     '${lmsdom_attribCount}'"
+			ldcConioDisplay "XML_ATT_COUNT :     '${ldcdom_attribCount}'"
 		
-			for attribute in "${!lmsdom_attArray[@]}"
+			for attribute in "${!ldcdom_attArray[@]}"
 			do
-				lmsConioDisplay "XML_ATT_NAME  :     '${attribute}'"
-				lmsConioDisplay "XML_ATT_VAL   :     '${lmsdom_attArray[$attribute]}'"
+				ldcConioDisplay "XML_ATT_NAME  :     '${attribute}'"
+				ldcConioDisplay "XML_ATT_VAL   :     '${ldcdom_attArray[$attribute]}'"
 				
 			done
 		 }
 	 }
 
-	lmsStrTrim "${lmsdom_Comment}" lmsdom_Comment
+	ldcStrTrim "${ldcdom_Comment}" ldcdom_Comment
 
-	lmsConioDisplay "XML_COMMENT   :     '${lmsdom_Comment}'"
-	lmsConioDisplay "XML_PATH      :     '${lmsdom_Path}'"
+	ldcConioDisplay "XML_COMMENT   :     '${ldcdom_Comment}'"
+	ldcConioDisplay "XML_PATH      :     '${ldcdom_Path}'"
 
-	lmsConioDisplay "XPATH         :     '${lmsdom_XPath}'"
+	ldcConioDisplay "XPATH         :     '${ldcdom_XPath}'"
 }
 
 # *******************************************************
@@ -130,20 +130,20 @@ function testIndentDisplay()
 
 	while [[ $levels -gt 0 ]]
 	do
-		lmsConioDisplay "    " n
+		ldcConioDisplay "    " n
 		(( levels-- ))
 	done
 }
 
 # *******************************************************
 #
-#	testLmsRDomShowStruc
+#	testLdcRDomShowStruc
 #
 # *******************************************************
-testLmsRDomShowStruc()
+testLdcRDomShowStruc()
 {
 	testIndentDisplay ${1}
-	lmsConioDisplay "${2}"
+	ldcConioDisplay "${2}"
 }
 
 # *******************************************************
@@ -153,19 +153,19 @@ testLmsRDomShowStruc()
 # *******************************************************
 testBuildDataTable()
 {
-	case $lmsdom_TagType in
+	case $ldcdom_TagType in
 
 		"OPEN")
-			lmsStackWrite global "${lmsdom_TagName}"
-			lmsStackSize global lmstst_sizeOfStack
+			ldcStackWrite global "${ldcdom_TagName}"
+			ldcStackSize global ldctst_sizeOfStack
 
-			testLmsRDomShowStruc $lmstst_sizeOfStack "${lmsdom_TagName} (${lmsdom_Entity})"
+			testLdcRDomShowStruc $ldctst_sizeOfStack "${ldcdom_TagName} (${ldcdom_Entity})"
 
-			lmstst_currentStackSize=$lmstst_sizeOfStack
+			ldctst_currentStackSize=$ldctst_sizeOfStack
 			;;
 
 		"CLOSE")
-			lmsStackRead global lmstst_Item
+			ldcStackRead global ldctst_Item
 			;;
 
 		*)
@@ -181,10 +181,10 @@ testBuildDataTable()
 # *****************************************************************************
 # *****************************************************************************
 
-lmsScriptFileName $0
+ldcScriptFileName $0
 
-. $lmsbase_dirLib/openLog.sh
-. $lmsbase_dirLib/startInit.sh
+. $ldcbase_dirLib/openLog.sh
+. $ldcbase_dirLib/startInit.sh
 
 # *****************************************************************************
 # *****************************************************************************
@@ -193,63 +193,63 @@ lmsScriptFileName $0
 #
 # *****************************************************************************
 # *****************************************************************************
-lmscli_optDebug=0
-lmscli_optQueueErrors=0
-lmscli_optLogDisplay=0
+ldccli_optDebug=0
+ldccli_optQueueErrors=0
+ldccli_optLogDisplay=0
 
 # *****************************************************************************
 
-lmstst_sizeOfStack=0
-lmstst_Item=""
+ldctst_sizeOfStack=0
+ldctst_Item=""
 
-lmsStackCreate "global" lmstst_guid 8
+ldcStackCreate "global" ldctst_guid 8
 [[ $? -eq 0 ]] ||
  {
-	lmsConioDisplay "StackCreate Unable to open/create stack 'global'"
+	ldcConioDisplay "StackCreate Unable to open/create stack 'global'"
 	testDumpExit
  }
 
-lmsStackCreate "namespace" lmstst_nsuid 8
+ldcStackCreate "namespace" ldctst_nsuid 8
 [[ $? -eq 0 ]] ||
  {
-	lmsConioDisplay "StackCreate Unable to open/create stack 'namespace'"
+	ldcConioDisplay "StackCreate Unable to open/create stack 'namespace'"
  	testDumpExit
  }
 
 # *****************************************************************************
 
-lmsDomDCallback "testShowXmlData" 
+ldcDomDCallback "testShowXmlData" 
 [[ $? -eq 0 ]] ||
  {
-	lmsConioDisplay "Callback function name is missing"
+	ldcConioDisplay "Callback function name is missing"
  	testDumpExit
  }
 
-lmsDomDParse ${lmstst_Declarations}
+ldcDomDParse ${ldctst_Declarations}
 [[ $? -eq 0 ]] ||
  {
-	lmsConioDisplay "TDOMParseDOM '${lmstst_Declarations}'"
+	ldcConioDisplay "TDOMParseDOM '${ldctst_Declarations}'"
 	testDumpExit	
  }
 
-lmsConioDisplay "*******************************************************"
+ldcConioDisplay "*******************************************************"
 
-lmsDomDCallback "testBuildDataTable" 
+ldcDomDCallback "testBuildDataTable" 
 [[ $? -eq 0 ]] ||
  {
-	lmsConioDisplay "Callback function name is missing"
+	ldcConioDisplay "Callback function name is missing"
 	testDumpExit
  }
 
-lmsDomDParse ${lmstst_Declarations}
+ldcDomDParse ${ldctst_Declarations}
 [[ $? -eq 0 ]] ||
  {
-	lmsConioDisplay "TDOMParseDOM '${lmstst_Declarations}'"
+	ldcConioDisplay "TDOMParseDOM '${ldctst_Declarations}'"
  	testDumpExit
  }
 
 # *****************************************************************************
 
-. $lmsbase_dirLib/scriptEnd.sh
+. $ldcbase_dirLib/scriptEnd.sh
 
 # *****************************************************************************

@@ -20,20 +20,20 @@
 #	Copyright © 2014, 2016, 2017, 2018. EarthWalk Software
 #	Licensed under the GNU General Public License, GPL-3.0-or-later.
 #
-#   This file is part of ewsdocker/lms-bash.
+#   This file is part of ewsdocker/ldc-bash.
 #
-#   ewsdocker/lms-bash is free software: you can redistribute 
+#   ewsdocker/ldc-bash is free software: you can redistribute 
 #   it and/or modify it under the terms of the GNU General Public License 
 #   as published by the Free Software Foundation, either version 3 of the 
 #   License, or (at your option) any later version.
 #
-#   ewsdocker/lms-bash is distributed in the hope that it will 
+#   ewsdocker/ldc-bash is distributed in the hope that it will 
 #   be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
 #   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with ewsdocker/lms-bash.  If not, see 
+#   along with ewsdocker/ldc-bash.  If not, see 
 #   <http://www.gnu.org/licenses/>.#
 # *****************************************************************************
 #
@@ -41,13 +41,17 @@
 #					1.1.0 - 02-23-2017.
 #					1.1.6 - 09-05-2018.
 #
-## *****************************************************************************
+#
+# *****************************************************************************
 # *****************************************************************************
 
-declare    lmsapp_name="getSongInfo"
-declare    lmslib_bashRelease="0.1.4"
+ldcapp_name="getSongInfo"
 
-declare -i lmscli_optProduction=0
+declare    ldcapp_name="getSongInfo"
+
+declare    ldclib_bashRelease="0.1.4"
+
+declare -i ldccli_optProduction=0
 
 # *****************************************************************************
 
@@ -55,32 +59,32 @@ source applib/installDirs.sh
 
 # *****************************************************************************
 
-source $lmsbase_dirLib/stdLibs.sh
-source $lmsbase_dirLib/cliOptions.sh
-source $lmsbase_dirLib/commonVars.sh
+source $ldcbase_dirLib/stdLibs.sh
+source $ldcbase_dirLib/cliOptions.sh
+source $ldcbase_dirLib/commonVars.sh
 
 # *****************************************************************************
 
-lmsscr_Version="1.1.6"									# script version
+ldcscr_Version="1.1.6"									# script version
 
-lmsapp_errors="$lmsbase_dirEtc/errorCodes.xml"
-lmsvar_help="$lmsbase_dirEtc/getSongHelp.xml"					# path to the help information file
-lmsvar_SongOptions="$lmsbase_dirEtc/getSongOptions.xml"
+ldcapp_errors="$ldcbase_dirEtc/errorCodes.xml"
+ldcvar_help="$ldcbase_dirEtc/getSongHelp.xml"					# path to the help information file
+ldcvar_SongOptions="$ldcbase_dirEtc/getSongOptions.xml"
 
-lmsapp_declare="$lmsbase_dirEtc/getSongOptions.xml"			# script declarations
+ldcapp_declare="$ldcbase_dirEtc/getSongOptions.xml"			# script declarations
 
 # *****************************************************************************
 #
 #   File locations - modify as needed
 #
 # *****************************************************************************
-declare    lmssng_fileRoot="/home/jay/.config/songlists/"
-declare    lmssng_fileCurrent="CurrentSong"
-declare    lmssng_fileSongName="SongName"
-declare    lmssng_fileSongHost="SongHost"
+declare    ldcsng_fileRoot="/home/jay/.config/songlists/"
+declare    ldcsng_fileCurrent="CurrentSong"
+declare    ldcsng_fileSongName="SongName"
+declare    ldcsng_fileSongHost="SongHost"
 
-declare    lmssng_fileRootList="/home/jay/Music/"
-declare    lmssng_fileListName="SongList"
+declare    ldcsng_fileRootList="/home/jay/Music/"
+declare    ldcsng_fileListName="SongList"
 
 # *****************************************************************************
 #
@@ -88,48 +92,48 @@ declare    lmssng_fileListName="SongList"
 #			or as command line options
 #
 # *****************************************************************************
-declare -i lmssng_reduceQuote=1   	# 0 = do not translate quote char, 1 = translate with lmscli_optAlter
+declare -i ldcsng_reduceQuote=1   	# 0 = do not translate quote char, 1 = translate with ldccli_optAlter
 
 # *****************************************************************************
 #
 #   Global variables - modified by program flow
 #
 # *****************************************************************************
-declare    lmssng_current=""  		# Currently playing song
-declare    lmssng_playerStatus=""   # Player status
-declare -i lmssng_playerPID=0		# Player PID
+declare    ldcsng_current=""  		# Currently playing song
+declare    ldcsng_playerStatus=""   # Player status
+declare -i ldcsng_playerPID=0		# Player PID
 
-declare -i lmssng_streamType=0		# Type of stream - 0=local file, 1=remote stream
+declare -i ldcsng_streamType=0		# Type of stream - 0=local file, 1=remote stream
 
-declare    lmssng_album=""			# Playing song album name
-declare    lmssng_artist=""   		#              artist
-declare    lmssng_title=""			#			   title
-declare    lmssng_formattedTitle="" #              formatted title
+declare    ldcsng_album=""			# Playing song album name
+declare    ldcsng_artist=""   		#              artist
+declare    ldcsng_title=""			#			   title
+declare    ldcsng_formattedTitle="" #              formatted title
 
-declare    lmssng_tuple=""
+declare    ldcsng_tuple=""
 
-declare    lmssng_songHost=""		#
-declare    lmssng_songName=""		#
-declare    lmssng_currentHost=""	#
-declare    lmssng_currentAlbum=""	#
+declare    ldcsng_songHost=""		#
+declare    ldcsng_songName=""		#
+declare    ldcsng_currentHost=""	#
+declare    ldcsng_currentAlbum=""	#
 
-declare    lmssng_songNameMod=""	#
-declare    lmssng_outputTitle=""	#
-declare -i lmssng_titleAllowed=0	# 1 if ok to output an xterm title
+declare    ldcsng_songNameMod=""	#
+declare    ldcsng_outputTitle=""	#
+declare -i ldcsng_titleAllowed=0	# 1 if ok to output an xterm title
 
-declare	   lmssng_helpMessage=""	#
-declare -i lmssng_currentHour=0
+declare	   ldcsng_helpMessage=""	#
+declare -i ldcsng_currentHour=0
 
-declare    lmssng_stackName="lmssng_songStack"
+declare    ldcsng_stackName="ldcsng_songStack"
 
-declare -a lmssng_reply=()			#
-declare	   lmssng_buffer=""
+declare -a ldcsng_reply=()			#
+declare	   ldcsng_buffer=""
 
 function updateOption()
 {
-	[[ ${#lmssng_reply[@]} -lt 2 || -z "${lmssng_reply[1]}" ]] &&
+	[[ ${#ldcsng_reply[@]} -lt 2 || -z "${ldcsng_reply[1]}" ]] &&
 	{
-		lmsConioDisplay "option name=value"
+		ldcConioDisplay "option name=value"
 		return 0
 	}
 
@@ -137,35 +141,35 @@ function updateOption()
 	local value
 	local option
 			
-	lmsStrSplit ${lmssng_reply[1]} parameter value
+	ldcStrSplit ${ldcsng_reply[1]} parameter value
 	[[ $? -eq 0 ]] ||
 	 {
-		lmsConioDisplay "option ${lmssng_reply[1]}=value"
+		ldcConioDisplay "option ${ldcsng_reply[1]}=value"
 		return 0
 	 }
 
-	lmsCliValid $parameter
+	ldcCliValid $parameter
 	[[ $? -eq 0 ]] ||
 	{
-		lmsConioDisplay "Unknown parameter '${parameter}'"
+		ldcConioDisplay "Unknown parameter '${parameter}'"
 		return 0
 	}
 
-	lmsCliLookup $parameter option
+	ldcCliLookup $parameter option
 	[[ $? -eq 0 ]] ||
 	 {
-		lmsConioDisplay "Unknown option '${parameter}'"
+		ldcConioDisplay "Unknown option '${parameter}'"
 		return 0
 	 }
 
 	[[ -z "${value}" ]] &&
 	{
-		lmsConioDisplay "option lmscli_${option}=${value}"
+		ldcConioDisplay "option ldccli_${option}=${value}"
 		return 0
 	}
 
-	lmsConioDisplay "Setting option '${option}' to '${value}'"
-	eval "lmscli_${option}='${value}'"
+	ldcConioDisplay "Setting option '${option}' to '${value}'"
+	eval "ldccli_${option}='${value}'"
 
 	return 0
 }
@@ -190,23 +194,23 @@ function checkInput()
 	read -t 1
 	[[ -z "${REPLY}" ]] && return 0
 
-	lmssng_reply=()
-	lmsStrExplode "${REPLY}" " " lmssng_reply
+	ldcsng_reply=()
+	ldcStrExplode "${REPLY}" " " ldcsng_reply
 
-	case ${lmssng_reply[0]} in
+	case ${ldcsng_reply[0]} in
 
 		"exit" | "quit")
-			[[ ${lmscli_optDebug} -eq 0 ]] || lmsConioDebugExit $LINENO "Debug" "Exiting by request"
+			[[ ${ldccli_optDebug} -eq 0 ]] || ldcConioDebugExit $LINENO "Debug" "Exiting by request"
 
-			lmsConioDisplay "Exiting by request"
-			lmsErrorExitScript "Exit"
+			ldcConioDisplay "Exiting by request"
+			ldcErrorExitScript "Exit"
 			;;
 
 		"help")
 			displayHelp
 			[[ $? -eq 0 ]] ||
 			 {
-				lmsConioDisplay "Help error: $?"
+				ldcConioDisplay "Help error: $?"
 				return 0
 			 }
 
@@ -218,27 +222,27 @@ function checkInput()
 			;;
 
 		"show")
-			lmsConioDisplay ""
-			lmssng_buffer=$( declare -p | grep "lmssng_" )
-			lmsConioDisplay "$lmssng_buffer"
+			ldcConioDisplay ""
+			ldcsng_buffer=$( declare -p | grep "ldcsng_" )
+			ldcConioDisplay "$ldcsng_buffer"
 
-			lmsConioDisplay ""
-			lmssng_buffer=$( declare -p | grep "lmscli_" )
-			lmsConioDisplay "$lmssng_buffer"
+			ldcConioDisplay ""
+			ldcsng_buffer=$( declare -p | grep "ldccli_" )
+			ldcConioDisplay "$ldcsng_buffer"
 
 			;;
 
 		"showall")
-			lmsDmpVar
+			ldcDmpVar
 			;;
 
-		*)	lmssng_buffer="Console commands: option show showall help exit quit"
-			lmsConioDisplay "$lmssng_buffer"
+		*)	ldcsng_buffer="Console commands: option show showall help exit quit"
+			ldcConioDisplay "$ldcsng_buffer"
 			;;
 	esac
 
-	lmsConioDisplay ""
-	lmsConioDisplay "${lmssng_timestamp}   ${lmssng_songName}"
+	ldcConioDisplay ""
+	ldcConioDisplay "${ldcsng_timestamp}   ${ldcsng_songName}"
 	return 0
 }
 
@@ -259,7 +263,7 @@ function checkInput()
 function getSongTuple()
 {
 	local field="$1"
-	lmssng_tuple="`audtool current-song-tuple-data ${field}`"
+	ldcsng_tuple="`audtool current-song-tuple-data ${field}`"
 }
 
 # *****************************************************************************
@@ -278,18 +282,18 @@ function getSongTuple()
 # *****************************************************************************
 function streamOrLocal()
 {
-	lmssng_streamType=1	# default to stream
+	ldcsng_streamType=1	# default to stream
 	getSongTuple "file-path"
 
-	lmsConioDebug $LINENO "Debug" "(streamOrLocal) file-path: ${lmssng_tuple}"
+	ldcConioDebug $LINENO "Debug" "(streamOrLocal) file-path: ${ldcsng_tuple}"
 
-	if [[ ${lmssng_tuple} == *"file://"* || "${lmssng_tuple:0:1}" == "/" ]]
+	if [[ ${ldcsng_tuple} == *"file://"* || "${ldcsng_tuple:0:1}" == "/" ]]
 	then
-		lmssng_streamType=0	# set to file (local)
-		lmsConioDebug $LINENO "Debug" "file-path is local"
+		ldcsng_streamType=0	# set to file (local)
+		ldcConioDebug $LINENO "Debug" "file-path is local"
 	fi
 
-	return ${lmssng_streamType}
+	return ${ldcsng_streamType}
 }
 
 # *****************************************************************************
@@ -308,10 +312,10 @@ function streamOrLocal()
 # *****************************************************************************
 function album()
 {
-	lmssng_album=""
+	ldcsng_album=""
 
 	getSongTuple 'album'
-	lmssng_album=${lmssng_tuple}
+	ldcsng_album=${ldcsng_tuple}
 }
 
 # *****************************************************************************
@@ -330,10 +334,10 @@ function album()
 # *****************************************************************************
 function artist()
 {
-	lmssng_artist=""
+	ldcsng_artist=""
 
 	getSongTuple 'artist'
-	lmssng_artist=${lmssng_tuple}
+	ldcsng_artist=${ldcsng_tuple}
 }
 
 # *****************************************************************************
@@ -352,12 +356,12 @@ function artist()
 # *****************************************************************************
 function title()
 {
-	lmssng_title=""
+	ldcsng_title=""
 
 	getSongTuple 'title'
-	lmssng_title=${lmssng_tuple}
+	ldcsng_title=${ldcsng_tuple}
 
-	[[ ${lmssng_reduceQuote} -ne 0 ]] && lmssng_title="${lmssng_title/\'/$lmscli_optAlter}"
+	[[ ${ldcsng_reduceQuote} -ne 0 ]] && ldcsng_title="${ldcsng_title/\'/$ldccli_optAlter}"
 	return 0
 }
 
@@ -377,12 +381,12 @@ function title()
 # *****************************************************************************
 function formattedTitle()
 {
-	lmssng_formattedTitle=""
+	ldcsng_formattedTitle=""
 
 	getSongTuple "formatted-title"
-	lmssng_formattedTitle=${lmssng_tuple}
+	ldcsng_formattedTitle=${ldcsng_tuple}
 
-	[[ ${lmssng_reduceQuote} -ne 0 ]] && lmssng_formattedTitle="${lmssng_formattedTitle/\'/$lmscli_optAlter}"
+	[[ ${ldcsng_reduceQuote} -ne 0 ]] && ldcsng_formattedTitle="${ldcsng_formattedTitle/\'/$ldccli_optAlter}"
 	return 0
 }
 
@@ -402,7 +406,7 @@ function formattedTitle()
 # *****************************************************************************
 function isRunning()
 {
-	lmssng_playerPID="`pidof audacious`"
+	ldcsng_playerPID="`pidof audacious`"
 	[[ $? -eq 0 ]] && return 1
 
 	return 0
@@ -428,7 +432,7 @@ function waitRunning()
 
 	until [ $? == 1 ]
 	do
-	  sleep $lmscli_optRun
+	  sleep $ldccli_optRun
 
 	  checkInput
 	  isRunning
@@ -453,13 +457,13 @@ function waitRunning()
 # *****************************************************************************
 function isPlaying()
 {
-	lmssng_playerStatus="stopped"
+	ldcsng_playerStatus="stopped"
 
 	isRunning
 	[[ $? -eq 1 ]] &&
 	 {
-		lmssng_playerStatus="`audtool playback-status`"
-		[[ "$lmssng_playerStatus" == "playing" ]] && return 1
+		ldcsng_playerStatus="`audtool playback-status`"
+		[[ "$ldcsng_playerStatus" == "playing" ]] && return 1
 	 }
 
 	return 0
@@ -486,11 +490,11 @@ function waitPlaying()
 	until [ $? -eq 1 ]
 	do
 		isRunning
-		[[ $? -eq 0 ]] && waitRunning || sleep $lmscli_optPlay
+		[[ $? -eq 0 ]] && waitRunning || sleep $ldccli_optPlay
 
 		checkInput
 
-		lmsConioDebug $LINENO "Debug" "(waitPlaying) Play status: $lmssng_playerStatus"
+		ldcConioDebug $LINENO "Debug" "(waitPlaying) Play status: $ldcsng_playerStatus"
 
 		isPlaying
 	done
@@ -514,15 +518,15 @@ function waitPlaying()
 # *****************************************************************************
 function songChanged()
 {
-	local waitingSong=${lmssng_title}
+	local waitingSong=${ldcsng_title}
 
 	checkInput
 
-	lmsConioDebug $LINENO "Debug" "(songChanged) Waiting for song to end: ${waitingSong}"
+	ldcConioDebug $LINENO "Debug" "(songChanged) Waiting for song to end: ${waitingSong}"
 
-	until [ "${waitingSong}" != "${lmssng_title}" ]
+	until [ "${waitingSong}" != "${ldcsng_title}" ]
 	do
-		sleep $lmscli_optSleep
+		sleep $ldccli_optSleep
 		checkInput
 		title
 	done
@@ -535,8 +539,8 @@ function songChanged()
 #	splitHostName
 #
 #	  Attempts to split out the actual host name from
-#		the current lmssng_songHost to a shortened lmssng_songHost and
-#		remainder into descriptive lmssng_songName
+#		the current ldcsng_songHost to a shortened ldcsng_songHost and
+#		remainder into descriptive ldcsng_songName
 #
 #	parameters:
 #		none
@@ -548,25 +552,25 @@ function songChanged()
 # *****************************************************************************
 function splitHostName()
 {
-	lmsConioDebug $LINENO "Debug" "(splitHostName) SongHost: ${lmssng_songHost}"
+	ldcConioDebug $LINENO "Debug" "(splitHostName) SongHost: ${ldcsng_songHost}"
 
 	sep=':'
-	case $lmssng_songHost in
+	case $ldcsng_songHost in
 
 		(*"$sep"*)
-			lmssng_songName=${lmssng_songHost#*"$sep"}   # first extract the end of the host name as a songname
-			lmsConioDebug $LINENO "Debug" "(splitHostName) SongNAME: ${lmssng_songName}"
+			ldcsng_songName=${ldcsng_songHost#*"$sep"}   # first extract the end of the host name as a songname
+			ldcConioDebug $LINENO "Debug" "(splitHostName) SongNAME: ${ldcsng_songName}"
 
-			lmssng_songHost=${lmssng_songHost%%"$sep"*}  # extract the beginning of the host name AS the host name
-			lmsConioDebug $LINENO "Debug" "(splitHostName) SongHOST: ${lmssng_songHost}"
+			ldcsng_songHost=${ldcsng_songHost%%"$sep"*}  # extract the beginning of the host name AS the host name
+			ldcConioDebug $LINENO "Debug" "(splitHostName) SongHOST: ${ldcsng_songHost}"
 			;;
 
 		(*)
-			lmsConioDebug $LINENO "Debug" "(splitHostName) no seperator found!"
-			lmsConioDebug $LINENO "Debug" "(splitHostName) SongHOST: ${lmssng_songHost}"
+			ldcConioDebug $LINENO "Debug" "(splitHostName) no seperator found!"
+			ldcConioDebug $LINENO "Debug" "(splitHostName) SongHOST: ${ldcsng_songHost}"
 
-			lmssng_songName=""
-			lmsConioDebug $LINENO "Debug" "(splitHostName) SongNAME: ${lmssng_songName}"
+			ldcsng_songName=""
+			ldcConioDebug $LINENO "Debug" "(splitHostName) SongNAME: ${ldcsng_songName}"
 			;;
 
 	esac
@@ -590,8 +594,8 @@ function splitHostName()
 # *****************************************************************************
 function createFileListName()
 {
-	lmssng_fileListName="$lmssng_fileListName-$(date +%F)"
-	lmssng_currentHour=$(date +"%k")
+	ldcsng_fileListName="$ldcsng_fileListName-$(date +%F)"
+	ldcsng_currentHour=$(date +"%k")
 
 	return 0
 }
@@ -613,9 +617,9 @@ function createFileListName()
 function checkCurrentDate()
 {
 	local -i hour=$(date +"%k")
-	[[ "${lmssng_currentHour}" -gt "${hour}" ]] && 
+	[[ "${ldcsng_currentHour}" -gt "${hour}" ]] && 
 	 {
-		lmsConioDisplay "Date change detected - $(date +%F)"
+		ldcConioDisplay "Date change detected - $(date +%F)"
 		createFileListName
 	 }
 
@@ -638,38 +642,38 @@ function checkCurrentDate()
 # *****************************************************************************
 function processSong()
 {
-	lmssng_timestamp=$(date +%H:%M:%S)
-	lmssng_currentHost=${lmssng_songHost}
+	ldcsng_timestamp=$(date +%H:%M:%S)
+	ldcsng_currentHost=${ldcsng_songHost}
 
-	if [ ${lmssng_streamType} -eq 0 ]
+	if [ ${ldcsng_streamType} -eq 0 ]
 	then # local files
-		lmssng_songHost="${lmssng_album}"
-		lmssng_songName="${lmssng_artist} - ${lmssng_title}"
+		ldcsng_songHost="${ldcsng_album}"
+		ldcsng_songName="${ldcsng_artist} - ${ldcsng_title}"
 	else # remote stream
-		lmssng_songHost=${lmssng_artist}
-		lmssng_songName=${lmssng_title}
+		ldcsng_songHost=${ldcsng_artist}
+		ldcsng_songName=${ldcsng_title}
 	fi
 
 	#
 	#  remove invalid characters from SongName
 	#
-	lmssng_songNameMod=`echo "${lmssng_songName}" | tr -d -c ".[:alnum:]._ ()-"`
+	ldcsng_songNameMod=`echo "${ldcsng_songName}" | tr -d -c ".[:alnum:]._ ()-"`
 
-	[[ "${lmssng_currentHost}" != "${lmssng_songHost}" ]] &&
+	[[ "${ldcsng_currentHost}" != "${ldcsng_songHost}" ]] &&
 	 {
-		lmsConioDisplay "*********************************"
-		lmsConioDisplay "${lmssng_timestamp} ${lmssng_songHost}"
+		ldcConioDisplay "*********************************"
+		ldcConioDisplay "${ldcsng_timestamp} ${ldcsng_songHost}"
 	 }
 
 	#
-	#  if there is nothing in lmssng_songName, try to create a lmssng_songName from lmssng_songHost
+	#  if there is nothing in ldcsng_songName, try to create a ldcsng_songName from ldcsng_songHost
 	#
-	[[ -e "$lmssng_songNameMod" ]] &&
+	[[ -e "$ldcsng_songNameMod" ]] &&
 	 {
-		[[ "${lmssng_currentHost}" != "${lmssng_songHost}" ]] && splitHostName
-		[[ -e "$lmssng_songName" ]] && lmssng_songName="... Station Break ..."
+		[[ "${ldcsng_currentHost}" != "${ldcsng_songHost}" ]] && splitHostName
+		[[ -e "$ldcsng_songName" ]] && ldcsng_songName="... Station Break ..."
 
-		lmssng_songNameMod=$lmssng_songName
+		ldcsng_songNameMod=$ldcsng_songName
 	 }
 
 	# *************************************************************************
@@ -680,22 +684,22 @@ function processSong()
 
 	checkCurrentDate
 
-	lmsConioDisplay "${lmssng_timestamp}   ${lmssng_songName}"
+	ldcConioDisplay "${ldcsng_timestamp}   ${ldcsng_songName}"
 
-	echo "${lmssng_songHost}" > ${lmssng_fileRoot}${lmssng_fileSongHost}
+	echo "${ldcsng_songHost}" > ${ldcsng_fileRoot}${ldcsng_fileSongHost}
 	
-	if [ ${lmssng_streamType} -eq 0 ]
+	if [ ${ldcsng_streamType} -eq 0 ]
 	then # local files
-		lmssng_outputTitle="${lmssng_album} - ${lmssng_songNameMod}"
-		echo "${lmssng_album} - ${lmssng_songNameMod}" > ${lmssng_fileRoot}${lmssng_fileCurrent}
+		ldcsng_outputTitle="${ldcsng_album} - ${ldcsng_songNameMod}"
+		echo "${ldcsng_album} - ${ldcsng_songNameMod}" > ${ldcsng_fileRoot}${ldcsng_fileCurrent}
 	else
-		lmssng_outputTitle="${lmssng_songNameMod}"
-		echo "${lmssng_songNameMod}" > ${lmssng_fileRoot}${lmssng_fileCurrent}
+		ldcsng_outputTitle="${ldcsng_songNameMod}"
+		echo "${ldcsng_songNameMod}" > ${ldcsng_fileRoot}${ldcsng_fileCurrent}
 	fi
 
-	[[ ${lmssng_titleAllowed} -eq 1 ]] && xtitle $lmssng_outputTitle
+	[[ ${ldcsng_titleAllowed} -eq 1 ]] && xtitle $ldcsng_outputTitle
 
-	echo "${lmssng_timestamp} - ${lmssng_formattedTitle}" >> ${lmssng_fileList}
+	echo "${ldcsng_timestamp} - ${ldcsng_formattedTitle}" >> ${ldcsng_fileList}
 }
 
 # *****************************************************************************
@@ -714,10 +718,10 @@ function processSong()
 # *****************************************************************************
 function processCliOptions()
 {
-	[[ "${lmscli_optAlter}" != "-" ]] &&
+	[[ "${ldccli_optAlter}" != "-" ]] &&
 	 {
-		[[ "${lmscli_optAlter:0:1}" == "-" ]] && lmscli_optAlter=""
-		lmssng_reduceQuote=1
+		[[ "${ldccli_optAlter:0:1}" == "-" ]] && ldccli_optAlter=""
+		ldcsng_reduceQuote=1
 	 }
 	
 	return 0
@@ -731,10 +735,10 @@ function processCliOptions()
 # *****************************************************************************
 # *****************************************************************************
 
-lmsScriptFileName $0
+ldcScriptFileName $0
 
-. $lmsbase_dirLib/openLog.sh
-. $lmsbase_dirLib/startInit.sh
+. $ldcbase_dirLib/openLog.sh
+. $ldcbase_dirLib/startInit.sh
 
 # *****************************************************************************
 # *****************************************************************************
@@ -744,8 +748,8 @@ lmsScriptFileName $0
 # *****************************************************************************
 # *****************************************************************************
 
-lmsDomCLoad ${lmsvar_SongOptions} "$lmssng_stackName" 0
-[[ $? -eq 0 ]] || lmsConioDebugExit $LINENO "DomError" "lmsDomCLoad failed loading '${lmssng_stackName}'."
+ldcDomCLoad ${ldcvar_SongOptions} "$ldcsng_stackName" 0
+[[ $? -eq 0 ]] || ldcConioDebugExit $LINENO "DomError" "ldcDomCLoad failed loading '${ldcsng_stackName}'."
 
 processCliOptions
 
@@ -753,17 +757,17 @@ processCliOptions
 
 createFileListName
 
-lmssng_fileList="${lmssng_fileRootList}${lmssng_fileListName}"
-lmssng_currentAlbum=""
-lmssng_currentHost=""
+ldcsng_fileList="${ldcsng_fileRootList}${ldcsng_fileListName}"
+ldcsng_currentAlbum=""
+ldcsng_currentHost=""
 
-lmsConioDisplay "Song Log = ${lmssng_fileList}"
+ldcConioDisplay "Song Log = ${ldcsng_fileList}"
 
-lmssng_titleAllowed=$(lmsUtilCommandExists "xtitle")
+ldcsng_titleAllowed=$(ldcUtilCommandExists "xtitle")
 
 # *******************************************************
 
-while [[ ${lmsapp_abort} -eq 0 ]]
+while [[ ${ldcapp_abort} -eq 0 ]]
 do
 	waitPlaying
 
@@ -780,6 +784,6 @@ done
 
 # *****************************************************************************
 
-. $lmsbase_dirLib/scriptEnd.sh
+. $ldcbase_dirLib/scriptEnd.sh
 
 # *****************************************************************************

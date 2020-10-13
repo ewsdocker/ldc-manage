@@ -1,21 +1,21 @@
-.\" Title: lmsInstallScript
+.\" Title: ldcInstallScript
 .\" Author: Jay Wheeler <jaywheeler@users.sourceforge.net>
 .\" Generator: manedit
 .\" Date: 05/18/2016
 .\" Manual: Subversion
-.\" Source: lmsInstallScript 0.0.1
+.\" Source: ldcInstallScript 0.0.1
 .\" Language: English
 .\" 
 .\" disable hyphenation
 .\" disable justification (adjust text to left margin only)
 .\" -----------------------------------------------------------
-.TH "lmsInstallScript" "1" "May 2016" "version 1.0.0" ""
+.TH "ldcInstallScript" "1" "May 2016" "version 1.0.0" ""
 .SH "NAME"
-\fBlmsInstallScript\fR \- Make Subversion Repository
+\fBldcInstallScript\fR \- Make Subversion Repository
 .SH "SYNOPSIS"
-\fB lmsInstallScript\fR <option=value><option=value>...\fBname\fR=[repository\-name]
+\fB ldcInstallScript\fR <option=value><option=value>...\fBname\fR=[repository\-name]
 .SH "DESCRIPTION"
-\fBlmsInstallScript\fR is a bash script which automates the creation of new Subversion repositories.
+\fBldcInstallScript\fR is a bash script which automates the creation of new Subversion repositories.
 .PP 
 The script automatically creates the requested repository in the current Subversion repository folder.
 .SH "OPTIONS"
@@ -42,21 +42,21 @@ Absolute path to svn repository folder.
 Create an empty repository named \fBBar\fR at the default location:
  
 .RS 5
-lmsInstallScriptsitory name=\fBBar\fR
+ldcInstallScriptsitory name=\fBBar\fR
 .RE
 .PP 
 .XP 3
 Create a repository named \fBBar\fR with initial content from \fB/media/source/\fBFoo\fR:
 
 .RS 5
-lmsInstallScriptsitory source=\fB/media/source/Foo\fR name=\fBBar\fR
+ldcInstallScriptsitory source=\fB/media/source/Foo\fR name=\fBBar\fR
 .RE
 .PP 
 .XP 3
 Create a repository named \fBBar\fR with initial content from \fB/media/source/Foo\fR loaded to the \fBtags\fR branch:
 
 .RS 5
-lmsInstallScriptsitory source=\fB/media/source/Foo\fR branch=\fBtags\fR name=\fBBar\fR
+ldcInstallScriptsitory source=\fB/media/source/Foo\fR branch=\fBtags\fR name=\fBBar\fR
 .RE
 .PP 
 .SH "REPORTING BUGS"
@@ -64,7 +64,7 @@ Report bugs at \fBhttp://subversion.net\fR
 .PP 
 Website: \fBhttp:///\fR
 .SH "COPYRIGHT"
-\fBlmsInstallScript\fR is copyright © 2016. EarthWalk Software.
+\fBldcInstallScript\fR is copyright © 2016. EarthWalk Software.
 .PP 
 Licensed under the \fBAcademic Free License version 3.0\fR (or later). Refer to the file named License.txt provided with the source, or from http://opensource.org/licenses/academic.php
 .SH "AUTHOR"

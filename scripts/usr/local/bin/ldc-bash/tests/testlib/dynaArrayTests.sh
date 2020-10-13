@@ -1,8 +1,8 @@
 # *****************************************************************************
 #
-#    testLmsDynaNew
+#    testLdcDynaNew
 #
-#      Test performance of the lmsDynaNew function
+#      Test performance of the ldcDynaNew function
 #
 #	parameters:
 #		arrayName = name of the array to iterate
@@ -12,9 +12,9 @@
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynaNew()
+function testLdcDynaNew()
 {
-	lmsDynaNew ${1} ${2}
+	ldcDynaNew ${1} ${2}
 	[[ $? -eq 0 ]] || return 1
 	
 	return 0
@@ -22,7 +22,7 @@ function testLmsDynaNew()
 
 # ***********************************************************************************************************
 #
-#	testLmsDynaAdd
+#	testLdcDynaAdd
 #
 #		test Insert at the end of the array ( size(array) )
 #
@@ -35,15 +35,15 @@ function testLmsDynaNew()
 #		0 = no error
 #		non-zero = error code ==> 1 invalid name
 #							  ==> 2 missing value parameter
-#							  ==> 3 lmsDynaSetAt failed
+#							  ==> 3 ldcDynaSetAt failed
 #
 # *********************************************************************************************************
-function testLmsDynaAdd()
+function testLdcDynaAdd()
 {
-	lmsDynaAdd ${1} "${2}" "${3}"
+	ldcDynaAdd ${1} "${2}" "${3}"
 	[[ $? -eq 0 ]] || 
 	{
-		lmsConioDisplay "lmsDynaAdd failed for ${1}, '${2}', '${3}' with reply $?"
+		ldcConioDisplay "ldcDynaAdd failed for ${1}, '${2}', '${3}' with reply $?"
 		return 1
 	}
 
@@ -52,9 +52,9 @@ function testLmsDynaAdd()
 
 # *****************************************************************************
 #
-#    testLmsDynaSetAt
+#    testLdcDynaSetAt
 #
-#      Test performance of the lmsDynaSetAt function
+#      Test performance of the ldcDynaSetAt function
 #
 #	parameters:
 #		arrayName = name of the dynamic array
@@ -66,13 +66,13 @@ function testLmsDynaAdd()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynaSetAt()
+function testLdcDynaSetAt()
 {
 	local arrayName="${1}"
 	local key="${2}"
 	local data="${3}"
 
-	lmsDynaSetAt ${arrayName} "${key}" "${data}"
+	ldcDynaSetAt ${arrayName} "${key}" "${data}"
 	[[ $? -eq 0 ]] || return 1
 
 	return 0
@@ -80,9 +80,9 @@ function testLmsDynaSetAt()
 
 # *****************************************************************************
 #
-#    testLmsDynaDeleteAt
+#    testLdcDynaDeleteAt
 #
-#      Test performance of the lmsDynaDeleteAt function
+#      Test performance of the ldcDynaDeleteAt function
 #
 #	parameters:
 #		arrayName = name of the dynamic array
@@ -93,9 +93,9 @@ function testLmsDynaSetAt()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynaDeleteAt()
+function testLdcDynaDeleteAt()
 {
-	lmsDynaDeleteAt "${1}" "${2}"
+	ldcDynaDeleteAt "${1}" "${2}"
 	[[ $? -eq 0 ]] || return 1
 	
 	return 0
@@ -103,9 +103,9 @@ function testLmsDynaDeleteAt()
 
 # *****************************************************************************
 #
-#    testLmsDynaUnset
+#    testLdcDynaUnset
 #
-#      Test performance of the lmsDynaUnset function
+#      Test performance of the ldcDynaUnset function
 #
 #	parameters:
 #		arrayName = name of the dynamic array to delete
@@ -115,9 +115,9 @@ function testLmsDynaDeleteAt()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynaUnset()
+function testLdcDynaUnset()
 {
-	lmsDynaUnset "${1}"
+	ldcDynaUnset "${1}"
 	[[ $? -eq 0 ]] || return 1
 	
 	return 0
@@ -125,9 +125,9 @@ function testLmsDynaUnset()
 
 # *****************************************************************************
 #
-#    testLmsDynaKeys
+#    testLdcDynaKeys
 #
-#      Test performance of the lmsDynaKeys function
+#      Test performance of the ldcDynaKeys function
 #
 #	parameters:
 #		arrayName = name of the dynamic array to delete
@@ -137,24 +137,24 @@ function testLmsDynaUnset()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynaKeys()
+function testLdcDynaKeys()
 {
 	local arrayName="${1}"
 
-	lmsDynaKeys "${arrayName}" lmstst_keys
+	ldcDynaKeys "${arrayName}" ldctst_keys
 	[[ $? -eq 0 ]] || return 1
 
-	lmsConioDisplay "lmsDynaKeys: ${arrayName} = $lmstst_keys"
-	lmsConioDisplay ""
+	ldcConioDisplay "ldcDynaKeys: ${arrayName} = $ldctst_keys"
+	ldcConioDisplay ""
 
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynaGet
+#    testLdcDynaGet
 #
-#      Test performance of the lmsDynaGet function
+#      Test performance of the ldcDynaGet function
 #
 #	parameters:
 #		arrayName = name of the dynamic array
@@ -164,24 +164,24 @@ function testLmsDynaKeys()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynaGet()
+function testLdcDynaGet()
 {
 	local arrayName="${1}"
 
-	lmsDynaGet "${arrayName}" testContent
+	ldcDynaGet "${arrayName}" testContent
 	[[ $? -eq 0 ]] || return 1
 
-	lmsConioDisplay "lmsDynaGet: ${arrayName} = $testContent"
-	lmsConioDisplay ""
+	ldcConioDisplay "ldcDynaGet: ${arrayName} = $testContent"
+	ldcConioDisplay ""
 
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynaKeyExists
+#    testLdcDynaKeyExists
 #
-#      Test performance of the lmsDynaKeyExists function
+#      Test performance of the ldcDynaKeyExists function
 #
 #	parameters:
 #		arrayName = name of the dynamic array
@@ -191,35 +191,35 @@ function testLmsDynaGet()
 #		1 = error
 #
 # *****************************************************************************
-function testLmsDynaKeyExists()
+function testLdcDynaKeyExists()
 {
 	local arrayName="${1}"
-	lmstst_key="${2}"
+	ldctst_key="${2}"
 
 	while [ true ]
 	do
-		lmsConioDisplay "lmsDynaKeyExists: ${lmstst_key} = " n
+		ldcConioDisplay "ldcDynaKeyExists: ${ldctst_key} = " n
 
-		lmsDynaKeyExists "${arrayName}" "${lmstst_key}"
+		ldcDynaKeyExists "${arrayName}" "${ldctst_key}"
 		[[ $? -eq 0 ]] && 
 		 {
-			lmsConioDisplay "FOUND"
+			ldcConioDisplay "FOUND"
 			break
 		 }
 
-		lmsConioDisplay "NOT found"
+		ldcConioDisplay "NOT found"
 		break
 	done
 
-	lmsConioDisplay ""
+	ldcConioDisplay ""
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynaFind
+#    testLdcDynaFind
 #
-#      Test performance of the lmsDynaFind function
+#      Test performance of the ldcDynaFind function
 #
 #	parameters:
 #		arrayName = name of the dynamic array
@@ -230,31 +230,31 @@ function testLmsDynaKeyExists()
 #		1 = not found or error
 #
 # *****************************************************************************
-function testLmsDynaFind()
+function testLdcDynaFind()
 {
 	local arrayName="${1}"
 	local value="${2}"
 
-	lmsConioDisplay "lmsDynaFind: value '${value}' " n
+	ldcConioDisplay "ldcDynaFind: value '${value}' " n
 
-	lmsDynaFind "${arrayName}" "${value}" lmstst_find
+	ldcDynaFind "${arrayName}" "${value}" ldctst_find
 	[[ $? -eq 0 ]] || 
 	 {
-		lmsConioDisplay "NOT found."
-		lmsConioDisplay ""
+		ldcConioDisplay "NOT found."
+		ldcConioDisplay ""
 		return 1
 	 }
 
-	lmsConioDisplay "FOUND at key = $lmstst_find"
-	lmsConioDisplay ""
+	ldcConioDisplay "FOUND at key = $ldctst_find"
+	ldcConioDisplay ""
 	return 0
 }
 
 # *****************************************************************************
 #
-#    testLmsDynaCount
+#    testLdcDynaCount
 #
-#      Test performance of the lmsDynaCount function
+#      Test performance of the ldcDynaCount function
 #
 #	parameters:
 #		arrayName = name of the dynamic array
@@ -264,15 +264,15 @@ function testLmsDynaFind()
 #		1 = not found or error
 #
 # *****************************************************************************
-function testLmsDynaCount()
+function testLdcDynaCount()
 {
 	local arrayName="${1}"
 
-	lmsDynaCount "${arrayName}" lmstst_count
+	ldcDynaCount "${arrayName}" ldctst_count
 	[[ $? -eq 0 ]] || return 1
 
-	lmsConioDisplay "lmsDynaCount: ${arrayName} = $lmstst_count"
-	lmsConioDisplay ""
+	ldcConioDisplay "ldcDynaCount: ${arrayName} = $ldctst_count"
+	ldcConioDisplay ""
 
 	return 0
 }
