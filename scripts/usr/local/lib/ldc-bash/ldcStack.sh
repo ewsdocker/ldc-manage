@@ -6,23 +6,34 @@
 # *****************************************************************************
 #
 # @author Jay Wheeler.
-# @version 0.1.2
-# @copyright © 2016, 2017. EarthWalk Software.
-# @license Licensed under the Academic Free License version 3.0
-# @package Linux Management Scripts
-# @subpackage ldcDomToStr
+# @version 0.2.1
+# @copyright © 2016-2021. EarthWalk Software.
+# @license Licensed under the GNU General Public License, GPL-3.0-or-later.
+# @package ewsdocker/ldcFramework
+# @subpackage library/ldcStack
 #
-# *****************************************************************************
+# =========================================================================================
 #
-#	Copyright © 2016, 2017. EarthWalk Software
-#	Licensed under the Academic Free License, version 3.0.
+#	Copyright © 2016-2021. EarthWalk Software
+#	Licensed under the GNU General Public License, GPL-3.0-or-later.
 #
-#	Refer to the file named License.txt provided with the source,
-#	or from
+#   This file is part of ewsdocker/ldcFramework.
 #
-#			http://opensource.org/licenses/academic.php
+#   ewsdocker/ldcFramework is free software: you can redistribute 
+#   it and/or modify it under the terms of the GNU General Public License 
+#   as published by the Free Software Foundation, either version 3 of the 
+#   License, or (at your option) any later version.
 #
-# *****************************************************************************
+#   ewsdocker/ldcFramework is distributed in the hope that it will 
+#   be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
+#   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with ewsdocker/ldcFramework.  If not, see 
+#   <http://www.gnu.org/licenses/>.
+#
+# =========================================================================================
 #
 #			Version 0.0.1 - 03-11-2016.
 #					0.0.2 - 03-24-2016.
@@ -32,21 +43,23 @@
 #					0.1.0 - 01-14-2017.
 #					0.1.1 - 01-24-2017.
 #					0.1.2 - 02-08-2017.
+#                   0.2.0 - 10-14-2020.
+#                   0.2.1 - 01-14-2021.
 #
 # ***********************************************************************************************************
 # ***********************************************************************************************************
 
-declare -r ldclib_ldcStackFunctions="0.1.2"	# version of library
+declare -r ldclib_ldcStackFunctions="0.2.1"	# version of library
 
 # ***********************************************************************************************************
 
 declare -A ldcstk_table				# stack name => stack uid
-declare	ldcstk_name=""				# current stack name, if ldcstk_uid not empty
+declare	   ldcstk_name=""			# current stack name, if ldcstk_uid not empty
 
 declare -i ldcstk_uidLength=6		# Number of characters in an unique id (uid)
-declare	ldcstk_uid=""				# current stack uid or empty if not assigned
+declare	   ldcstk_uid=""			# current stack uid or empty if not assigned
 
-declare	ldcstk_stackName			# current ldcstku stack name (ldcstk_name + ldcstk_uid)
+declare	   ldcstk_stackName			# current ldcstku stack name (ldcstk_name + ldcstk_uid)
 declare -i ldcstk_head				# current stack head
 declare -i ldcstk_tail				# current stack tail
 
@@ -554,7 +567,7 @@ function ldcStackPointerQueue()
 #
 #	ldcStackReset
 #
-# 		Empty the stack and reeet pointers
+# 		Empty the stack and reset pointers
 #
 #	parameters:
 #		stsName = the name of the stack to reset
@@ -608,7 +621,7 @@ function ldcStackToString
 	[[ -z "${1}" || -z "${2}" ]] && return 1
 
 	local	sName="${1}"
-	local	sFormat=${3:-1}
+	local	sFormat=${3:-"1"}
 
 	local	sLine=""
 	local	sBuffer=""
@@ -653,3 +666,5 @@ function ldcStackToString
 	return 0
 }
 
+# ***********************************************************************************************************
+# ***********************************************************************************************************

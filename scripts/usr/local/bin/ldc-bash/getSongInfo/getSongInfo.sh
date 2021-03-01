@@ -34,7 +34,8 @@
 #
 #   You should have received a copy of the GNU General Public License
 #   along with ewsdocker/ldc-bash.  If not, see 
-#   <http://www.gnu.org/licenses/>.#
+#   <http://www.gnu.org/licenses/>.
+#
 # *****************************************************************************
 #
 #			Version 0.0.1 - 01-29-2017.
@@ -45,7 +46,7 @@
 # *****************************************************************************
 # *****************************************************************************
 
-ldcapp_name="getSongInfo"
+#ldcapp_name="getSongInfo"
 
 declare    ldcapp_name="getSongInfo"
 
